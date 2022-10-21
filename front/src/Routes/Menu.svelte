@@ -1,0 +1,38 @@
+<script>
+  import { link } from "svelte-spa-router";
+</script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+<header class="p-3 text-white" style="background-color: #3270B6;">
+  <div class="container">
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+    >
+      <a
+        href="/"
+        class="d-flex align-items-center mb-3 mb-lg-0 text-dark text-decoration-none" style="font-size: 1.5rem;"
+        ><img src="imagens/logo.png" alt=""></a
+      >
+      <form action="" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 w-50">
+        <input
+          type="search"
+          class="form-control form-control-dark"
+          placeholder="&#xF002; Pesquisar doações"
+          aria-label="Pesquisar" style="font-family:Arial, FontAwesome"
+        />
+      </form>
+      <div class="text-end">
+        <a href="/login" use:link
+          ><button type="button" class="btn btn-sm btn-outline-light me-2"
+            >Faça login</button
+          ></a
+        >
+        <a href="/"
+          ><button type="button" class="btn btn-sm btn-dark ml-2 mr-3">Cadastre-se</button></a
+        >
+      </div>
+      <img class="img-fluid" src="imagens/caixinha.png" alt="">
+    </div>
+  </div>
+</header>
