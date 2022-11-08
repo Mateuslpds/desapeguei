@@ -1,6 +1,8 @@
 <script>
-  import Menu from "./Menu.svelte";
+    import Menu from "./Menu.svelte";
+
 </script>
+
 
 <link
   rel="stylesheet"
@@ -8,7 +10,7 @@
 />
 
 <main>
-  <Menu />
+  <Menu/>
   <div class="container">
     <div class="row m-5 no-gutters shadow-lg">
       <div class="col-md-6 d-none d-md-block">

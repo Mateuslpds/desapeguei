@@ -32,7 +32,9 @@
           ><button type="button" class="btn btn-sm btn-dark ml-2 mr-3">Cadastre-se</button></a
         >
       </div>
+      <a href ='/caixinha' use:link>
       <img class="img-fluid" src="imagens/caixinha.png" alt="">
+      </a>
     </div>
   </div>
 </header>
