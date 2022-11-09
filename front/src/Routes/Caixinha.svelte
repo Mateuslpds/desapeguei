@@ -1,6 +1,9 @@
 <script>
     import Menu from "./Menu.svelte";
 </script>
+<svelte:head>
+    <link rel="stylesheet" href="./src/caixinha.css">
+</svelte:head>
 
 
 <link
@@ -11,16 +14,16 @@
     <Menu/>
 </main>
 <body class ="container">
-    <div>
+    <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 w-25 mt-lg-5">
         <form>
-            <input placeholder="Pesquisar por suas doações...">
+            <input class="form-control" style="background:#BDE5EB; color:black"  placeholder="Pesquisar por suas doações...">
         </form>
     </div>
-    <div>
+    <div class="mt-lg-5 pl-lg-5 me-lg-3" style="padding-right:120px ;">
         <h1>Ops... você ainda não fez nenhuma doação </h1>
     </div>
-    <div>
-        <button type="button" class='.btn-large'>
+    <div class="col-12 col-lg-auto mb-3 mb-lg-3 me-lg-6 w-25  pl-lg-5" id="Cbotao">
+        <button type="button" class='btn btn-dark btn btn-outline-primary w-75'>
             Doar
         </button>
     </div>
