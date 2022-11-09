@@ -33,7 +33,7 @@
         >
       </div>
       <a href ='/caixinha' use:link>
-      <img class="img-fluid" src="imagens/caixinha.png" alt="">
+      <img class="img-fluid  shadow-lg btn btn-sm" src="imagens/caixinha.png" alt="">
       </a>
     </div>
   </div>

@@ -13,16 +13,19 @@
 <main>
     <Menu/>
 </main>
-<body class ="container">
+<body class ="container  shadow-lg">
     <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 w-25 mt-lg-5">
         <form>
-            <input class="form-control" style="background:#BDE5EB; color:black"  placeholder="Pesquisar por suas doações...">
+            <input class="form-control" style="background:#1; color:black;"  placeholder="Pesquisar por suas doações...">
         </form>
     </div>
-    <div class="mt-lg-5 pl-lg-5 me-lg-3" style="padding-right:120px ;">
-        <h1>Ops... você ainda não fez nenhuma doação </h1>
+    <div class="mt-lg-5  me-lg-3 " id="Ctexto1">
+        <h1>Ops... você ainda não fez nenhuma doação  </h1>
     </div>
-    <div class="col-12 col-lg-auto mb-3 mb-lg-3 me-lg-6 w-25  pl-lg-5" id="Cbotao">
+    <div class="w-25 " style="margin-left:430px; margin-bottom:5px;">
+        <img src="imagens/gacaixa.png" alt="gato na caixa" width="250px" height="250px"/>
+    </div>
+    <div class="col-12 col-lg-auto mb-0 mb-lg-3 me-lg-6 w-25  pl-lg-5" id="Cbotao">
         <button type="button" class='btn btn-dark btn btn-outline-primary w-75'>
             Doar
         </button>
