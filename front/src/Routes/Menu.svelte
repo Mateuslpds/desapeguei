@@ -28,8 +28,8 @@
             >Faça login</button
           ></a
         >
-        <a href="/"
-          ><button type="button" class="btn btn-sm btn-dark ml-2 mr-3">Cadastre-se</button></a
+        <a href="/cadastro" use:link
+        ><button type="button" class="btn btn-sm btn-dark ml-2 mr-3">Cadastre-se</button></a
         >
       </div>
       <a href ='/caixinha' use:link>
