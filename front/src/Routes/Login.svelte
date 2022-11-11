@@ -1,6 +1,6 @@
 <script>
     import Menu from "./Menu.svelte";
-
+    import { link } from "svelte-spa-router";
 </script>
 
 
@@ -44,7 +44,7 @@
               />
             </div>
             <div class="d-flex align-items-center justify-content-between">
-              <div><a href="/">Esqueceu a senha?</a></div>
+              <div><a href="/recuperar"use:link>Esqueceu a senha?</a></div>
               <div class="d-flex align-items-center">
                 <input name="" type="checkbox" value="" />
                 <span class="pl-2 font-weight-bold">Mantenha-me conectado</span>
