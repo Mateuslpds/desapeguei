@@ -1,0 +1,16 @@
+#BOXdoar{
+    height: 500px;
+    width: max-content;
+    box-sizing: border-box;
+    border: crimson;
+}
+
+#BOXformgeral{
+    padding-top: 100px;
+    box-sizing: border-box;
+}
+
+#DOARdescri{
+    padding-bottom: 100px ;
+    box-sizing: border-box;
+}

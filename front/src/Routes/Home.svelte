@@ -13,7 +13,14 @@
 </main>
 
 <body>
-  <div>
-    <h1>working</h1>
+  <div
+    class="col-12 col-lg-auto mb-0 mb-lg-3 me-lg-6 w-25  pl-lg-5"
+    id="Cbotao"
+  >
+  <a href="/doarTela"use:link>
+    <button type="button" class="btn btn-dark btn btn-outline-primary w-75">
+      Doar
+    </button>
+  </a>
   </div>
 </body>
