@@ -16,6 +16,24 @@
             body: data,
         });
     };
+
+    function Senha() {
+        var x = document.getElementById("senha");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+        };
+    };
+
+    function Confirmar() {
+        var x = document.getElementById("confirmar senha");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+        };
+    };
 </script>
 
 <link
@@ -30,7 +48,7 @@
 <body>
     <div class="user container">
         <div class="Inputs">
-            <h1 style="text-align: center;">Junte-se a nós!</h1>
+            <h1><b>Junte-se a nós!</b></h1>
             <form action="">
                 <label for="nome">Nome completo</label>
                 <input
@@ -39,10 +57,10 @@
                     id="nome"
                     class="inputUser"
                     placeholder="Insira seu nome"
+                    maxlength= "70"
                     required
                     bind:value={user.nome}
                 />
-                <br />
                 <br />
                 <label for="cpf">CPF</label>
                 <input
@@ -50,23 +68,23 @@
                     name="cpf"
                     id="cpf"
                     class="inputUser"
-                    placeholder="Insira seu CPF"
+                    placeholder="Ex: xxx.xxx.xxx-xx"
+                    maxlength= "14"
                     required
                     bind:value={user.cpf}
                 />
                 <br />
-                <br />
                 <label for="telefone">Telefone</label>
                 <input
-                    type="number"
+                    type="tel"
                     name="telefone"
                     id="telefone"
                     class="inputUser"
-                    placeholder="Insira seu número"
+                    placeholder="Ex: (xx) xxxxx-xxxx"
+                    maxlength= "16"
                     required
                     bind:value={user.telefone}
                 />
-                <br />
                 <br />
                 <label for="email">E-mail</label>
                 <input
@@ -74,33 +92,39 @@
                     name="email"
                     id="email"
                     class="inputUser"
-                    placeholder="Insira seu número"
+                    placeholder="Ex: xaolinmatadordeporco@mail.com"
+                    maxlength= "45"
+                    pattern=".+@globex\.com"
                     bind:value={user.email}
                     required
                 />
                 <br />
-                <br />
                 <label for="senha">Senha</label>
-                <input
-                    type="password"
-                    name="senha"
-                    id="senha"
-                    class="inputUser"
-                    placeholder="Insira sua senha"
-                    bind:value={user.senha}
-                    required
-                />
-                <br />
+                    <input
+                        type="password"
+                        name="senha"
+                        id="senha"
+                        class="inputUser"
+                        placeholder="Insira sua senha"
+                        maxlength= "20"
+                        bind:value={user.senha}
+                        required
+                    />
+                <label class="passwordhide" for="showpass" ><b>Mostrar senha</b></label>
+                    <input class="boxpasswordhide" type="checkbox" on:click={Senha}>
                 <br />
                 <label for="confirmar senha">Confirmar senha</label>
-                <input
+                <input 
                     type="password"
                     name="confirmar senha"
                     id="confirmar senha"
                     class="inputUser"
                     placeholder="Insira sua senha novamente"
+                    maxlength= "20"
                     required
                 />
+                <label class="passwordhide" for="showpass"><b>Mostrar senha</b></label>
+                    <input class="boxpasswordhide" type="checkbox" on:click={Confirmar}>
                 <button on:click={createUser} type="submit" class="signIn">Cadastre-se</button>
             </form>
         </div>
@@ -117,39 +141,73 @@
         font-family: sans-serif;
     }
 
+    h1 {
+        text-align: center;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    input {
+        width: 100%;
+        padding: 7px 0px;
+        box-sizing: border-box;
+        text-indent: 14px;
+        margin-bottom: 12px;
+        border: 1px solid rgb(140, 139, 139);
+        border-radius: 5px;
+    }
+
+    label {
+        font-size: 15px;
+        font-style: italic;
+        padding-top: 10px;
+        line-height: 4px;
+    }
+
+    hr{
+        width: 20%;
+        text-align: center;
+    }
+
     .container {
         width: 45%;
         background-color: white;
         margin: 4rem auto 0 auto;
         display: flex;
         justify-content: space-between;
-        box-shadow: 10px -10px #2596be;
-        border: 2px solid #2596be;
+        box-shadow: 4px 4px 4px #2596be;
+        border: 1px solid #2596be;
     }
 
     .container img {
-        height: 670px;
+        height: 700px;
     }
 
-    input {
-        width: 100%;
-        padding: 8px 0px;
-        margin: 2px 0;
-        box-sizing: border-box;
+    .passwordhide {
+        padding-left: 70%;
+        padding-right: 8px;
+        font-size: 12px;
+        position: relative;
     }
 
-    label {
-        font-size: 15px;
+    .boxpasswordhide {
+        height: 15px;
+        width: 15px;
     }
 
     .signIn {
-        width: 100%;
-        border: none;
-        padding: 10px 0px;
-        margin: 10px 0;
+        background-color: #2596be;
         box-sizing: border-box;
+        width: 100%;
+        padding: 10px 0px;
+        margin: 15px 0px;
+        border: none;
         font-family: "Trebuchet MS";
         font-size: large;
-        background-color: #2596be;
+        border-radius: 8px;
+        color: white;
+    }
+    .signIn:active{
+        background-color: #14485d;
     }
 </style>
