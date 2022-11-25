@@ -7,7 +7,7 @@
         const updateRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
         dado.append("nome", obj.nome);
-        dado.append("descrição", obj.descricao);
+        dado.append("descricao", obj.descricao);
         dado.append("foto", obj.foto);
 
         let res = await fetch(updateRoute, {
