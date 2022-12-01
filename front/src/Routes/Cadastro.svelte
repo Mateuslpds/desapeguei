@@ -49,7 +49,7 @@
     <div class="user container">
         <div class="Inputs">
             <h1><b>Junte-se a nós!</b></h1>
-            <form action="">
+            <form action="" method="POST" on:submit={createUser}>
                 <label for="nome">Nome completo</label>
                 <input
                     type="text"
@@ -94,7 +94,6 @@
                     class="inputUser"
                     placeholder="Ex: xaolinmatadordeporco@mail.com"
                     maxlength= "45"
-                    pattern=".+@globex\.com"
                     bind:value={user.email}
                     required
                 />
@@ -125,7 +124,7 @@
                 />
                 <label class="passwordhide" for="showpass"><b>Mostrar senha</b></label>
                     <input class="boxpasswordhide" type="checkbox" on:click={Confirmar}>
-                <button on:click={createUser} type="submit" class="signIn">Cadastre-se</button>
+                <button type="submit" class="signIn">Cadastre-se</button>
             </form>
         </div>
         <div class="imagem">

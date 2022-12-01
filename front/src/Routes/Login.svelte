@@ -1,8 +1,30 @@
 <script>
-    import Menu from "./Menu.svelte";
-    import { link } from "svelte-spa-router";
-</script>
+  import Menu from "./Menu.svelte";
+  import { link } from "svelte-spa-router";
+  import { users } from "../stores";
+  import { userid } from "../stores";
 
+  export let user = {};
+
+  const submit = async () => {
+    const auth = "http://localhost/desapeguei/back/auth.php";
+    const data = new FormData();
+    data.append("email", user.email);
+    data.append("senha", user.senha);
+    let res = await fetch(auth, {
+      method: "POST",
+      body: data,
+    });
+    let json = await res.json();
+    if (json.id != undefined) {
+      $userid = json.id;
+      localStorage.setItem("id", json.id);
+      window.location.href = "/";
+    } else {
+      alert("Email e/ou senha errados.");
+    }
+  };
+</script>
 
 <link
   rel="stylesheet"
@@ -10,7 +32,7 @@
 />
 
 <main>
-  <Menu/>
+  <Menu />
   <div class="container">
     <div class="row m-5 no-gutters shadow-lg">
       <div class="col-md-6 d-none d-md-block">
@@ -23,7 +45,7 @@
       </div>
       <div class="col-md-6 bg-white p-5">
         <h2 class="pb-3">Fique conectado</h2>
-        <div class="form-style">
+        <div class="form-style user">
           <form>
             <div class="form-group pb-3">
               <label for="">Usuário</label>
@@ -32,6 +54,7 @@
                 placeholder="Seu e-mail ou CPF"
                 class="form-control"
                 id="email"
+                bind:value={user.email}
               />
             </div>
             <div class="form-group pb-3">
@@ -41,10 +64,11 @@
                 placeholder="Coloque sua senha aqui"
                 class="form-control"
                 id="senha"
+                bind:value={user.senha}
               />
             </div>
             <div class="d-flex align-items-center justify-content-between">
-              <div><a href="/recuperar"use:link>Esqueceu a senha?</a></div>
+              <div><a href="/recuperar" use:link>Esqueceu a senha?</a></div>
               <div class="d-flex align-items-center">
                 <input name="" type="checkbox" value="" />
                 <span class="pl-2 font-weight-bold">Mantenha-me conectado</span>
@@ -53,8 +77,9 @@
             <div class="pb-2">
               <button
                 type="submit"
-                class="btn text-white w-100 font-weight-bold mt-2" style="background-color: #3270B6;"
-                >Conectar</button
+                class="btn text-white w-100 font-weight-bold mt-2"
+                style="background-color: #3270B6;"
+                on:click={submit}>Conectar</button
               >
             </div>
           </form>

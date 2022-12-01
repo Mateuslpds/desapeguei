@@ -26,7 +26,8 @@
     <Menu />
 </main>
 
-<body class="container  shadow-lg mt-5 border border-primary" id="BOXdoar">
+<body class="container shadow-lg mt-4 border border-primary" id="BOXdoar">
+    <h2>Doe aí meu vey</h2>
     <form class="container row gy-5" id="BOXformgeral" >
         <div class="form-group col-6">
             <label for="image ">Adicione foto ao objeto</label>
@@ -73,6 +74,11 @@
 
 
 <style>
+    h2{
+        margin-top:2rem;
+        margin-bottom: -4rem;
+        text-align: center;
+    }
     label{
         line-height: 10px;
     }

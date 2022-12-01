@@ -1,5 +1,10 @@
 <script>
   import { link } from "svelte-spa-router";
+  
+  const logout = async () => {
+    localStorage.removeItem("id");
+    location.reload();
+  };
 </script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
@@ -22,6 +27,7 @@
           aria-label="Pesquisar" style="font-family:Arial, FontAwesome"
         />
       </form>
+      {#if localStorage.getItem("id") == undefined}
       <div class="text-end">
         <a href="/login" use:link
           ><button type="button" class="btn btn-sm btn-outline-light me-2"
@@ -32,9 +38,17 @@
         ><button type="button" class="btn btn-sm btn-dark ml-2 mr-3">Cadastre-se</button></a
         >
       </div>
+      {:else}
       <a href ='/caixinha' use:link>
       <img class="img-fluid  shadow-lg btn btn-sm" src="imagens/caixinha.png" alt="">
       </a>
+      <button
+          id="logout"
+          type="button"
+          class="btn btn-sm btn-dark ml-2 mr-3"
+          on:click={logout}>Logout</button
+      >
+      {/if}
     </div>
   </div>
 </header>
