@@ -1,6 +1,9 @@
 <script>
   import { link } from "svelte-spa-router";
   import Menu from "./Menu.svelte";
+
+  
+
 </script>
 
 <link
@@ -13,6 +16,7 @@
 </main>
 
 <body>
+  
   <div
     class="col-12 col-lg-auto mb-0 mb-lg-3 me-lg-6 w-25  pl-lg-5"
     id="Cbotao"
@@ -24,3 +28,4 @@
   </a>
   </div>
 </body>
+

@@ -26,15 +26,15 @@
     <Menu />
 </main>
 
-<body class="container  shadow-lg mt-5" id="BOXdoar">
-    <form class="container row gy-5" id="BOXformgeral">
+<body class="container  shadow-lg mt-5 border border-primary" id="BOXdoar">
+    <form class="container row gy-5" id="BOXformgeral" >
         <div class="form-group col-6">
-            <label for="image">Adicione foto ao objeto</label>
+            <label for="image ">Adicione foto ao objeto</label>
             <input
                 type="file"
                 name="foto"
                 id="foto"
-                class="form-control"
+                class="form-control border border-secondary p-1"
                 placeholder="escolha a foto em seu dispositivo"
                 bind:value={obj.foto}
             />
@@ -45,7 +45,7 @@
                 type="text"
                 name="nome"
                 id="nome"
-                class="form-control"
+                class="form-control border border-secondary"
                 placeholder="nome do objeto..."
                 bind:value={obj.nome}
             />
@@ -56,7 +56,7 @@
                 type="text"
                 name="descricao"
                 id="DOARdescri"
-                class="form-control"
+                class="form-control border border-secondary pt-3"
                 placeholder="insira aqui a descrição do objeto..."
                 bind:value={obj.descricao}
             />
@@ -66,7 +66,14 @@
             <select name="tipo" />
         </div>
         <div>
-            <button on:click={postOBJ} type="submit">Fazer doação</button>
+            <button on:click={postOBJ} type="submit" class="btn btn-primary">Fazer doação</button>
         </div>
     </form>
 </body>
+
+
+<style>
+    label{
+        line-height: 10px;
+    }
+</style>
