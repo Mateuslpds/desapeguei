@@ -1,6 +1,7 @@
 <script>
   import { link } from "svelte-spa-router";
   import Menu from "./Menu.svelte";
+  import Objetos from "./Objetos.svelte";
 </script>
 
 <link
@@ -25,4 +26,6 @@
   </a>
   </div>
   {/if}
+
+  <Objetos />
 </body>

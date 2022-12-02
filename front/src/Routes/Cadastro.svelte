@@ -49,7 +49,7 @@
     <div class="user container">
         <div class="Inputs">
             <h1><b>Junte-se a nós!</b></h1>
-            <form action="" method="POST" on:submit={createUser}>
+            <form action="" on:submit={createUser}>
                 <label for="nome">Nome completo</label>
                 <input
                     type="text"
