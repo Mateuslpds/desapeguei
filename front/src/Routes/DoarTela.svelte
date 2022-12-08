@@ -64,7 +64,13 @@
         </div>
         <div class="form-group col-6">
             <label for="dsrc"> Tipo do produto</label>
-            <select name="tipo" />
+            <select name="tipo"> tipo do objeto
+                <option>- - - - - - - - - -</option>
+                <option value="eleDomestico">Eletrodoméstico</option>
+                <option value="hardware">Hardware</option>
+                <option value="perifericoE">Periférico de entrada</option>
+                <option value="perifericoS">Periférico de saída</option>
+            </select>
         </div>
         <div>
             <button on:click={postOBJ} type="submit" class="btn btn-primary">Fazer doação</button>

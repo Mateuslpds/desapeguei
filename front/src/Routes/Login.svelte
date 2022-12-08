@@ -85,11 +85,13 @@
           </form>
           <div class="pt-4 text-center">
             Não tem conta? Crie ela em apenas alguns cliques
+            <a href="/cadastro"use:link>
             <button
               type="submit"
               class="btn btn-dark w-100 font-weight-bold mt-2"
               >Cadastre-se</button
             >
+            </a>
           </div>
         </div>
       </div>
