@@ -7,15 +7,14 @@ header('Content-Type: application/json');
 require_once(__DIR__.'/protected/database.php');
 
 try{
-    $q = $db->prepare('SELECT id FROM users WHERE email = :email AND senha = :senha');
+    $q = $db->prepare('SELECT * FROM usuario WHERE USUARIO_EMAIL = :email AND USUARIO_SENHA = :senha');
     $q->bindValue(':email', $_POST['email']);
     $q->bindValue(':senha', $_POST['senha']);
     $q->execute();
     $auth = $q->fetch();
     if(!$auth){err('user not found', __LINE__);}
-    $res = $auth;
-    $_SESSION['userid'] = json_encode($res);
-    echo json_encode($res);
+    $_SESSION['userid'] = json_encode($auth);
+    echo json_encode($auth);
     exit();
 }catch(PDOException $ex){
     err('doideira', __LINE__);

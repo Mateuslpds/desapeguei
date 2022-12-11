@@ -12,7 +12,7 @@ if(!isset($_POST['telefone'])){err('telefone esta faltando', __LINE__);}
 require_once(__DIR__.'/protected/database.php');
 
 try{
-    $q = $db->prepare('INSERT INTO users VALUES (null, :nome, :senha, :email, :cpf, :telefone)');
+    $q = $db->prepare('INSERT INTO usuario VALUES (null, :nome, :senha, :email, :cpf, :telefone)');
     $q->bindValue(':nome', $_POST['nome']);
     $q->bindValue(':senha', $_POST['senha']);
     $q->bindValue(':email', $_POST['email']);

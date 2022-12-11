@@ -16,12 +16,10 @@
       body: data,
     });
     let json = await res.json();
-    if (json.id != undefined) {
-      $userid = json.id;
-      localStorage.setItem("id", json.id);
+    if (json.USUARIO_ID != undefined) {
+      $userid = json.USUARIO_ID;
+      localStorage.setItem("id", json.USUARIO_ID);
       window.location.href = "/";
-    } else {
-      alert("Email e/ou senha errados.");
     }
   };
 </script>
