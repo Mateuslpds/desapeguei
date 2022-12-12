@@ -31,24 +31,4 @@ function err($message = 'error', $debug = 0){
     exit();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

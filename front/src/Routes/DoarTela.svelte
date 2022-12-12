@@ -2,7 +2,7 @@
     import Menu from "./Menu.svelte";
 
     let obj = {};
-
+    let tipo = {};
     const postOBJ = async () => {
         const updateRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
@@ -15,6 +15,16 @@
             body: dado,
         });
     };
+    const typeInsert = async () => {
+        const updateRoute = "http://localhost/desapeguei/back/type.php";
+        const dadoTipo = new FormData();
+        dadoTipo.append("descricao", tipo.descricao);
+
+        let res = await fetch(updateRoute, {
+            method: "POST",
+            body: dadoTipo,
+        });
+    }
 </script>
 
 <link
@@ -37,7 +47,7 @@
                 id="foto"
                 class="form-control border border-secondary p-1"
                 placeholder="escolha a foto em seu dispositivo"
-                bind:value={obj.foto}
+                bind:files={obj.foto}
             />
         </div>
         <div class="form-group col-6">
@@ -64,7 +74,7 @@
         </div>
         <div class="form-group col-6">
             <label for="dsrc"> Tipo do produto</label>
-            <select name="tipo"> tipo do objeto
+            <select name="tipo" bind:value={tipo.descricao}> tipo do objeto
                 <option>- - - - - - - - - -</option>
                 <option value="eleDomestico">Eletrodoméstico</option>
                 <option value="hardware">Hardware</option>
