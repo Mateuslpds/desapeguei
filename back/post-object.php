@@ -1,19 +1,19 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+session_start();
 
+header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-if(!isset($_POST['nome'])){err('nome esta faltando', __LINE__);}
 if(!isset($_POST['descricao'])){err('descricao esta faltando', __LINE__);}
 if(!isset($_POST['foto'])){err('foto esta faltando',__LINE__);}
 
 require_once(__DIR__.'/protected/database.php');
 
 try{
-    $q = $db->prepare('INSERT INTO obj VALUES (null, :nome, :descricao, :foto)');
-    $q->bindValue(':nome', $_POST['nome']);
+    $q = $db->prepare('INSERT INTO obj VALUES (null, :descricao, :foto, :userid)');
     $q->bindValue(':descricao', $_POST['descricao']);
     $q->bindValue(':foto', $_POST['foto']);
+    $q->bindValue(':userid', $_SESSION['userid']);
     $q->execute();
     $objId = $db->lastInsertId();
 }catch(PDOException $ex){

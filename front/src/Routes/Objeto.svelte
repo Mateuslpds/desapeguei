@@ -3,11 +3,7 @@
     export let obj = {};
 </script>
 
-<div class="nome">
-    Nome:
-    {obj.nome}
-</div>
 <div class="descricao">
     Descrição:
-    {obj.descricao}
+    {obj.OBJ_DESCRICAO}
 </div>

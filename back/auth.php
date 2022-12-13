@@ -13,7 +13,7 @@ try{
     $q->execute();
     $auth = $q->fetch();
     if(!$auth){err('user not found', __LINE__);}
-    $_SESSION['userid'] = json_encode($auth);
+    $_SESSION['userid'] = json_encode($auth['USUARIO_ID']);
     echo json_encode($auth);
     exit();
 }catch(PDOException $ex){
