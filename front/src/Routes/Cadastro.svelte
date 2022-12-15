@@ -1,4 +1,5 @@
 <script>
+    import { link } from "svelte-spa-router";
     import Menu from "./Menu.svelte";
 
     export let user = {};
@@ -33,13 +34,21 @@
             } else {
                 x.type = "password";
         };
-    };
+    };  
+
 </script>
 
 <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
 />
+
+<head>
+    <script 
+        src="https://kit.fontawesome.com/bc98966db5.js" 
+        crossorigin="anonymous">
+    </script>
+</head>
 
 <main>
     <Menu />
@@ -109,6 +118,10 @@
                         bind:value={user.senha}
                         required
                     />
+                    <!----- FA dos olhos, para ser adicionado depois
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-eye-slash"></i>
+                    ----->
                 <label class="passwordhide" for="showpass" ><b>Mostrar senha</b></label>
                     <input class="boxpasswordhide" type="checkbox" on:click={Senha}>
                 <br />
@@ -122,18 +135,26 @@
                     maxlength= "20"
                     required
                 />
+                <!----- FA dos olhos, para ser adicionado depois
+                    <i class="fa-solid fa-eye"></i>
+                    <i class="fa-solid fa-eye-slash"></i>
+                 ----->
                 <label class="passwordhide" for="showpass"><b>Mostrar senha</b></label>
                     <input class="boxpasswordhide" type="checkbox" on:click={Confirmar}>
                 <button type="submit" class="signIn">Cadastre-se</button>
             </form>
         </div>
         <div class="imagem">
-            <img src="imagens/Caba_imagi.jpg" alt="Caba da caixa" />
+                <img src="imagens/Caba_imagi.jpg" alt="Caba da caixa" />
         </div>
     </div>
 </body>
 
 <style>
+    *{
+       box-sizing: border-box;
+    }
+
     body {
         margin: 0;
         background-color: white;
@@ -144,6 +165,11 @@
         text-align: center;
         margin: 10px;
         padding: 10px;
+    }
+
+    img {
+        width: 100%;
+        max-width: 100%;
     }
 
     input {
@@ -163,10 +189,14 @@
         line-height: 4px;
     }
 
-    hr{
-        width: 20%;
-        text-align: center;
+    /* CONFIGURAÇÃO DOS OLHOS *Lembrar de arrumar os imput*
+    i {
+        cursor: pointer;
+        font-size: 20px;
+        float: right;
+        margin: 4px 2px;
     }
+    */
 
     .container {
         width: 45%;
@@ -174,8 +204,9 @@
         margin: 4rem auto 0 auto;
         display: flex;
         justify-content: space-between;
-        box-shadow: 4px 4px 4px #2596be;
-        border: 1px solid #2596be;
+        box-shadow: 4px 4px 4px #2595bea1;
+        border: 1px solid #2595bea1;
+        border-radius: 10px;
     }
 
     .container img {
@@ -183,15 +214,16 @@
     }
 
     .passwordhide {
-        padding-left: 70%;
-        padding-right: 8px;
+        padding-left: 10%;
+        padding-right: 5px;
         font-size: 12px;
-        position: relative;
+        line-height: 5px;
     }
 
     .boxpasswordhide {
         height: 15px;
         width: 15px;
+        cursor: pointer;
     }
 
     .signIn {
@@ -201,12 +233,14 @@
         padding: 10px 0px;
         margin: 15px 0px;
         border: none;
-        font-family: "Trebuchet MS";
+        font-family: "Verdana";
         font-size: large;
         border-radius: 8px;
         color: white;
+        cursor: pointer;
     }
-    .signIn:active{
-        background-color: #14485d;
+
+    .signIn:hover{
+        background-color: #216e8a;
     }
 </style>
