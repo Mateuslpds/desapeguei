@@ -1,7 +1,7 @@
 <?php
 try{
     $dbUsername = 'root';
-    $dbPassword = '35424665ian';
+    $dbPassword = '';
     $dbConnection = 'mysql:host=localhost; dbname=desapeguei; charset=utf8';
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
