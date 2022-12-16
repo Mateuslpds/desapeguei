@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: http://127.0.0.1:5173');
 header('Content-Type: application/json');
+header('Access-Control-Allow-Credentials: true');
 
 if(!isset($_POST['descricao'])){err('descricao esta faltando', __LINE__);}
 if(!isset($_POST['foto'])){err('foto esta faltando',__LINE__);}

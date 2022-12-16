@@ -1,28 +1,29 @@
 <script>
     import Menu from "./Menu.svelte";
-
-    let obj = {};
+    //import { userid } from "../stores";
     let tipo = {};
+    let obj = {};
     const postOBJ = async () => {
         const updateRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
         dado.append("nome", obj.nome);
         dado.append("descricao", obj.descricao);
         dado.append("foto", obj.foto);
-
         let res = await fetch(updateRoute, {
             method: "POST",
             body: dado,
+            credentials : "include",
         });
     };
     const typeInsert = async () => {
         const updateRoute = "http://localhost/desapeguei/back/type.php";
         const dadoTipo = new FormData();
-        dadoTipo.append("descricao", tipo.descricao);
+        dadoTipo.append("tipo", tipo.descricao);
 
-        let res = await fetch(updateRoute, {
+        let res2 = await fetch(updateRoute, {
             method: "POST",
             body: dadoTipo,
+            credentials : "include",
         });
     }
 </script>
@@ -35,9 +36,9 @@
 <main>
     <Menu />
 </main>
-
 <body class="container shadow-lg mt-4 border border-primary" id="BOXdoar">
     <h2>Doe aí meu vey</h2>
+    <form on:submit="{postOBJ}">
     <form class="container row gy-5" id="BOXformgeral" >
         <div class="form-group col-6">
             <label for="image ">Adicione foto ao objeto</label>
@@ -47,7 +48,7 @@
                 id="foto"
                 class="form-control border border-secondary p-1"
                 placeholder="escolha a foto em seu dispositivo"
-                bind:files={obj.foto}
+                bind:value={obj.foto}
             />
         </div>
         <div class="form-group col-6">
@@ -83,9 +84,10 @@
             </select>
         </div>
         <div>
-            <button on:click={postOBJ} type="submit" class="btn btn-primary">Fazer doação</button>
+            <button type="submit" class="btn btn-primary">Fazer doação</button>
         </div>
     </form>
+</form>
 </body>
 
 

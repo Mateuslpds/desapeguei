@@ -14,6 +14,7 @@
     let res = await fetch(auth, {
       method: "POST",
       body: data,
+      credentials : "include",
     });
     let json = await res.json();
     if (json.USUARIO_ID != undefined) {
