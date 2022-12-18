@@ -1,10 +1,9 @@
 <?php
 session_start();
 
-header('Access-Control-Allow-Origin: http://127.0.0.1:5173');
+header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Credentials: true');
-
 
 require_once(__DIR__.'/protected/database.php');
 
@@ -13,13 +12,23 @@ try{
     $q->bindValue(':email', $_POST['email']);
     $q->bindValue(':senha', $_POST['senha']);
     $q->execute();
-    $auth = $q->fetch();
-    if(!$auth){err('user not found', __LINE__);}
-    $_SESSION['userid'] = json_encode($auth['USUARIO_ID']);
-    echo json_encode($auth);
+
+    $auth = $q->fetchAll(PDO::FETCH_ASSOC);
+
+    if (sizeof($auth) == 0) {
+        http_response_code(401);
+        exit();
+    }
+
+    if(!$auth){err('usuario nao encontrado', __LINE__);}
+
+    $user = $auth[0];
+    $_SESSION['user'] = $user;
+    http_response_code(200);
+    echo json_encode($_SESSION['user']);
     exit();
 }catch(PDOException $ex){
-    err('doideira', __LINE__);
+    err('nao foi possivel realizar o login', __LINE__);
 }
 
 function err($message = 'error', $debug = 0){

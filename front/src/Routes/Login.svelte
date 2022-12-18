@@ -1,27 +1,34 @@
 <script>
   import Menu from "./Menu.svelte";
   import { link } from "svelte-spa-router";
-  import { users } from "../stores";
-  import { userid } from "../stores";
+  import { users, userid, isLogged } from "../stores";
 
   export let user = {};
 
+  let email = "";
+  let senha = "";
+
   const submit = async () => {
     const auth = "http://localhost/desapeguei/back/auth.php";
+    
     const data = new FormData();
-    data.append("email", user.email);
-    data.append("senha", user.senha);
-    let res = await fetch(auth, {
+    data.append("email", email);
+    data.append("senha", senha);
+
+    const res = await fetch(auth, {
       method: "POST",
       body: data,
       credentials : "include",
     });
-    let json = await res.json();
-    if (json.USUARIO_ID != undefined) {
-      $userid = json.USUARIO_ID;
-      localStorage.setItem("id", json.USUARIO_ID);
-      window.location.href = "/";
+
+    if (!res.ok) {
+      alert("Usuário ou senha incorreto");
+      return;
     }
+
+    $isLogged = true;
+    localStorage.setItem("isLogged", "true");
+    window.location.href = "/";
   };
 </script>
 
@@ -45,7 +52,7 @@
       <div class="col-md-6 bg-white p-5">
         <h2 class="pb-3">Fique conectado</h2>
         <div class="form-style user">
-          <form>
+          <form on:submit|preventDefault={submit}>
             <div class="form-group pb-3">
               <label for="">Usuário</label>
               <input
@@ -53,7 +60,7 @@
                 placeholder="Seu e-mail ou CPF"
                 class="form-control"
                 id="email"
-                bind:value={user.email}
+                bind:value={email}
               />
             </div>
             <div class="form-group pb-3">
@@ -63,7 +70,7 @@
                 placeholder="Coloque sua senha aqui"
                 class="form-control"
                 id="senha"
-                bind:value={user.senha}
+                bind:value={senha}
               />
             </div>
             <div class="d-flex align-items-center justify-content-between">
@@ -78,7 +85,7 @@
                 type="submit"
                 class="btn text-white w-100 font-weight-bold mt-2"
                 style="background-color: #3270B6;"
-                on:click={submit}>Conectar</button
+                >Conectar</button
               >
             </div>
           </form>

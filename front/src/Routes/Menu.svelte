@@ -1,8 +1,12 @@
 <script>
   import { link } from "svelte-spa-router";
+  import { isLogged } from "../stores";
   
   const logout = async () => {
-    localStorage.removeItem("id");
+    fetch("http://localhost/desapeguei/back/logout.php", {
+      credentials: "include",
+    });
+    localStorage.removeItem("isLogged");
     location.reload();
   };
 </script>
@@ -27,7 +31,7 @@
           aria-label="Pesquisar" style="font-family:Arial, FontAwesome"
         />
       </form>
-      {#if localStorage.getItem("id") == undefined}
+      {#if localStorage.getItem("isLogged") == undefined}
       <div class="text-end">
         <a href="/login" use:link
           ><button type="button" class="btn btn-sm btn-outline-light me-2"

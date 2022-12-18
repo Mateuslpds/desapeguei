@@ -4,15 +4,24 @@
 
     export let user = {};
 
+    let nome = "";
+    let senha = "";
+    let senha2 = "";
+    let email = "";
+    let cpf = "";
+    let telefone = "";
+
     const createUser = async () => {
-        const updateRoute = "http://localhost/desapeguei/back/create-user.php";
+        if(senha != senha2) return;
+
+        const create = "http://localhost/desapeguei/back/create-user.php";
         const data = new FormData();
-        data.append("nome", user.nome);
-        data.append("senha", user.senha);
-        data.append("email", user.email);
-        data.append("cpf", user.cpf);
-        data.append("telefone", user.telefone);
-        let res = await fetch(updateRoute, {
+        data.append("nome", nome);
+        data.append("senha", senha);
+        data.append("email", email);
+        data.append("cpf", cpf);
+        data.append("telefone", telefone);
+        fetch(create, {
             method: "POST",
             body: data,
         });
@@ -58,7 +67,7 @@
     <div class="user container">
         <div class="Inputs">
             <h1><b>Junte-se a nós!</b></h1>
-            <form action="" on:submit={createUser}>
+            <form on:submit|preventDefault={createUser}>
                 <label for="nome">Nome completo</label>
                 <input
                     type="text"
@@ -68,7 +77,7 @@
                     placeholder="Insira seu nome"
                     maxlength= "70"
                     required
-                    bind:value={user.nome}
+                    bind:value={nome}
                 />
                 <br />
                 <label for="cpf">CPF</label>
@@ -80,7 +89,7 @@
                     placeholder="Ex: xxx.xxx.xxx-xx"
                     maxlength= "14"
                     required
-                    bind:value={user.cpf}
+                    bind:value={cpf}
                 />
                 <br />
                 <label for="telefone">Telefone</label>
@@ -92,7 +101,7 @@
                     placeholder="Ex: (xx) xxxxx-xxxx"
                     maxlength= "16"
                     required
-                    bind:value={user.telefone}
+                    bind:value={telefone}
                 />
                 <br />
                 <label for="email">E-mail</label>
@@ -103,7 +112,7 @@
                     class="inputUser"
                     placeholder="Ex: xaolinmatadordeporco@mail.com"
                     maxlength= "45"
-                    bind:value={user.email}
+                    bind:value={email}
                     required
                 />
                 <br />
@@ -115,7 +124,7 @@
                         class="inputUser"
                         placeholder="Insira sua senha"
                         maxlength= "20"
-                        bind:value={user.senha}
+                        bind:value={senha}
                         required
                     />
                     <!----- FA dos olhos, para ser adicionado depois
@@ -134,7 +143,11 @@
                     placeholder="Insira sua senha novamente"
                     maxlength= "20"
                     required
+                    bind:value={senha2}
                 />
+                {#if senha != '' && senha != senha2}
+                    <div style="color:red;">Senhas não conferem</div>
+                {/if}
                 <!----- FA dos olhos, para ser adicionado depois
                     <i class="fa-solid fa-eye"></i>
                     <i class="fa-solid fa-eye-slash"></i>

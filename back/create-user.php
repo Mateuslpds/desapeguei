@@ -3,6 +3,8 @@ header('Access-Control-Allow-Origin: http://127.0.0.1:5173');
 header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
 
+session_start();
+
 if(!isset($_POST['nome'])){err('nome esta faltando', __LINE__);}
 if(!isset($_POST['senha'])){err('senha esta faltando', __LINE__);}
 if(!isset($_POST['email'])){err('email esta faltando', __LINE__);}
