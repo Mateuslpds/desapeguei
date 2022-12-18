@@ -1,8 +1,11 @@
 <?php
-   
-    header('Access-Control-Allow-Origin: *');
+   session_start();
+
+    header('Access-Control-Allow-Origin: http://127.0.0.1:5173');
     header('Content-Type: application/json');
     header('Access-Control-Allow-Credentials: true');
+
+    if(!isset($_POST['descricao'])){err('descricao do tipo esta faltando',__LINE__);}
     
     require_once(DIR.'/protected/database.php');
 

@@ -6,7 +6,7 @@
     const postOBJ = async () => {
         const updateRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
-        dado.append("nome", obj.nome);
+       // dado.append("nome", obj.nome);
         dado.append("descricao", obj.descricao);
         dado.append("foto", obj.foto);
         let res = await fetch(updateRoute, {
@@ -15,7 +15,7 @@
             credentials : "include",
         });
     };
-    const typeInsert = async () => {
+   const typeInsert = async () => {
         const updateRoute = "http://localhost/desapeguei/back/type.php";
         const dadoTipo = new FormData();
         dadoTipo.append("tipo", tipo.descricao);
@@ -38,12 +38,12 @@
 </main>
 <body class="container shadow-lg mt-4 border border-primary" id="BOXdoar">
     <h2>Doe aí meu vey</h2>
-    <form on:submit="{postOBJ}">
+    <form on:submit="{postOBJ}" on:submit="{typeInsert}">
     <form class="container row gy-5" id="BOXformgeral" >
         <div class="form-group col-6">
             <label for="image ">Adicione foto ao objeto</label>
             <input
-                type="file"
+                type="text"
                 name="foto"
                 id="foto"
                 class="form-control border border-secondary p-1"
@@ -59,8 +59,7 @@
                 id="nome"
                 class="form-control border border-secondary"
                 placeholder="nome do objeto..."
-                bind:value={obj.nome}
-            />
+                />
         </div>
         <div class="form-group col-6">
             <label for="dsrc"> Descrição</label>
