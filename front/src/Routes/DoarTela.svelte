@@ -3,29 +3,41 @@
     //import { userid } from "../stores";
     let tipo = {};
     let obj = {};
+
+    let descricao = "";
+    let imagem = "";
+
     const postOBJ = async () => {
-        const updateRoute = "http://localhost/desapeguei/back/post-object.php";
+        const postRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
-       // dado.append("nome", obj.nome);
-        dado.append("descricao", obj.descricao);
-        dado.append("foto", obj.foto);
-        let res = await fetch(updateRoute, {
+        //dado.append("nome", obj.nome);
+        dado.append("descricao", descricao);
+        dado.append("imagem", imagem);
+        let res = await fetch(postRoute, {
             method: "POST",
             body: dado,
             credentials : "include",
         });
+        if (!res.ok) {
+            alert("deu merda");
+            return;
+        }
+        descricao = "";
+        imagem = "";
     };
+    /*
    const typeInsert = async () => {
-        const updateRoute = "http://localhost/desapeguei/back/type.php";
+        const postRoute = "http://localhost/desapeguei/back/type.php";
         const dadoTipo = new FormData();
         dadoTipo.append("tipo", tipo.descricao);
 
-        let res2 = await fetch(updateRoute, {
+        let res2 = await fetch(postRoute, {
             method: "POST",
             body: dadoTipo,
             credentials : "include",
         });
     }
+    */
 </script>
 
 <link
@@ -38,28 +50,17 @@
 </main>
 <body class="container shadow-lg mt-4 border border-primary" id="BOXdoar">
     <h2>Doe aí meu vey</h2>
-    <form on:submit="{postOBJ}" on:submit="{typeInsert}">
-    <form class="container row gy-5" id="BOXformgeral" >
+    <form on:submit|preventDefault={postOBJ} class="container row gy-5" id="BOXformgeral" >
         <div class="form-group col-6">
-            <label for="image ">Adicione foto ao objeto</label>
+            <label for="imagem">Adicione imagem ao objeto</label>
             <input
                 type="text"
-                name="foto"
-                id="foto"
+                name="imagem"
+                id="imagem"
                 class="form-control border border-secondary p-1"
-                placeholder="escolha a foto em seu dispositivo"
-                bind:value={obj.foto}
+                placeholder="escolha a imagem em seu dispositivo"
+                bind:value={imagem}
             />
-        </div>
-        <div class="form-group col-6">
-            <label for="name">Insira o nome do objeto</label>
-            <input
-                type="text"
-                name="nome"
-                id="nome"
-                class="form-control border border-secondary"
-                placeholder="nome do objeto..."
-                />
         </div>
         <div class="form-group col-6">
             <label for="dsrc"> Descrição</label>
@@ -69,9 +70,10 @@
                 id="DOARdescri"
                 class="form-control border border-secondary pt-3"
                 placeholder="insira aqui a descrição do objeto..."
-                bind:value={obj.descricao}
+                bind:value={descricao}
             />
         </div>
+        <!--
         <div class="form-group col-6">
             <label for="dsrc"> Tipo do produto</label>
             <select name="tipo" bind:value={tipo.descricao}> tipo do objeto
@@ -82,11 +84,11 @@
                 <option value="perifericoS">Periférico de saída</option>
             </select>
         </div>
+        -->
         <div>
-            <button type="submit" class="btn btn-primary">Fazer doação</button>
+            <button class="btn btn-primary">Fazer doação</button>
         </div>
     </form>
-</form>
 </body>
 
 
