@@ -21,6 +21,22 @@
     onMount(() => {
         loadObjs();
     });
+
+    const deleteCard = async (id) => {
+        const data = new FormData();
+        data.append("id", id);
+        const deleteRoute = "http://localhost/desapeguei/back/delete-objects.php";
+        const res = await fetch(deleteRoute, {
+            method: "POST",
+            body: data,
+            credentials: "include",
+        })
+        if(!res.ok){
+            alert("deu merda aí");
+            return;
+        }
+        loadObjs();
+    }
 </script>
 <svelte:head>
     <link rel="stylesheet" href="./src/caixinha.css">
@@ -45,6 +61,7 @@
     {#each objs as obj}
         <div>
             {obj.OBJ_DESCRICAO}
+            <span style="cursor: pointer;" on:click={() => deleteCard(obj.OBJ_ID)}>&times;</span>
         </div>
     {/each}
     {:else}
