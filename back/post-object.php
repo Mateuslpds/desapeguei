@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-header('Access-Control-Allow-Origin: http://localhost:5173');
+header('Access-Control-Allow-Origin: http://127.0.0.1:5173');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Credentials: true');
 
@@ -15,9 +15,10 @@ if(!isset($_POST['imagem'])){err('imagem esta faltando',__LINE__);}
 require_once(__DIR__.'/protected/database.php');
 
 try{
-    $q = $db->prepare('INSERT INTO obj VALUES (null, :descricao, :imagem, :userid)');
+    $q = $db->prepare('INSERT INTO obj VALUES (null, :descricao, :imagem, :tipoid, :userid)');
     $q->bindValue(':descricao', $_POST['descricao']);
     $q->bindValue(':imagem', $_POST['imagem']);
+    $q->bindValue(':userid', $_SESSION['tipo']['TIPO_ID']);
     $q->bindValue(':userid', $_SESSION['user']['USUARIO_ID']);
     $q->execute();
     $objId = $db->lastInsertId();

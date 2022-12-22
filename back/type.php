@@ -13,7 +13,10 @@ try{
     $q= $db->prepare('INSERT INTO tipo VALUES (null, :descricao)');
     $q= bindValue(':descricao',$_POST['descricao']);
     $typeid= $db->lastInsertId();
-
+    
+    $_SESSION['tipo'] = $typeid;
+    http_response_code(200);
+    exit();
 }catch(PDOException $ex){
     err('nao foi possivel inserir o tipo', __LINE__);
 }
