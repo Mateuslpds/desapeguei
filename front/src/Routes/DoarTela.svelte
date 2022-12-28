@@ -7,8 +7,6 @@
     let descricao = "";
     let imagem = "";
 
-    let Tdescricao = "";
-
     const postOBJ = async () => {
         const postRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
@@ -24,19 +22,7 @@
             alert("deu merda");
             return;
         }
-        descricao = "";
-        imagem = "";
-        const TpostRoute = "http://localhost/desapeguei/back/type.php";
-        const dadoTipo = new FormData();
-        dadoTipo.append("tipo", Tdescricao);
-
-        let res2 = await fetch(postRoute, {
-            method: "POST",
-            body: dadoTipo,
-            credentials : "include",
-        });
     };
-
 </script>
 
 <link
@@ -72,9 +58,10 @@
                 bind:value={descricao}
             />
         </div>
+        <!--
         <div class="form-group col-6">
             <label for="dsrc"> Tipo do produto</label>
-            <select name="tipo" bind:value={Tdescricao}> tipo do objeto
+            <select name="tipo"> tipo do objeto
                 <option>- - - - - - - - - -</option>
                 <option value="eleDomestico">Eletrodoméstico</option>
                 <option value="hardware">Hardware</option>
@@ -82,6 +69,7 @@
                 <option value="perifericoS">Periférico de saída</option>
             </select>
         </div>
+        -->
         <div>
             <button class="btn btn-primary">Fazer doação</button>
         </div>

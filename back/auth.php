@@ -1,10 +1,11 @@
 <?php
+/*
 session_start();
 
-header('Access-Control-Allow-Origin: http://127.0.0.1:5173');
+header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Access-Control-Allow-Credentials: true');
 
-require_once(__DIR__.'/protected/database.php');
+require_once(__DIR__.'/database.php');
 
 try{
     $q = $db->prepare('SELECT * FROM usuario WHERE USUARIO_EMAIL = :email AND USUARIO_SENHA = :senha');
@@ -35,3 +36,26 @@ function err($message = 'error', $debug = 0){
         }';
     exit();
 }
+*/
+require 'main.php';
+
+$email = $_POST['email'];
+$senha = $_POST['senha'];
+
+$stmt = $conn->prepare('SELECT * FROM usuario WHERE USUARIO_EMAIL = :email AND USUARIO_SENHA = :senha');
+$stmt->execute([
+    'email' => $email, 
+    'senha' => $senha
+]);
+
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if (sizeof($data) == 0) {
+    http_response_code(401);
+    exit();
+}
+
+$user = $data[0];
+$_SESSION['user'] = $user;
+http_response_code(200);
+?>

@@ -17,7 +17,7 @@
 
 <body>
 
-  {#if localStorage.getItem("id") != undefined}
+  {#if localStorage.getItem("isLogged") != undefined}
     <div
       class="col-12 col-lg-auto mb-0 mb-lg-3 me-lg-6 w-25  pl-lg-5"
       id="Cbotao"

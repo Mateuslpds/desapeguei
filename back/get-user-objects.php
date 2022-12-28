@@ -1,5 +1,6 @@
 <?php
-header('Access-Control-Allow-Origin: http://127.0.0.1:5173');
+/*
+header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Credentials: true');
 
@@ -29,4 +30,16 @@ function err($message = 'error', $debug = 0){
     }';
     exit();
 }
+*/
+include 'main.php';
+
+if (!isset($_SESSION['user'])) {
+    http_response_code(401);
+    exit();
+}
+
+$stmt = $conn->query('SELECT * FROM obj WHERE OBJ_USUARIO_ID = ' . $_SESSION['user']['USUARIO_ID']);
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+echo json_encode($data);
 ?>
