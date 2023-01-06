@@ -1,12 +1,11 @@
 <script>
     import Menu from "./Menu.svelte";
     //import { userid } from "../stores";
-    let tipo = {};
     let obj = {};
 
     let descricao = "";
     let imagem = "";
-
+    //let tipo = "";
     const postOBJ = async () => {
         const postRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
@@ -23,6 +22,21 @@
             return;
         }
     };
+  /*  const typeInsert = async () => {
+        const typeRoute = "http://localhost/desapeguei/back/type.php";
+        const Tdescricao = new FormData();
+        Tdescricao.append("tipo", tipo);
+        let res = await fetch(typeRoute, {
+            method: "POST",
+            body: Tdescricao,
+            credentials : "include",
+        });
+        if (!res.ok) {
+            alert("deu merda");
+            return;
+        }
+    };*/
+
 </script>
 
 <link
@@ -35,7 +49,7 @@
 </main>
 <body class="container shadow-lg mt-4 border border-primary" id="BOXdoar">
     <h2>Doe aí meu vey</h2>
-    <form on:submit|preventDefault={postOBJ} class="container row gy-5" id="BOXformgeral" >
+    <form on:submit|preventDefault={postOBJ}  class="container row gy-5" id="BOXformgeral" >
         <div class="form-group col-6">
             <label for="imagem">Adicione imagem ao objeto</label>
             <input
@@ -58,18 +72,18 @@
                 bind:value={descricao}
             />
         </div>
-        <!--
-        <div class="form-group col-6">
+
+    <!---<div class="form-group col-6">
             <label for="dsrc"> Tipo do produto</label>
-            <select name="tipo"> tipo do objeto
+            <select name="tipo" bind:value={tipo}> tipo do objeto
                 <option>- - - - - - - - - -</option>
-                <option value="eleDomestico">Eletrodoméstico</option>
+                <option value="eleDomestico" >Eletrodoméstico</option>
                 <option value="hardware">Hardware</option>
                 <option value="perifericoE">Periférico de entrada</option>
                 <option value="perifericoS">Periférico de saída</option>
             </select>
-        </div>
-        -->
+        </div>-->
+        
         <div>
             <button class="btn btn-primary">Fazer doação</button>
         </div>
