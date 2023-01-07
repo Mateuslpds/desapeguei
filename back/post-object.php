@@ -12,4 +12,8 @@ $q->bindValue(':imagem', $_POST['imagem']);
 $q->bindValue(':userid', $_SESSION['user']['USUARIO_ID']);
 $q->execute();
 $objId = $conn->lastInsertId();
+
+$_SESSION['obj'] = $objId
+
 ?>
+

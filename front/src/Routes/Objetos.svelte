@@ -1,4 +1,5 @@
 <script>
+    import { link } from "svelte-spa-router";
     import { objs } from "../stores.js";
     import { onMount } from "svelte";
     import Objeto from "./Objeto.svelte";
@@ -13,7 +14,8 @@
 
 <div id="objs">
     {#each $objs as obj}
-        <Objeto {obj}/>
+        <Objeto {obj}/> 
+        <a href="/agendamento" use:link> <button> agendar</button> </a>
         <br>
     {/each}
 </div>
