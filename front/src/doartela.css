@@ -1,7 +1,13 @@
-#BOXdoar{
-    height: 500px;
-    width: max-content;
-    box-sizing: border-box;
+h2 {
+    text-align: left;
+}
+
+.box {
+    width: 45%;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 #BOXformgeral{

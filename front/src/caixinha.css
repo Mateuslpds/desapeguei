@@ -1,8 +1,65 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+}
+
+input{ 
+    width: 40%;
+    padding: 8px 10px;
+    margin: 5px 0;
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: #2595bed8;
+}
+
+.form > label {
+    float: left;
+    clear: right;
+}
+
+.form > input {
+    float: right;
+}
+
+.caixinha{
+    font-size: 35px;
+    text-align: left;
+    padding: 20px 60px 20px 60px;
+    clear: both;
+}
+
+.box {
+    width: 45%;
+    background-color: white;
+    margin: auto;
+    margin-top: 50px;;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 #Cbotao{
-    margin-top: 50px;
+    padding: 25px 0 20px 50px;
 }
 
 #Ctexto1{
-    padding-left: 150px;
-    font-style: italic;
+    text-align: center;
+    line-height: 18px;
+    font-size: 35px;
+}
+
+.textodoar{
+    font-size: 20px;
+    text-align: center;
+    line-height: 5px;
+    padding-top: 45px;
+}
+
+.imagem img {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    max-width: 100%;
+    min-width: 20%;
 }

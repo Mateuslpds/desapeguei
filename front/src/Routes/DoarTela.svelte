@@ -47,8 +47,8 @@
 <main>
     <Menu />
 </main>
-<body class="container shadow-lg mt-4 border border-primary" id="BOXdoar">
-    <h2>Doe aí meu vey</h2>
+<body class="box">
+    <h2>Faça sua doação</h2>
     <form on:submit|preventDefault={postOBJ}  class="container row gy-5" id="BOXformgeral" >
         <div class="form-group col-6">
             <label for="imagem">Adicione imagem ao objeto</label>
