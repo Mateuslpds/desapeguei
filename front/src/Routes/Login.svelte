@@ -30,6 +30,16 @@
     localStorage.setItem("isLogged", "true");
     window.location.href = "/";
   };
+
+  function Senha() {
+        var x = document.getElementById("senha");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+        };
+    };
+
 </script>
 
 <link
@@ -76,8 +86,8 @@
             <div class="d-flex align-items-center justify-content-between">
               <div><a href="/recuperar" use:link>Esqueceu a senha?</a></div>
               <div class="d-flex align-items-center">
-                <input name="" type="checkbox" value="" />
-                <span class="pl-2 font-weight-bold">Mantenha-me conectado</span>
+                <input class="boxpasswordhide" type="checkbox" style="width: 15px" on:click={Senha}> 
+                <span class="pl-2 font-weight-bold">Mostrar senha</span>
               </div>
             </div>
             <div class="pb-2">
