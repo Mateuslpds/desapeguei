@@ -1,42 +1,48 @@
 <script>
     import Menu from "./Menu.svelte";
+    import { onMount } from "svelte";
     //import { userid } from "../stores";
     let obj = {};
 
+    let types = [];
+
     let descricao = "";
     let imagem = "";
-    //let tipo = "";
+    let tipo = "";
+
     const postOBJ = async () => {
         const postRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
-        //dado.append("nome", obj.nome);
         dado.append("descricao", descricao);
         dado.append("imagem", imagem);
+        dado.append("tipo", tipo);
         let res = await fetch(postRoute, {
             method: "POST",
             body: dado,
-            credentials : "include",
+            credentials: "include",
         });
         if (!res.ok) {
             alert("deu merda");
             return;
         }
     };
-  /*  const typeInsert = async () => {
-        const typeRoute = "http://localhost/desapeguei/back/type.php";
-        const Tdescricao = new FormData();
-        Tdescricao.append("tipo", tipo);
-        let res = await fetch(typeRoute, {
-            method: "POST",
-            body: Tdescricao,
-            credentials : "include",
+
+    const loadTypes = async () => {
+        const loadRoute = "http://localhost/desapeguei/back/get-types.php";
+        const res = await fetch(loadRoute, {
+            credentials: "include",
         });
         if (!res.ok) {
-            alert("deu merda");
+            alert("deu merda, não tais logado");
             return;
         }
-    };*/
+        types = await res.json();
+        console.log(types.length);
+    };
 
+    onMount(() => {
+        loadTypes();
+    });
 </script>
 
 <link
@@ -49,7 +55,11 @@
 </main>
 <body class="box">
     <h2>Faça sua doação</h2>
-    <form on:submit|preventDefault={postOBJ}  class="container row gy-5" id="BOXformgeral" >
+    <form
+        on:submit|preventDefault={postOBJ}
+        class="container row gy-5"
+        id="BOXformgeral"
+    >
         <div class="form-group col-6">
             <label for="imagem">Adicione imagem ao objeto</label>
             <input
@@ -73,31 +83,25 @@
             />
         </div>
 
-    <!---<div class="form-group col-6">
-            <label for="dsrc"> Tipo do produto</label>
-            <select name="tipo" bind:value={tipo}> tipo do objeto
-                <option>- - - - - - - - - -</option>
-                <option value="eleDomestico" >Eletrodoméstico</option>
-                <option value="hardware">Hardware</option>
-                <option value="perifericoE">Periférico de entrada</option>
-                <option value="perifericoS">Periférico de saída</option>
-            </select>
-        </div>-->
-        
+        <select name="tipo" id="tipo" bind:value={tipo}>
+            {#each types as type}
+                <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
+            {/each}
+        </select>
+
         <div>
             <button class="btn btn-primary">Fazer doação</button>
         </div>
     </form>
 </body>
 
-
 <style>
-    h2{
-        margin-top:2rem;
+    h2 {
+        margin-top: 2rem;
         margin-bottom: -4rem;
         text-align: center;
     }
-    label{
+    label {
         line-height: 10px;
     }
 </style>
