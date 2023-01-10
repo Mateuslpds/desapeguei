@@ -8,6 +8,7 @@
 
     let descricao = "";
     let imagem = "";
+    //let tipo = "";
     let tipo = "";
 
     const postOBJ = async () => {
@@ -36,10 +37,9 @@
             alert("deu merda, não tais logado");
             return;
         }
-        types = await res.json();
-        console.log(types.length);
+            types = await res.json();
+            console.log(types.length);
     };
-
     onMount(() => {
         loadTypes();
     });
@@ -55,11 +55,7 @@
 </main>
 <body class="box">
     <h2>Faça sua doação</h2>
-    <form
-        on:submit|preventDefault={postOBJ}
-        class="container row gy-5"
-        id="BOXformgeral"
-    >
+    <form on:submit|preventDefault={postOBJ}  class="container row gy-5" id="BOXformgeral" >
         <div class="form-group col-6">
             <label for="imagem">Adicione imagem ao objeto</label>
             <input
@@ -88,12 +84,13 @@
                 <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
             {/each}
         </select>
-
+        
         <div>
             <button class="btn btn-primary">Fazer doação</button>
         </div>
     </form>
 </body>
+
 
 <style>
     h2 {
@@ -104,4 +101,5 @@
     label {
         line-height: 10px;
     }
+
 </style>
