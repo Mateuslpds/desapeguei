@@ -1,10 +1,26 @@
 <script>
     import Menu from "./Menu.svelte";
     import { link } from "svelte-spa-router";
+    import { onMount } from "svelte";
     import { prevent_default } from "svelte/internal";
+
+    let objs = [];
 
     let CEP = "";
     let DATA_HORA = "";
+
+    const getObjs = async () => {
+        const loadRoute = "http://localhost/desapeguei/back/get-object.php";
+        const res = await fetch(loadRoute, {
+            credentials : "include",
+        });
+        objs = await res.json();
+        console.log(objs.length)
+    };
+
+    onMount(() => {
+        getObjs();
+    });
 
     const agendaCreate = async () => {
         const agendaRoute = "http://localhost/desapeguei/back/agenda-create.php";
@@ -29,7 +45,9 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
 />
 <Menu></Menu>
-<h1>testeteste teste oi oi oi</h1>
+{#each objs as obj}
+<h1>Objeto: {obj.OBJ_DESCRICAO}</h1>
+{/each}
 
 <h1>realize seu agendamento</h1>
 
