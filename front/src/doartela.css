@@ -1,21 +1,40 @@
 h2 {
     text-align: left;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    padding: 15px 15px 15px 40px;
+    background-image: linear-gradient(to right, #269ac5, transparent);
+}
+
+label {
+    padding-top: 20px;
+    line-height: 10px;
 }
 
 .box {
-    width: 45%;
+    width: 40%;
     background-color: white;
-    margin: auto;
-    margin-top: 50px;
+    margin-top: 60px;
+    padding-bottom: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-#BOXformgeral{
-    padding-top: 100px;
+.geral{
     box-sizing: border-box;
+    padding: 0 40px 10px 40px;
 }
 
-#DOARdescri{
-    padding-bottom: 100px ;
-    box-sizing: border-box;
+.botão {
+    font-size: 16px;
+    background-color: #269ac5;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    margin-left: 280px;
+}
+
+.botão:hover{
+    background-color: #2276ae;
+    box-shadow: 0 10px 15px 0 rgba(0,0,0,0.15), 0 10px 30px 0 rgba(0, 0, 0, 0.15);
 }

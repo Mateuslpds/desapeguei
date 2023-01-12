@@ -27,8 +27,7 @@ input{
 .caixinha{
     font-size: 35px;
     text-align: left;
-    padding: 20px 60px 20px 60px;
-    clear: both;
+    padding: 40px 60px 20px 60px;
 }
 
 .box {
@@ -40,12 +39,12 @@ input{
 }
 
 #Cbotao{
-    padding: 25px 0 20px 50px;
+    padding: 25px 0 0 50px;
 }
 
 #Ctexto1{
     text-align: center;
-    line-height: 18px;
+    line-height: 15px;
     font-size: 35px;
 }
 
