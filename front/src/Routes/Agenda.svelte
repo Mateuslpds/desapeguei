@@ -5,7 +5,7 @@
     import { prevent_default } from "svelte/internal";
 
     let objs = [];
-
+    
     let CEP = "";
     let DATA_HORA = "";
 
@@ -47,7 +47,6 @@
 <Menu></Menu>
 {#each objs as obj}
 <h1>Objeto: {obj.OBJ_DESCRICAO}</h1>
-{/each}
 
 <h1>realize seu agendamento</h1>
 
@@ -65,5 +64,5 @@
     <div>
         <button>lansa</button>
     </div>
-
 </form>
+{/each}
