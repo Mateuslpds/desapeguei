@@ -7,7 +7,7 @@ if (!isset($_SESSION["user"])) {
     exit();
 }
 
-$stmt = $conn->query('SELECT * FROM agenda WHERE AGD_OBJ_ID =' . $_SESSION['obj']['OBJ_USUARIO_ID']);
+$stmt = $conn->query('SELECT * FROM agenda WHERE USUARIO_DOADOR_ID =' . $_SESSION['user']['USUARIO_ID']);
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode($data);

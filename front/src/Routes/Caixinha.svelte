@@ -27,6 +27,7 @@
 
     onMount(() => {
         loadObjs();
+        loadAgenda();
     });
 
     const deleteOBJ = async (id) => {
@@ -75,8 +76,14 @@
         const res = await fetch(loadAgendaRoute, {
         credentials: "include",
     });
-    dataAgenda = await res.json();
+        if(!res.ok){
+            alert("deu merda aí");
+            return;
+        }
+        dataAgenda = await res.json();
     };
+
+
 
 </script>
 <svelte:head>
@@ -100,16 +107,18 @@
     </div>
     {#if objs.length > 0}
     {#each objs as obj}
+        {#each dataAgenda as agenda}
         <div>
             {obj.OBJ_DESCRICAO}
             {obj.OBJ_IMG}
+            /
+           CEP: {agenda.AGD_CEP}
+           HORA EFETUADA :{agenda.AGD_DATETIME}
             <span style="cursor: pointer;" on:click={() => deleteOBJ(obj.OBJ_ID)}>&times;</span>
             <button on:click={() => selectID(obj.OBJ_ID)}>Editar</button>        
         </div>
+        {/each}
     {/each}
-       
-        <!--<button on:click={() => loadAgenda(dataAgenda.AGD_ID)}>{dataAgenda} consultar agendamento</button>-->
-
         <form on:submit|preventDefault={() => editOBJ()}>
             <input type="text" id="descricao" bind:value={descricao}>
             <input type="text" id="imagem" bind:value={imagem}>
