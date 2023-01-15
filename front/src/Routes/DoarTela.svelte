@@ -68,13 +68,13 @@
         <div class="inpimage">
             <label for="imagem">Adicione imagem ao objeto</label>
             <input
-                type="file"
+                type="text"
                 name="imagem"
                 id="imagem"
                 class="form-control border border-secondary p-1"
                 placeholder="Insira uma imagem."
                 bind:value={imagem}
-            />
+            /> <!--tlg tem q ser text pq vai ter um drama ae do caminho do arquivo, se esqueci desculpa-->
         </div>
         <div class="inpdescri">
             <label for="dsrc">Descrição</label>

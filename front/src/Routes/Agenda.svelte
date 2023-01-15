@@ -5,9 +5,9 @@
     import { prevent_default } from "svelte/internal";
 
     let objs = [];
+    let dataAgenda = [];
     
     let CEP = "";
-    let DATA_HORA = "";
 
     const getObjs = async () => {
         const loadRoute = "http://localhost/desapeguei/back/get-object.php";
@@ -26,7 +26,6 @@
         const agendaRoute = "http://localhost/desapeguei/back/agenda-create.php";
         const agenDado = new FormData();
         agenDado.append("CEP", CEP);
-        agenDado.append("datahora", DATA_HORA);
         let res = await fetch(agendaRoute, {
             method: "POST",
             body: agenDado,
@@ -37,6 +36,15 @@
             return;
         }
     };
+
+    const loadAgenda = async () => {
+        const loadAgendaRoute = "http://localhost/desapeguei/back/agenda-doador-read.php";
+        const res = await fetch(loadAgendaRoute, {
+        credentials: "include",
+    });
+    dataAgenda = await res.json();
+    };
+
 
 </script>
 
@@ -57,12 +65,9 @@
         </label>
     </div>
     <div>
-        <label>
-            <input type="text" bind:value={DATA_HORA}> insira aq data e hora
-        </label>
-    </div>
-    <div>
         <button>lansa</button>
     </div>
 </form>
 {/each}
+
+<button on:click={() => loadAgenda()}>{dataAgenda}</button>

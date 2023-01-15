@@ -6,6 +6,6 @@
     $conn = new PDO($dsn, 'root', '');
 
     session_start();
+    //nao se esquecer de trocar o host
 ?>
 
-//nao se esquecer de trocar o host

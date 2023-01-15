@@ -3,11 +3,14 @@
     import { link } from "svelte-spa-router";
     import { onMount } from "svelte";
     import { dataset_dev } from "svelte/internal";
+    import Agenda from "./Agenda.svelte";
 
     let objs = [];
+    let dataAgenda = [];
 
     let descricao = "";
     let imagem = "";
+    
 
     const loadObjs = async () => {
         const loadRoute = "http://localhost/desapeguei/back/get-user-objects.php";
@@ -66,6 +69,15 @@
         }
         loadObjs();
     };
+  
+    const loadAgenda = async () => {
+        const loadAgendaRoute = "http://localhost/desapeguei/back/agenda-doador-read.php";
+        const res = await fetch(loadAgendaRoute, {
+        credentials: "include",
+    });
+    dataAgenda = await res.json();
+    };
+
 </script>
 <svelte:head>
     <link rel="stylesheet" href="./src/caixinha.css">
@@ -92,9 +104,12 @@
             {obj.OBJ_DESCRICAO}
             {obj.OBJ_IMG}
             <span style="cursor: pointer;" on:click={() => deleteOBJ(obj.OBJ_ID)}>&times;</span>
-            <button on:click={() => selectID(obj.OBJ_ID)}>Editar</button>
+            <button on:click={() => selectID(obj.OBJ_ID)}>Editar</button>        
         </div>
     {/each}
+       
+        <!--<button on:click={() => loadAgenda(dataAgenda.AGD_ID)}>{dataAgenda} consultar agendamento</button>-->
+
         <form on:submit|preventDefault={() => editOBJ()}>
             <input type="text" id="descricao" bind:value={descricao}>
             <input type="text" id="imagem" bind:value={imagem}>
