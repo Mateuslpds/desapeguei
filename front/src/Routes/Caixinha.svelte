@@ -6,7 +6,8 @@
     import Agenda from "./Agenda.svelte";
 
     let objs = [];
-    let dataAgenda = [];
+    let doadorAgenda = [];
+    let receptorAgenda = [];
 
     let descricao = "";
     let imagem = "";
@@ -27,7 +28,8 @@
 
     onMount(() => {
         loadObjs();
-        loadAgenda();
+        loadDoadorAgenda();
+        loadReceptorAgenda();
     });
 
     const deleteOBJ = async (id) => {
@@ -71,19 +73,29 @@
         loadObjs();
     };
   
-    const loadAgenda = async () => {
-        const loadAgendaRoute = "http://localhost/desapeguei/back/agenda-doador-read.php";
-        const res = await fetch(loadAgendaRoute, {
+    const loadDoadorAgenda = async () => {
+        const loadDoadorAgendaRoute = "http://localhost/desapeguei/back/agenda-doador-read.php";
+        const res = await fetch(loadDoadorAgendaRoute, {
         credentials: "include",
     });
         if(!res.ok){
             alert("deu merda aí");
             return;
         }
-        dataAgenda = await res.json();
+        doadorAgenda = await res.json();
     };
 
-
+    const loadReceptorAgenda = async () => {
+        const loadReceptorAgendaRoute = "http://localhost/desapeguei/back/agenda-receptor-read.php";
+        const res = await fetch(loadReceptorAgendaRoute, {
+        credentials: "include",
+    });
+        if(!res.ok){
+            alert("deu merda aí");
+            return;
+        }
+        receptorAgenda = await res.json();
+    };
 
 </script>
 <svelte:head>
@@ -107,17 +119,19 @@
     </div>
     {#if objs.length > 0}
     {#each objs as obj}
-        {#each dataAgenda as agenda}
         <div>
             {obj.OBJ_DESCRICAO}
             {obj.OBJ_IMG}
-            /
-           CEP: {agenda.AGD_CEP}
-           HORA EFETUADA :{agenda.AGD_DATETIME}
             <span style="cursor: pointer;" on:click={() => deleteOBJ(obj.OBJ_ID)}>&times;</span>
             <button on:click={() => selectID(obj.OBJ_ID)}>Editar</button>        
         </div>
-        {/each}
+    {/each}
+    {#each doadorAgenda as Dagenda}
+        <!--arrumar alguma forma de deixar isso de lado do objeto como se tivesse relacionando visualmente isto-->
+        <div>
+        CEP: {Dagenda.AGD_CEP}
+        HORA EFETUADA :{Dagenda.AGD_DATETIME}
+        </div>
     {/each}
         <form on:submit|preventDefault={() => editOBJ()}>
             <input type="text" id="descricao" bind:value={descricao}>
@@ -135,6 +149,12 @@
         <p>doação.</p>
     </div>
     {/if}
+    {#each receptorAgenda as Ragenda}
+        <div>
+            CEP: {Ragenda.AGD_CEP}
+            HORA EFETUADA: {Ragenda.AGD_DATETIME}
+        </div>
+    {/each}
     <div class="textodoar">
         Gostaria de fazer uma doação?
     </div>
