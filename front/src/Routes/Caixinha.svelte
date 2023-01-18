@@ -19,7 +19,7 @@
             credentials : "include",
         });
         if (!res.ok) {
-            alert("deu merda, não tais logado");
+            alert("erro: você não está logado");
             return;
         }
         objs = await res.json();
@@ -42,7 +42,7 @@
             credentials: "include",
         })
         if(!res.ok){
-            alert("deu merda aí");
+            alert("erro: não foi possível deletar o objeto");
             return;
         }
         loadObjs();
@@ -67,7 +67,7 @@
             credentials: "include",
         })
         if(!res.ok){
-            alert("deu merda aí");
+            alert("erro: não foi possível editar o objeto");
             return;
         }
         loadObjs();
@@ -79,7 +79,7 @@
         credentials: "include",
     });
         if(!res.ok){
-            alert("deu merda aí");
+            alert("erro: não foi possível carregar seus objetos doados com agendamento");
             return;
         }
         doadorAgenda = await res.json();
@@ -91,7 +91,7 @@
         credentials: "include",
     });
         if(!res.ok){
-            alert("deu merda aí");
+            alert("erro: não foi possível carregar os objetos dos quais você agendou");
             return;
         }
         receptorAgenda = await res.json();
@@ -129,6 +129,7 @@
     {#each doadorAgenda as Dagenda}
         <!--arrumar alguma forma de deixar isso de lado do objeto como se tivesse relacionando visualmente isto-->
         <div>
+       <!--PARA O RECEPTOR : {Dagenda.USUARIO_NOME}   forma de fazer com que apareça o nome do receptor para o doador -->
         CEP: {Dagenda.AGD_CEP}
         HORA EFETUADA :{Dagenda.AGD_DATETIME}
         </div>
@@ -151,6 +152,7 @@
     {/if}
     {#each receptorAgenda as Ragenda}
         <div>
+          DO DOADOR: {Ragenda.USUARIO_NOME} <!-- forma com que apareça o nome do doador para o receptor-->
             CEP: {Ragenda.AGD_CEP}
             HORA EFETUADA: {Ragenda.AGD_DATETIME}
         </div>

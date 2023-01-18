@@ -12,5 +12,5 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode($data);
 
-
+//quero inserir um inner join neste, para que apareça o nome de todos os receptores dos quais agendaram
 ?>
