@@ -15,7 +15,7 @@
         const postRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
         dado.append("descricao", descricao);
-        dado.append("imagem", imagem);
+        dado.append("imagem", imagem[0]);
         dado.append("tipo", tipo);
         let res = await fetch(postRoute, {
             method: "POST",
@@ -26,6 +26,8 @@
             alert("deu merda");
             return;
         }
+
+        console.log(imagem[0]);
     };
 
     const loadTypes = async () => {
@@ -38,7 +40,6 @@
             return;
         }
             types = await res.json();
-            console.log(types.length);
     };
     onMount(() => {
         loadTypes();
@@ -68,13 +69,13 @@
         <div class="inpimage">
             <label for="imagem">Adicione imagem ao objeto</label>
             <input
-                type="text"
+                type="file"
                 name="imagem"
                 id="imagem"
                 class="form-control border border-secondary p-1"
                 placeholder="Insira uma imagem."
-                bind:value={imagem}
-            /> <!--tlg tem q ser text pq vai ter um drama ae do caminho do arquivo, se esqueci desculpa-->
+                bind:files={imagem}
+            />
         </div>
         <div class="inpdescri">
             <label for="dsrc">Descrição</label>

@@ -2,9 +2,10 @@
   import { link } from "svelte-spa-router";
   import { onMount } from "svelte";
   import Menu from "./Menu.svelte";
-  import Objetos from "./Objetos.svelte";
 
   let objs = [];
+
+  const imgPath = "http://localhost/desapeguei/back/imagens/";
 
   const loadObjs = async () => {
     const loadRoute = "http://localhost/desapeguei/back/get-objects.php";
@@ -50,11 +51,10 @@
     </div>
   {/if}
 
-  <!--<Objetos />-->
   {#each objs as obj}
     <div>
       {obj.OBJ_DESCRICAO}
-      {obj.OBJ_IMG}
+      <img src="{imgPath}{obj.OBJ_IMG}" alt="">
       <a href="/agendamento" use:link>
         <button on:click={() => getOBJ(obj.OBJ_ID)}> agendar</button>
       </a>

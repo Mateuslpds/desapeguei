@@ -6,15 +6,18 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
+$target_dir = "imagens/";
+$target_file = $target_dir . basename($_FILES["imagem"]["name"]);
+
 $q = $conn->prepare('INSERT INTO obj VALUES (null, :descricao, :imagem, :tipo, :userid)');
 $q->bindValue(':descricao', $_POST['descricao']);
-$q->bindValue(':imagem', $_POST['imagem']);
+$q->bindValue(':imagem', basename($_FILES["imagem"]["name"]));
 $q->bindValue(':tipo', $_POST['tipo']);
 $q->bindValue(':userid', $_SESSION['user']['USUARIO_ID']);
 $q->execute();
 $objId = $conn->lastInsertId();
 
-//$_SESSION['obj'] = $objId
+move_uploaded_file($_FILES['imagem']['tmp_name'], $target_file);
 
 ?>
 

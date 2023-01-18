@@ -12,6 +12,7 @@
     let descricao = "";
     let imagem = "";
     
+    const imgPath = "http://localhost/desapeguei/back/imagens/";
 
     const loadObjs = async () => {
         const loadRoute = "http://localhost/desapeguei/back/get-user-objects.php";
@@ -121,7 +122,7 @@
     {#each objs as obj}
         <div>
             {obj.OBJ_DESCRICAO}
-            {obj.OBJ_IMG}
+            <img src="{imgPath}{obj.OBJ_IMG}" alt="">
             <span style="cursor: pointer;" on:click={() => deleteOBJ(obj.OBJ_ID)}>&times;</span>
             <button on:click={() => selectID(obj.OBJ_ID)}>Editar</button>        
         </div>
