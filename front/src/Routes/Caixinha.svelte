@@ -49,6 +49,24 @@
         loadObjs();
     }
 
+    const deleteAGD = async (id) => {
+        const data = new FormData();
+        data.append("id", id);
+        const deleteRoute = "http://localhost/desapeguei/back/delete-agendamento.php";
+        const res = await fetch(deleteRoute, {
+            method: "POST",
+            body: data,
+            credentials: "include",
+        })
+        if(!res.ok){
+            alert("erro: não foi possível deletar o objeto");
+            return;
+        }
+        loadDoadorAgenda();
+        loadReceptorAgenda();
+
+    }
+
     let idEdit = "";
 
     const selectID = async (id) => {
@@ -72,6 +90,7 @@
             return;
         }
         loadObjs();
+
     };
   
     const loadDoadorAgenda = async () => {
@@ -133,7 +152,8 @@
        <!--PARA O RECEPTOR : {Dagenda.USUARIO_NOME}   forma de fazer com que apareça o nome do receptor para o doador -->
         CEP: {Dagenda.AGD_CEP}
         HORA EFETUADA :{Dagenda.AGD_DATETIME}
-        </div>
+        <span style="cursor: pointer;" on:click={() => deleteAGD(Dagenda.AGD_ID)}>&times;</span>
+      </div>
     {/each}
         <form on:submit|preventDefault={() => editOBJ()}>
             <input type="text" id="descricao" bind:value={descricao}>
@@ -156,6 +176,8 @@
           DO DOADOR: {Ragenda.USUARIO_NOME} <!-- forma com que apareça o nome do doador para o receptor-->
             CEP: {Ragenda.AGD_CEP}
             HORA EFETUADA: {Ragenda.AGD_DATETIME}
+            <span style="cursor: pointer;" on:click={() => deleteAGD(Ragenda.AGD_ID)}>&times;</span>
+        
         </div>
     {/each}
     <div class="textodoar">
