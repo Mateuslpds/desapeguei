@@ -2,9 +2,10 @@ import Home from './Routes/Home.svelte';
 import Login from './Routes/Login.svelte';
 import Caixinha from './Routes/Caixinha.svelte';
 import Cadastro from './Routes/Cadastro.svelte';
-import Recuperarsenha from "./Routes/Recuperarsenha.svelte"
-import DoarTela from './Routes/DoarTela.svelte';
+import Recuperarsenha from "./Routes/Recuperarsenha.svelte";
+import DoarTela from "./Routes/DoarTela.svelte";
 import Agenda from './Routes/Agenda.svelte';
+import Pesquisa from './Routes/Pesquisa.svelte';
 
 const routes = {
     '/' : Home,
@@ -13,7 +14,8 @@ const routes = {
     '/cadastro' : Cadastro,
     '/recuperar' : Recuperarsenha,
     '/doarTela' : DoarTela,
-    '/agendamento' : Agenda
+    '/agendamento' : Agenda,
+    '/pesquisa' : Pesquisa
 }
 
 export default routes;

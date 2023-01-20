@@ -1,7 +1,12 @@
 <script>
   import { link } from "svelte-spa-router";
   import { isLogged } from "../stores";
+  import { search } from "../stores";
   
+  const searchObj = async () => {
+    location.href = "/#/pesquisa";
+  }
+
   const logout = async () => {
     fetch("http://localhost/desapeguei/back/logout.php", {
       credentials: "include",
@@ -23,13 +28,16 @@
         class="d-flex align-items-center mb-3 mb-lg-0 text-dark text-decoration-none" style="font-size: 1.5rem;"
         ><img src="imagens/logo.png" alt=""></a
       >
-      <form action="" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 w-50">
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 w-50">
         <input
-          type="search"
+          type="text"
           class="form-control form-control-dark"
           placeholder="&#xF002; Pesquisar doações"
           aria-label="Pesquisar" style="font-family:Arial, FontAwesome"
-        />
+          autofocus
+          bind:value={$search}
+          on:input={searchObj}
+          />
       </form>
       {#if localStorage.getItem("isLogged") == undefined}
       <div class="text-end">
