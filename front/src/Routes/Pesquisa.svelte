@@ -5,14 +5,26 @@
     import { search } from "../stores.js";
 
     let objs = [];
+    let types = [];
 
-    console.log($search);
+    let tipo = null;
 
     const imgPath = "http://localhost/desapeguei/back/imagens/";
 
+    const loadTypes = async () => {
+        const loadRoute = "http://localhost/desapeguei/back/get-types.php";
+        const res = await fetch(loadRoute, {
+            credentials: "include",
+        });
+        types = await res.json();
+    };
+    onMount(() => {
+        loadTypes();
+    });
+
     $: visibleObjs = $search ?
 		objs.filter(obj => {
-			return obj.OBJ_DESCRICAO.match(`${$search}.*`)
+			return obj.OBJ_DESCRICAO.match(`${$search}.*`) && (obj.OBJ_TIPO_ID == tipo || tipo == null)
 		}) : objs;
 
 	onMount(async () => {
@@ -31,6 +43,10 @@
         });
         console.log(loadRoute);
     };
+
+    const cleanFilter = () => {
+        tipo = null
+    }
 </script>
 
 <link
@@ -40,6 +56,14 @@
 
 <body>
     <Menu />
+
+    <label class="tipo" for="tipo">Tipo</label>
+    <select class="tipobutton" name="tipo" id="tipo" bind:value={tipo}>
+        {#each types as type}
+            <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
+        {/each}
+    </select>
+    <button on:click={cleanFilter}>Limpar filtro</button>
 
     {#each visibleObjs as obj}
         <div>

@@ -17,7 +17,4 @@ $a->bindValue('dh', $datahora);
 $a->bindValue(':CEP', $_POST['CEP']);
 $a->execute();
 $agdid = $conn->lastInsertId();
-
-
-
 ?>
