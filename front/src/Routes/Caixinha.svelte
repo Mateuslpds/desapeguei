@@ -33,9 +33,10 @@
         loadReceptorAgenda();
     });
 
-    const deleteOBJ = async (id) => {
+    const deleteOBJ = async (id, imagem) => {
         const data = new FormData();
         data.append("id", id);
+        data.append("imagem", imagem);
         const deleteRoute = "http://localhost/desapeguei/back/delete-objects.php";
         const res = await fetch(deleteRoute, {
             method: "POST",
@@ -68,18 +69,20 @@
     }
 
     let idEdit = "";
+    let imgEdit = "";
 
-    const selectID = async (id) => {
+    const selectID = async (id, imagemEdit) => {
         idEdit = id;
-        console.log(idEdit);
+        imgEdit = imagemEdit;
     }
 
     const editOBJ = async () => {
         const updateRoute = "http://localhost/desapeguei/back/update-object.php";
         const data = new FormData();
         data.append("id", idEdit);
+        data.append("imgEdit", imgEdit);
         data.append("descricao", descricao);
-        data.append("imagem", imagem);
+        data.append("imagem", imagem[0]);
         const res = await fetch(updateRoute, {
             method: "POST",
             body: data,
@@ -90,7 +93,6 @@
             return;
         }
         loadObjs();
-
     };
   
     const loadDoadorAgenda = async () => {
@@ -142,8 +144,8 @@
         <div>
             {obj.OBJ_DESCRICAO}
             <img src="{imgPath}{obj.OBJ_IMG}" alt="">
-            <span style="cursor: pointer;" on:click={() => deleteOBJ(obj.OBJ_ID)}>&times;</span>
-            <button on:click={() => selectID(obj.OBJ_ID)}>Editar</button>        
+            <span style="cursor: pointer;" on:click={() => deleteOBJ(obj.OBJ_ID, obj.OBJ_IMG)}>&times;</span>
+            <button on:click={() => selectID(obj.OBJ_ID, obj.OBJ_IMG)}>Editar</button>
         </div>
     {/each}
     {#each doadorAgenda as Dagenda}
@@ -156,7 +158,7 @@
     {/each}
         <form on:submit|preventDefault={() => editOBJ()}>
             <input type="text" id="descricao" bind:value={descricao}>
-            <input type="text" id="imagem" bind:value={imagem}>
+            <input type="file" id="imagem" bind:files={imagem}>
             <button class="Editar">Editar</button>
         </form>
     {:else}
