@@ -5,9 +5,10 @@
     import { prevent_default } from "svelte/internal";
 
     let objs = [];
-    let dataAgenda = [];
-    
+
     let CEP = "";
+
+    const imgPath = "http://localhost/desapeguei/back/imagens/";
 
     const getObjs = async () => {
         const loadRoute = "http://localhost/desapeguei/back/get-object.php";
@@ -37,15 +38,6 @@
         }
     };
 
-    const loadAgenda = async () => {
-        const loadAgendaRoute = "http://localhost/desapeguei/back/agenda-doador-read.php";
-        const res = await fetch(loadAgendaRoute, {
-        credentials: "include",
-    });
-    dataAgenda = await res.json();
-    };
-
-
 </script>
 
 <link
@@ -54,6 +46,7 @@
 />
 <Menu></Menu>
 {#each objs as obj}
+<img src="{imgPath}{obj.OBJ_IMG}" alt="" />
 <h1>Objeto: {obj.OBJ_DESCRICAO}</h1>
 
 <h1>realize seu agendamento</h1>
@@ -65,9 +58,8 @@
         </label>
     </div>
     <div>
-        <button>lansa</button>
+        <button>enviar CEP</button>
     </div>
 </form>
 {/each}
 
-<button on:click={() => loadAgenda()}>{dataAgenda}</button>

@@ -147,9 +147,8 @@
         </div>
     {/each}
     {#each doadorAgenda as Dagenda}
-        <!--arrumar alguma forma de deixar isso de lado do objeto como se tivesse relacionando visualmente isto-->
         <div>
-       <!--PARA O RECEPTOR : {Dagenda.USUARIO_NOME}   forma de fazer com que apareça o nome do receptor para o doador -->
+        DO RECEPTOR: {Dagenda.USUARIO_NOME}
         CEP: {Dagenda.AGD_CEP}
         HORA EFETUADA :{Dagenda.AGD_DATETIME}
         <span style="cursor: pointer;" on:click={() => deleteAGD(Dagenda.AGD_ID)}>&times;</span>

@@ -7,5 +7,6 @@
 
     session_start();
     //nao se esquecer de trocar o host
+    //localhost voltou a funcionar no pc do ianzera
 ?>
 
