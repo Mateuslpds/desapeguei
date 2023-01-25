@@ -2,7 +2,7 @@
     import Menu from "./Menu.svelte";
     import { link } from "svelte-spa-router";
     import { onMount } from "svelte";
-    import { dataset_dev } from "svelte/internal";
+    import { dataset_dev, prevent_default } from "svelte/internal";
     import Agenda from "./Agenda.svelte";
 
     let objs = [];
@@ -50,10 +50,28 @@
         loadObjs();
     }
 
-    const deleteAGD = async (id) => {
+    const deleteDoadorAGD = async (id) => {
         const data = new FormData();
         data.append("id", id);
-        const deleteRoute = "http://localhost/desapeguei/back/delete-agendamento.php";
+        const deleteRoute = "http://localhost/desapeguei/back/delete-doador-agendamento.php";
+        const res = await fetch(deleteRoute, {
+            method: "POST",
+            body: data,
+            credentials: "include",
+        })
+        if(!res.ok){
+            alert("erro: não foi possível deletar o objeto");
+            return;
+        }
+        loadDoadorAgenda();
+        loadReceptorAgenda();
+
+    }
+
+    const deleteReceptorAGD = async (id) => {
+        const data = new FormData();
+        data.append("id", id);
+        const deleteRoute = "http://localhost/desapeguei/back/delete-receptor-agendamento.php";
         const res = await fetch(deleteRoute, {
             method: "POST",
             body: data,
@@ -119,6 +137,34 @@
         receptorAgenda = await res.json();
     };
 
+   
+    const ConfirmarEnvio = async () => {
+        var Prdt_enviado = document.getElementById("P_enviado")
+        if(Prdt_enviado.checked){
+            const  ConfirmarEnvioRoute = "http://localhost/desapeguei/back/get-doador-confirmation.php";
+            const res = await fetch(ConfirmarEnvioRoute, {
+                credentials: "include",
+            });
+            if(!res.ok){
+                alert("erro: não foi possível confirmar o envio")
+                return;
+            }
+        }
+    };
+
+    const confirmarRecebimento = async () => {
+        var Prdt_recebido = document.getElementById("P_recebido")
+        if(Prdt_recebido.checked){
+            const  ConfirmarRecebimentoRoute = "http://localhost/desapeguei/back/get-receptor-confirmation.php";
+            const res = await fetch(ConfirmarRecebimentoRoute, {
+                credentials: "include",
+            });
+            if(!res.ok){
+                alert("erro: não foi possível confirmar o recebimento")
+                return;
+            }
+        }
+    };
 </script>
 <svelte:head>
     <link rel="stylesheet" href="./src/caixinha.css">
@@ -151,10 +197,19 @@
     {#each doadorAgenda as Dagenda}
         <div>
         DO RECEPTOR: {Dagenda.USUARIO_NOME}
+        TELEFONE DO RECEPTOR: {Dagenda.USUARIO_TEL}
         CEP: {Dagenda.AGD_CEP}
         HORA EFETUADA :{Dagenda.AGD_DATETIME}
-        <span style="cursor: pointer;" on:click={() => deleteAGD(Dagenda.AGD_ID)}>&times;</span>
-      </div>
+        <span style="cursor: pointer;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
+    </div>
+    <div>
+    <form>
+        <label>
+            <input type="checkbox" name = "confirmar" id="P_enviado"> produto enviado
+        </label>
+            <button name="submit" value="true" on:click={() => ConfirmarEnvio()}> confirmar</button>
+    </form>
+    </div>
     {/each}
         <form on:submit|preventDefault={() => editOBJ()}>
             <input type="text" id="descricao" bind:value={descricao}>
@@ -174,12 +229,22 @@
     {/if}
     {#each receptorAgenda as Ragenda}
         <div>
-          DO DOADOR: {Ragenda.USUARIO_NOME} <!-- forma com que apareça o nome do doador para o receptor-->
+          DO DOADOR: {Ragenda.USUARIO_NOME}
+          TELEFONE DO DOADOR: {Ragenda.USUARIO_TEL}  
             CEP: {Ragenda.AGD_CEP}
             HORA EFETUADA: {Ragenda.AGD_DATETIME}
-            <span style="cursor: pointer;" on:click={() => deleteAGD(Ragenda.AGD_ID)}>&times;</span>
-        
+            <span style="cursor: pointer;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
         </div>
+
+          <form>
+                <label>
+                    <input type="checkbox" name = "confirmarRecebimento" id="P_recebido">produto recebido
+                </label>
+                    <button name="submit2" value="true" on:click={() => confirmarRecebimento()}> confirmar</button>
+              
+          </form>
+             
+    
     {/each}
     <div class="textodoar">
         Gostaria de fazer uma doação?
