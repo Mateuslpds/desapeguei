@@ -22,18 +22,22 @@
         loadTypes();
     });
 
-    $: visibleObjs = $search ?
-		objs.filter(obj => {
-			return obj.OBJ_DESCRICAO.match(`${$search}.*`) && (obj.OBJ_TIPO_ID == tipo || tipo == null)
-		}) : objs;
+    $: visibleObjs = $search
+        ? objs.filter((obj) => {
+              return (
+                  obj.OBJ_DESCRICAO.match(`${$search}.*`) &&
+                  (obj.OBJ_TIPO_ID == tipo || tipo == null)
+              );
+          })
+        : objs;
 
-	onMount(async () => {
-		const loadRoute = "http://localhost/desapeguei/back/get-objects.php";
+    onMount(async () => {
+        const loadRoute = "http://localhost/desapeguei/back/get-objects.php";
         const res = await fetch(loadRoute, {
             credentials: "include",
         });
         objs = await res.json();
-	});
+    });
 
     const getOBJ = async (obj) => {
         const loadRoute =
@@ -45,8 +49,8 @@
     };
 
     const cleanFilter = () => {
-        tipo = null
-    }
+        tipo = null;
+    };
 </script>
 
 <link
@@ -58,20 +62,74 @@
     <Menu />
 
     <label class="tipo" for="tipo">Tipo</label>
-    <select class="tipobutton" name="tipo" id="tipo" bind:value={tipo}>
+    <select class="form-select" name="tipo" id="tipo" bind:value={tipo}>
         {#each types as type}
             <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
         {/each}
     </select>
-    <button on:click={cleanFilter}>Limpar filtro</button>
+    <button class="btn btn-outline-danger btn-sm" on:click={cleanFilter}>Limpar filtro</button>
 
+    <div class="grid">
     {#each visibleObjs as obj}
-        <div>
-            {obj.OBJ_DESCRICAO}
-            <img src="{imgPath}{obj.OBJ_IMG}" alt="" />
-            <a href="/agendamento" use:link>
-                <button on:click={() => getOBJ(obj.OBJ_ID)}> agendar</button>
-            </a>
-        </div>
+        <a class="card" on:click={() => getOBJ(obj.OBJ_ID)} href="/agendamento" use:link>
+            <img class="objImage" src="{imgPath}{obj.OBJ_IMG}" alt="Avatar" style="width:100%" />
+            <div class="container">
+                <h5><b>Nome do Objeto</b></h5>
+                <p class="descricao">{obj.OBJ_DESCRICAO}</p>
+            </div>
+        </a>
     {/each}
+    </div>
 </body>
+
+<style>
+    body{
+        background-color: #ebebeb;
+    }
+    .tipo{
+        margin-top: 1rem;
+        margin-left: 3rem;
+        font-weight: bold;
+    }
+
+    .form-select{
+        margin-right: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .grid{
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .card {
+        color: #333;
+        box-shadow: 0 0.5px 0px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 23%;
+        margin: 0.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .objImage{
+        margin-bottom: 20px;
+        padding: 20px;
+        height: 17rem;
+    }
+
+    .container {
+        padding: 2px 16px;
+    }
+
+    .descricao{
+        height: 4.5rem;
+        overflow-wrap: break-word;
+        overflow: hidden;
+    }
+</style>
