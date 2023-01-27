@@ -15,7 +15,7 @@ $stmt->execute();
 
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if ($data['AGD_STATUS'] != $AgdStatus) {
+if ($data['AGD_STATUS'] == $AgdStatus) {
     http_response_code(401);
     exit();
 }
