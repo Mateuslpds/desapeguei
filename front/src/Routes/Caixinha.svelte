@@ -11,6 +11,8 @@
 
     let descricao = "";
     let imagem = "";
+    let cep = "";
+    let hora = "";
     
     const imgPath = "http://localhost/desapeguei/back/imagens/";
 
@@ -112,7 +114,26 @@
         }
         loadObjs();
     };
-  
+
+    const editAGD = async () => {
+        const updateRoute = "http://localhost/desapeguei/back/agenda-reagenda.php";
+        const data = new FormData()
+        data.append("id", idEdit);
+        data.append("cep", cep);
+        data.append("hora",hora);
+        const res = await fetch(updateRoute, {
+            method: "POST",
+            body: data,
+            credentials: "include",
+        })
+        if(!res.ok){
+            alert("erro: não foi possível editar o objeto");
+            return;
+        }
+        loadDoadorAgenda();
+        loadReceptorAgenda();
+    };
+
     const loadDoadorAgenda = async () => {
         const loadDoadorAgendaRoute = "http://localhost/desapeguei/back/agenda-doador-read.php";
         const res = await fetch(loadDoadorAgendaRoute, {
@@ -165,6 +186,7 @@
             }
         }
     };
+
 </script>
 <svelte:head>
     <link rel="stylesheet" href="./src/caixinha.css">
@@ -200,6 +222,7 @@
         TELEFONE DO RECEPTOR: {Dagenda.USUARIO_TEL}
         CEP: {Dagenda.AGD_CEP}
         HORA EFETUADA :{Dagenda.AGD_DATETIME}
+        <button on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)}>Reagendar</button>
         <span style="cursor: pointer;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
     </div>
     <div>
@@ -246,6 +269,11 @@
              
     
     {/each}
+    <form on:submit|preventDefault={() => editAGD()}>
+        <input type="text" id="cep" bind:value={cep}>
+        <input type="datetime-local" id="hora" bind:value={hora}>
+        <button class="Editar">Reagendar</button>
+    </form>
     <div class="textodoar">
         Gostaria de fazer uma doação?
     </div>
