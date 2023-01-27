@@ -2,12 +2,19 @@
 
 include 'main.php';
 
+if (!isset($_SESSION["user"])) {
+    http_response_code(401);
+    exit();
+}
 
-$ConfirmaReceptor = true;
+$AgdStatus = "fechado";
 
-session_destroy($_SESSION['CD']);
-$stmt = $conn->prepare('DELETE FROM AGENDA WHERE AGD_ID = ? AND USUARIO_RECEPTOR_ID = ?');
-$stmt->execute([
-    $_SESSION['user']['USUARIO_ID']
-])
+$stmt = $conn->prepare('UPDATE agenda SET AGD_STATUS = :StatusAgenda');
+$stmt->bindValue(':StatusAgenda', $AgdStatus);
+$stmt->execute();
+
+if(isset($_SESSION['confirmation'])){
+    http_response_code(200);
+    session_destroy($_SESSION['confirmation']);
+};
 ?>
