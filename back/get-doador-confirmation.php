@@ -20,8 +20,6 @@ if ($data['AGD_STATUS'] == $AgdStatus) {
     exit();
 }
 
-
-$_SESSION['confirmation'] = $data;
 http_response_code(200);
-echo $_SESSION['confirmation'];
+
 ?>

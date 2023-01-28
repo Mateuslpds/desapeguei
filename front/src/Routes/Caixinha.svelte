@@ -7,7 +7,7 @@
 
     let objs = [];
     let doadorAgenda = [];
-    let receptorAgenda = [];
+    let receptorAgenda = []; 
 
     let descricao = "";
     let imagem = "";
@@ -173,12 +173,16 @@
         }
     };
 
-    const confirmarRecebimento = async () => {
+    const confirmarRecebimento = async (id) => {
         var Prdt_recebido = document.getElementById("P_recebido")
         if(Prdt_recebido.checked){
             const  ConfirmarRecebimentoRoute = "http://localhost/desapeguei/back/get-receptor-confirmation.php";
+            const data = new FormData()
+            data.append("id",id)
             const res = await fetch(ConfirmarRecebimentoRoute, {
-                credentials: "include",
+                method: "POST",
+                body: data,
+                credentials: "include"
             });
             if(!res.ok){
                 alert("erro: não foi possível confirmar o recebimento")
@@ -216,12 +220,12 @@
             <button on:click={() => selectID(obj.OBJ_ID, obj.OBJ_IMG)}>Editar</button>
         </div>
     {/each}
-    {#each doadorAgenda as Dagenda}
+    {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado") as Dagenda}
         <div>
         DO RECEPTOR: {Dagenda.USUARIO_NOME}
         TELEFONE DO RECEPTOR: {Dagenda.USUARIO_TEL}
         CEP: {Dagenda.AGD_CEP}
-        HORA EFETUADA :{Dagenda.AGD_DATETIME}
+        DATA E HORA EFETUADA :{Dagenda.AGD_DATETIME}
         <button on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)}>Reagendar</button>
         <span style="cursor: pointer;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
     </div>
@@ -234,6 +238,11 @@
     </form>
     </div>
     {/each}
+        <form on:submit|preventDefault={() => editAGD()}>
+            <input type="text" id="cep" bind:value={cep}>
+            <input type="datetime-local" id="hora" bind:value={hora}>
+            <button class="Editar">Reagendar</button>
+        </form>
         <form on:submit|preventDefault={() => editOBJ()}>
             <input type="text" id="descricao" bind:value={descricao}>
             <input type="file" id="imagem" bind:files={imagem}>
@@ -250,12 +259,12 @@
         <p>doação.</p>
     </div>
     {/if}
-    {#each receptorAgenda as Ragenda}
+    {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado") as Ragenda}
         <div>
           DO DOADOR: {Ragenda.USUARIO_NOME}
           TELEFONE DO DOADOR: {Ragenda.USUARIO_TEL}  
             CEP: {Ragenda.AGD_CEP}
-            HORA EFETUADA: {Ragenda.AGD_DATETIME}
+            DATA E HORA EFETUADA: {Ragenda.AGD_DATETIME}
             <span style="cursor: pointer;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
         </div>
 
@@ -263,17 +272,32 @@
                 <label>
                     <input type="checkbox" name = "confirmarRecebimento" id="P_recebido">produto recebido
                 </label>
-                    <button name="submit2" value="true" on:click={() => confirmarRecebimento()}> confirmar</button>
+                    <button name="submit2" value="true" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}> confirmar</button>
               
           </form>
-             
-    
     {/each}
-    <form on:submit|preventDefault={() => editAGD()}>
-        <input type="text" id="cep" bind:value={cep}>
-        <input type="datetime-local" id="hora" bind:value={hora}>
-        <button class="Editar">Reagendar</button>
-    </form>
+    {#if doadorAgenda.length > 0}
+        {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "fechado") as DoadorFechado} 
+          <div>
+              DOAÇÃO REALIZADA 
+            CEP DO ENCONTRO:{DoadorFechado.AGD_CEP}
+            DATA E HORA EFETUADA:{DoadorFechado.AGD_DATETIME}
+            NOME DO RECEPTOR:{DoadorFechado.USUARIO_NOME}
+            TELEFONE DO RECEPTOR:{DoadorFechado.USUARIO_TEL}
+          </div>
+        {/each}
+    {/if} 
+    {#if receptorAgenda.length > 0 }   
+        {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS == "fechado") as ReceptorFechado} 
+          <div>
+              DOAÇÃO REALIZADA 
+            CEP DO ENCONTRO:{ReceptorFechado.AGD_CEP}
+            DATA E HORA EFETUADA:{ReceptorFechado.AGD_DATETIME}
+            NOME DO DOADOR:{ReceptorFechado.USUARIO_NOME}
+            TELEFONE DO DOADOR:{ReceptorFechado.USUARIO_TEL}
+          </div>
+        {/each}
+    {/if}
     <div class="textodoar">
         Gostaria de fazer uma doação?
     </div>
