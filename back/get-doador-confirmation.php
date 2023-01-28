@@ -9,8 +9,9 @@ if (!isset($_SESSION["user"])) {
 
 $AgdStatus = "semi fechado";
 
-$stmt = $conn->prepare('UPDATE agenda SET AGD_STATUS = :StatusAgenda');
+$stmt = $conn->prepare('UPDATE agenda SET AGD_STATUS = :StatusAgenda WHERE AGD_ID = :id');
 $stmt->bindValue(':StatusAgenda', $AgdStatus);
+$stmt->bindValue(':id', $_GET['id']);
 $stmt->execute();
 
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

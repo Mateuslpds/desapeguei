@@ -159,10 +159,10 @@
     };
 
    
-    const ConfirmarEnvio = async () => {
+    const ConfirmarEnvio = async (id) => {
         var Prdt_enviado = document.getElementById("P_enviado")
         if(Prdt_enviado.checked){
-            const  ConfirmarEnvioRoute = "http://localhost/desapeguei/back/get-doador-confirmation.php";
+            const  ConfirmarEnvioRoute = "http://localhost/desapeguei/back/get-doador-confirmation.php?id=" + id;
             const res = await fetch(ConfirmarEnvioRoute, {
                 credentials: "include",
             });
@@ -176,9 +176,8 @@
     const confirmarRecebimento = async (id) => {
         var Prdt_recebido = document.getElementById("P_recebido")
         if(Prdt_recebido.checked){
-            const  ConfirmarRecebimentoRoute = "http://localhost/desapeguei/back/get-receptor-confirmation.php";
+            const  ConfirmarRecebimentoRoute = "http://localhost/desapeguei/back/get-receptor-confirmation.php?id=" + id;
             const data = new FormData()
-            data.append("id",id)
             const res = await fetch(ConfirmarRecebimentoRoute, {
                 method: "POST",
                 body: data,
@@ -234,7 +233,7 @@
         <label>
             <input type="checkbox" name = "confirmar" id="P_enviado"> produto enviado
         </label>
-            <button name="submit" value="true" on:click={() => ConfirmarEnvio()}> confirmar</button>
+            <button name="submit" value="true" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}> confirmar</button>
     </form>
     </div>
     {/each}
