@@ -127,10 +127,6 @@
                         bind:value={senha}
                         required
                     />
-                    <!----- FA dos olhos, para ser adicionado depois
-                        <i class="fa-solid fa-eye"></i>
-                        <i class="fa-solid fa-eye-slash"></i>
-                    ----->
                 <label class="passwordhide" for="showpass" ><b>Mostrar senha</b></label>
                     <input class="boxpasswordhide" type="checkbox" on:click={Senha}>
                 <br />
@@ -148,10 +144,6 @@
                 {#if senha != '' && senha != senha2}
                     <div style="color:red;">Senhas não conferem</div>
                 {/if}
-                <!----- FA dos olhos, para ser adicionado depois
-                    <i class="fa-solid fa-eye"></i>
-                    <i class="fa-solid fa-eye-slash"></i>
-                 ----->
                 <label class="passwordhide" for="showpass"><b>Mostrar senha</b></label>
                     <input class="boxpasswordhide" type="checkbox" on:click={Confirmar}>
                 <button type="submit" class="signIn">Cadastre-se</button>
@@ -201,16 +193,7 @@
         padding-top: 10px;
         line-height: 4px;
     }
-
-    /* CONFIGURAÇÃO DOS OLHOS *Lembrar de arrumar os imput*
-    i {
-        cursor: pointer;
-        font-size: 20px;
-        float: right;
-        margin: 4px 2px;
-    }
-    */
-
+    
     .container {
         width: 45%;
         background-color: white;

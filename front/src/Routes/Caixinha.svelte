@@ -2,7 +2,7 @@
     import Menu from "./Menu.svelte";
     import { link } from "svelte-spa-router";
     import { onMount } from "svelte";
-    import { dataset_dev, prevent_default } from "svelte/internal";
+    import { dataset_dev, element, prevent_default } from "svelte/internal";
     import Agenda from "./Agenda.svelte";
 
     let objs = [];
@@ -178,6 +178,7 @@
         if(Prdt_recebido.checked){
             const  ConfirmarRecebimentoRoute = "http://localhost/desapeguei/back/get-receptor-confirmation.php?id=" + id;
             const data = new FormData()
+            data.append("id",id)
             const res = await fetch(ConfirmarRecebimentoRoute, {
                 method: "POST",
                 body: data,
@@ -189,8 +190,19 @@
             }
         }
     };
-
+  
+    function openpop(){
+        let popout = document.getElementById("popout");
+        //popout.classList.add("open-popout");
+        console.log(popout)
+    }
+    function closepop(){
+        let popout = document.getElementById("popout");
+        //popout.classList.remove("open-popout");
+        console.log(popout)
+    } 
 </script>
+
 <svelte:head>
     <link rel="stylesheet" href="./src/caixinha.css">
 </svelte:head>
@@ -207,34 +219,44 @@
     <div class="pesquisar">
         <form>
             <label class="caixinha" for="caixa">CAIXINHA</label>
-            <input class="inputdonate" type="search" placeholder="Pesquisar por suas doações.">
+            <input class="InPesquisar" type="search" placeholder="Pesquisar por suas doações.">
         </form>
-    </div>
+    <div class="Caixinhasgeral">
     {#if objs.length > 0}
     {#each objs as obj}
-        <div>
+        <div class="Descrição">
             {obj.OBJ_DESCRICAO}
-            <img src="{imgPath}{obj.OBJ_IMG}" alt="">
-            <span style="cursor: pointer;" on:click={() => deleteOBJ(obj.OBJ_ID, obj.OBJ_IMG)}>&times;</span>
-            <button on:click={() => selectID(obj.OBJ_ID, obj.OBJ_IMG)}>Editar</button>
+            <img class="IMGplaceholder" src="{imgPath}{obj.OBJ_IMG}" alt="">
+            <div class="xdelete">
+                <span on:click={() => deleteOBJ(obj.OBJ_ID, obj.OBJ_IMG)}>&times;</span>
+            </div>
+            <button class="deletebotão" on:click={() => selectID(obj.OBJ_ID, obj.OBJ_IMG)} on:click={openpop}>Editar</button> 
         </div>
     {/each}
     {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado") as Dagenda}
         <div>
-        DO RECEPTOR: {Dagenda.USUARIO_NOME}
-        TELEFONE DO RECEPTOR: {Dagenda.USUARIO_TEL}
-        CEP: {Dagenda.AGD_CEP}
-        DATA E HORA EFETUADA :{Dagenda.AGD_DATETIME}
+            <b>DO RECEPTOR:</b> {Dagenda.USUARIO_NOME}
+            <b>TELEFONE DO RECEPTOR:</b> {Dagenda.USUARIO_TEL}
+            <b>CEP:</b> {Dagenda.AGD_CEP}
+            <b>DATA E HORA EFETUADA:</b> {Dagenda.AGD_DATETIME}
         <button on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)}>Reagendar</button>
-        <span style="cursor: pointer;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
+        <span style="cursor: pointer; color:red; font-size: 20px;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
     </div>
     <div>
     <form>
         <label>
             <input type="checkbox" name = "confirmar" id="P_enviado"> produto enviado
         </label>
-            <button name="submit" value="true" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}> confirmar</button>
+        <button name="submit" value="true" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}> confirmar</button>
     </form>
+    </div>
+    <div class="popout" id="popout">
+        <h2>Edição de objeto</h2>
+        <form on:submit|preventDefault={() => editOBJ()}>
+            <input type="text" id="descricao" bind:value={descricao}>
+            <input type="file" id="imagem" bind:files={imagem}>
+            <button class="EditarPopout" on:click={closepop}>Editar</button> 
+        </form>
     </div>
     {/each}
         <form on:submit|preventDefault={() => editAGD()}>
@@ -242,16 +264,11 @@
             <input type="datetime-local" id="hora" bind:value={hora}>
             <button class="Editar">Reagendar</button>
         </form>
-        <form on:submit|preventDefault={() => editOBJ()}>
-            <input type="text" id="descricao" bind:value={descricao}>
-            <input type="file" id="imagem" bind:files={imagem}>
-            <button class="Editar">Editar</button>
-        </form>
     {:else}
     <div class="imagem">
         <img src="imagens\sad.jpg" alt="gato na caixa"/>
     </div>
-    <div class="mt-lg-5  me-lg-3 " id="Ctexto1">
+    <div class="mt-lg-5  me-lg-3" id="Ctexto1">
         <p>Sua caixinha está vazia!</p>
         <br>
         <p>Você ainda não fez nenhuma</p>
@@ -260,51 +277,51 @@
     {/if}
     {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado") as Ragenda}
         <div>
-          DO DOADOR: {Ragenda.USUARIO_NOME}
-          TELEFONE DO DOADOR: {Ragenda.USUARIO_TEL}  
-            CEP: {Ragenda.AGD_CEP}
-            DATA E HORA EFETUADA: {Ragenda.AGD_DATETIME}
-            <span style="cursor: pointer;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
+            <b>DO DOADOR:</b> {Ragenda.USUARIO_NOME}
+            <b>TELEFONE DO DOADOR:</b> {Ragenda.USUARIO_TEL}  
+            <b>CEP:</b> {Ragenda.AGD_CEP}
+            <b>DATA E HORA EFETUADA:</b> {Ragenda.AGD_DATETIME}
+            <span style="cursor: pointer; color:red; font-size: 20px;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
         </div>
-
-          <form>
-                <label>
-                    <input type="checkbox" name = "confirmarRecebimento" id="P_recebido">produto recebido
-                </label>
-                    <button name="submit2" value="true" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}> confirmar</button>
-              
-          </form>
+        <form>
+            <label>
+                <input type="checkbox" name = "confirmarRecebimento" id="P_recebido">produto recebido
+            </label>
+                <button name="submit2" value="true" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}> confirmar</button>  
+        </form>
     {/each}
     {#if doadorAgenda.length > 0}
         {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "fechado") as DoadorFechado} 
-          <div>
+          <div class="Doador">
               DOAÇÃO REALIZADA 
-            CEP DO ENCONTRO:{DoadorFechado.AGD_CEP}
-            DATA E HORA EFETUADA:{DoadorFechado.AGD_DATETIME}
-            NOME DO RECEPTOR:{DoadorFechado.USUARIO_NOME}
-            TELEFONE DO RECEPTOR:{DoadorFechado.USUARIO_TEL}
+            <b>CEP DO ENCONTRO:</b> {DoadorFechado.AGD_CEP}
+            <b>DATA E HORA EFETUADA:</b> {DoadorFechado.AGD_DATETIME}
+            <b>NOME DO RECEPTOR:</b> {DoadorFechado.USUARIO_NOME}
+            <b>TELEFONE DO RECEPTOR:</b> {DoadorFechado.USUARIO_TEL}
           </div>
         {/each}
     {/if} 
     {#if receptorAgenda.length > 0 }   
         {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS == "fechado") as ReceptorFechado} 
-          <div>
+          <div class="Receptor">
               DOAÇÃO REALIZADA 
-            CEP DO ENCONTRO:{ReceptorFechado.AGD_CEP}
-            DATA E HORA EFETUADA:{ReceptorFechado.AGD_DATETIME}
-            NOME DO DOADOR:{ReceptorFechado.USUARIO_NOME}
-            TELEFONE DO DOADOR:{ReceptorFechado.USUARIO_TEL}
+            <b>CEP DO ENCONTRO:</b> {ReceptorFechado.AGD_CEP}
+            <b>DATA E HORA EFETUADA:</b> {ReceptorFechado.AGD_DATETIME}
+            <b>NOME DO DOADOR:</b> {ReceptorFechado.USUARIO_NOME}
+            <b>TELEFONE DO DOADOR:</b> {ReceptorFechado.USUARIO_TEL}
           </div>
         {/each}
     {/if}
     <div class="textodoar">
         Gostaria de fazer uma doação?
     </div>
-    <div class="col-12 col-lg-auto mb-0 mb-lg-3 me-lg-6 w-25  pl-lg-5" id="Cbotao">
+    <center>
+    <div>
         <a href="/doarTela" use:link>
-        <button type="button" class='btn btn-dark btn btn-outline-primary w-75'>
+        <button type="button" class='btnEspecial'>
             Doar
         </button>
         </a>
     </div>
+    </center>
 </body>
