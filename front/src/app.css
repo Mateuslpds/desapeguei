@@ -24,3 +24,238 @@ body {
 button {
   height: 50px;
 }
+
+.conteudo {
+  background: linear-gradient(-45deg, #23d5ab, #008eff, #23a6d5, #0070ff);
+	background-size: 400% 400%;
+	-webkit-animation: gradient 15s ease infinite;
+	        animation: gradient 15s ease infinite;
+  border-top: 0.4px solid #fffee7;
+}
+
+.conteudo-principal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.conteudo-principal-escrito{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.conteudo-principal-titulo{
+  font-family: 'Righteous', cursive;
+  font-weight: 400;
+  font-size: 64px;
+  color: #fffee7;
+}
+
+.conteudo-principal-subtitulo{
+  font-family: 'Sarala', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: #fffee7;
+
+}
+.conteudo-principal-escrito-botao{
+  background-color: #ecd6c4;
+  height: 60px;
+  width: 180px;
+  border: none;
+  box-shadow: 4px 5´x 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  font-family: 'Sarala', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #2f2325;
+
+}
+
+.conteudo-principal-imagem{
+  height: 450px;
+}
+
+.conteudo-secundario{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.conteudo-secundario-titulo{
+  border-top: 0.4px solid #fff2e7;
+  padding-top: 48px;
+  font-family: 'Righteous', cursive;
+  font-weight: 400;
+  font-size: 64px;
+  color: #fff2ef;
+  margin-bottom: 16px;
+}
+
+.conteudo-secundario-paragrafo{
+  font-family: 'Sarala', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+color: #ecd6c4;
+}
+
+.rodape{
+  padding: 32px;
+  border-top: 0.4px solid #fffee7;
+  background: #2f2325;
+  color: #fff2e7;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  
+}
+
+.rodape-imagem{
+  height: 48px;
+  display: block;
+  margin: 0 auto;
+}
+
+.contatos{
+ padding-left: 200px;
+}
+
+.redes-sociais{
+  padding-right: 200px;
+}
+
+.carrossel{
+  background-color: #fff2e7;
+  margin: 0;
+  padding: 10px;
+}
+
+.carrossel-2{
+  display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: space-around;
+ gap: -20px;
+ padding-left: 28px;
+ padding-right: 28px;
+}
+.carrossel img {
+  width: 200px;
+  height: 200px;
+}
+
+.img1{
+  border: double 8px;
+  text-align: center;
+  padding: 8px;
+  
+}
+
+.img2{
+ border: double 8px;
+  text-align: center;
+  padding: 8px;
+}
+
+.img3{
+  border: double 8px;
+  text-align: center;
+  padding: 8px;
+}
+footer{
+  background-color: #2f2325;
+  padding: 50px 0;
+}
+.container-footer{
+  max-width: 1400px;
+  padding: 0 4%;
+  margin: auto;
+}
+.row-footer{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-col{
+  width: 25%;
+  padding: 0 15px;
+}
+.footer-col h4{
+  font-size: 22px;
+  color: white;
+  margin-bottom: 20px;
+  font-weight: 500;
+  position: relative;
+  text-transform: uppercase;
+}
+.footer-col ul{
+  list-style: none;
+}
+.footer-col ul li{
+  margin: 10px 0;
+}
+.footer-col ul li a{
+  font-size: 16px;
+  text-transform: capitalize;
+  color: white;
+  text-decoration: none;
+  font-weight: 300;
+  display: block;
+  transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+  color: #cecdcd;
+  padding-left: 10px;
+}
+.footer-col .medias-socias{
+  margin-top: 30px;
+}
+.footer-col .medias-socias a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  border-radius: 50%;
+  color: white;
+  border: 1px solid white;
+  transition: all 0.5s ease;
+}
+.footer-col .medias-socias a i{
+  font-size: 20px;
+}
+
+.footer-col .medias-socias a:hover{
+  color: #415aca;
+  background-color: white;
+}
+.footer-col .form-sub input{
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  outline: none;
+  border: 1px solid white;
+  color: white;
+  background-color: #415aca;
+}
+.footer-col .form-sub input::placeholder{
+  color: white;
+}
+.footer-col .form-sub button{
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px; 
+  font-size: 17px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #415aca;
+  border-radius: 3px;
+  font-weight: bold;
+  background-color: white;        
+}
