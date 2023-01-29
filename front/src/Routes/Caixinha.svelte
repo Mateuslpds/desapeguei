@@ -14,6 +14,17 @@
     let cep = "";
     let hora = "";
     
+    function openpop(){
+        let popout = document.getElementById("popout");
+        popout.classList.add("open-popout");
+        console.log(popout)
+    }
+    function closepop(){
+        let popout = document.getElementById("popout");
+        popout.classList.remove("open-popout");
+        console.log(popout)
+    } 
+
     const imgPath = "http://localhost/desapeguei/back/imagens/";
 
     const loadObjs = async () => {
@@ -191,16 +202,7 @@
         }
     };
   
-    function openpop(){
-        let popout = document.getElementById("popout");
-        //popout.classList.add("open-popout");
-        console.log(popout)
-    }
-    function closepop(){
-        let popout = document.getElementById("popout");
-        //popout.classList.remove("open-popout");
-        console.log(popout)
-    } 
+    
 </script>
 
 <svelte:head>
@@ -250,6 +252,7 @@
         <button name="submit" value="true" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}> confirmar</button>
     </form>
     </div>
+    {/each}
     <div class="popout" id="popout">
         <h2>Edição de objeto</h2>
         <form on:submit|preventDefault={() => editOBJ()}>
@@ -258,7 +261,6 @@
             <button class="EditarPopout" on:click={closepop}>Editar</button> 
         </form>
     </div>
-    {/each}
         <form on:submit|preventDefault={() => editAGD()}>
             <input type="text" id="cep" bind:value={cep}>
             <input type="datetime-local" id="hora" bind:value={hora}>
