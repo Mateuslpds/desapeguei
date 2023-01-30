@@ -49,14 +49,14 @@
   <section class="conteudo-principal">
     <div class="conteudo-principal-escrito">
       <h1 class="conteudo-principal-titulo">Desapeguei Doação</h1>
-      <h2 class="conteudo-principal-subtitulo">Preserve o mundo com a sua doação de eletrônicos.</h2>
+      <h3 class="conteudo-principal-subtitulo">Preserve o mundo com a sua doação de eletrônicos.</h3>
       {#if localStorage.getItem("isLogged") != undefined}
       <a href="/doarTela" use:link>
         <button class="conteudo-principal-escrito-botao">Faça uma doação!</button>
       </a>
       {/if}
     </div>
-      <img class="conteudo-principal-imagem" src="imagens/robo.svg" alt="">
+      <img class="conteudo-principal-imagem" src="imagens/robo.png" alt="ROBÔ">
   </section>
 
   <section class="conteudo-secundario">
