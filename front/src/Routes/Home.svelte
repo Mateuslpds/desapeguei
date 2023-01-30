@@ -92,7 +92,7 @@
             style="width:100%"
           />
           <div class="container">
-            <h5><b>Nome do Objeto</b></h5>
+            <h5><b>{obj.OBJ_NOME}</b></h5>
             <p class="descricao">{obj.OBJ_DESCRICAO}</p>
           </div>
         </a>
@@ -124,7 +124,7 @@
             style="width:100%"
           />
           <div class="container">
-            <h5><b>Nome do Objeto</b></h5>
+            <h5><b>{obj.OBJ_NOME}</b></h5>
             <p class="descricao">{obj.OBJ_DESCRICAO}</p>
           </div>
         </a>
@@ -156,7 +156,7 @@
             style="width:100%"
           />
           <div class="container">
-            <h5><b>Nome do Objeto</b></h5>
+            <h5><b>{obj.OBJ_NOME}</b></h5>
             <p class="descricao">{obj.OBJ_DESCRICAO}</p>
           </div>
         </a>

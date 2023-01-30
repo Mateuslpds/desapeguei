@@ -25,7 +25,7 @@
     $: visibleObjs = $search
         ? objs.filter((obj) => {
               return (
-                  obj.OBJ_DESCRICAO.match(`${$search}.*`) &&
+                  (obj.OBJ_NOME.match(`${$search}.*`) || obj.OBJ_DESCRICAO.match(`${$search}.*`)) &&
                   (obj.OBJ_TIPO_ID == tipo || tipo == null)
               );
           })
@@ -74,7 +74,7 @@
         <a class="card" on:click={() => getOBJ(obj.OBJ_ID)} href="/agendamento" use:link>
             <img class="objImage" src="{imgPath}{obj.OBJ_IMG}" alt="Avatar" style="width:100%" />
             <div class="container">
-                <h5><b>Nome do Objeto</b></h5>
+                <h5><b>{obj.OBJ_NOME}</b></h5>
                 <p class="descricao">{obj.OBJ_DESCRICAO}</p>
             </div>
         </a>

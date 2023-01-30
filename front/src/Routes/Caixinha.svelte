@@ -9,6 +9,7 @@
     let doadorAgenda = [];
     let receptorAgenda = []; 
 
+    let nome = "";
     let descricao = "";
     let imagem = "";
     let cep = "";
@@ -111,6 +112,7 @@
         const updateRoute = "http://localhost/desapeguei/back/update-object.php";
         const data = new FormData();
         data.append("id", idEdit);
+        data.append("nome", nome);
         data.append("imgEdit", imgEdit);
         data.append("descricao", descricao);
         data.append("imagem", imagem[0]);
@@ -221,6 +223,7 @@
     {#if objs.length > 0}
     {#each objs as obj}
         <div class="Descrição">
+            {obj.OBJ_NOME}
             {obj.OBJ_DESCRICAO}
             <img class="IMGplaceholder" src="{imgPath}{obj.OBJ_IMG}" alt="">
             <div class="xdelete">
@@ -245,6 +248,7 @@
     <div class="popout" id="popout">
         <h2>Edição de objeto</h2>
         <form on:submit|preventDefault={() => editOBJ()}>
+            <input type="text" id="nome" bind:value={nome}>
             <input type="text" id="descricao" bind:value={descricao}>
             <input type="file" id="imagem" bind:files={imagem}>
             <button class="EditarPopout" on:click={closepop}>Editar</button> 

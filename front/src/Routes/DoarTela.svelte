@@ -1,19 +1,19 @@
 <script>
     import Menu from "./Menu.svelte";
     import { onMount } from "svelte";
-    //import { userid } from "../stores";
     let obj = {};
 
     let types = [];
 
+    let nome = "";
     let descricao = "";
     let imagem = "";
-    //let tipo = "";
     let tipo = "";
 
     const postOBJ = async () => {
         const postRoute = "http://localhost/desapeguei/back/post-object.php";
         const dado = new FormData();
+        dado.append("nome", nome);
         dado.append("descricao", descricao);
         dado.append("imagem", imagem[0]);
         dado.append("tipo", tipo);
@@ -57,14 +57,15 @@
 <body class="box">
     <h2>Faça sua doação</h2>
     <form on:submit|preventDefault={postOBJ}  class="geral" id="BOXformgeral" >
-        <div class="titulo">
-            <label for="titulo">Nome do objeto</label>
+        <div class="nome">
+            <label for="nome">Nome do objeto</label>
             <input
                 type="text"
-                name="titulo"
-                id="titulo"
+                name="nome"
+                id="nome"
                 class="form-control border border-secondary p-1"
                 placeholder="Insira o nome do objeto"
+                bind:value={nome}
             />
         <div class="inpimage">
             <label for="imagem">Adicione imagem ao objeto</label>

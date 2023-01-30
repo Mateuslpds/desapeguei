@@ -2,37 +2,22 @@
     import Menu from "./Menu.svelte";
     import { link } from "svelte-spa-router";
     import { onMount } from "svelte";
-    import { prevent_default } from "svelte/internal";
 
-    let objs = [];
-    let userDATA = [];
-
+    let infos = [];
     let CEP = "";
 
     const imgPath = "http://localhost/desapeguei/back/imagens/";
 
-    const getObjs = async () => {
+    const getInfos = async () => {
         const loadRoute = "http://localhost/desapeguei/back/get-object.php";
         const res = await fetch(loadRoute, {
             credentials : "include",
         });
-        objs = await res.json();
-        console.log(objs.length)
-    };
-
-    const readUSER = async () => {
-        const loadUserRoute = "http://localhost/desapeguei/back/read-user.php";
-        const res = await fetch (loadUserRoute, {
-            credentials: "include",
-        });
-        userDATA = await res.json();
-        console.log(userDATA.length);
-
+        infos = await res.json();
     };
 
     onMount(() => {
-        getObjs();
-        readUSER();
+        getInfos();
     });
 
     const agendaCreate = async () => {
@@ -49,7 +34,6 @@
             return;
         }
     };
-
 </script>
 
 <link
@@ -57,28 +41,24 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
 />
 <Menu></Menu>
-{#each objs as obj}
-{#each userDATA as user}
+{#each infos as info}
 <h1>
-    NOME DO DOADOR :{user.USUARIO_NOME}
-    TELEFONE DE CONTADO DO DOADOR: {user.USUARIO_TEL}
+    NOME DO DOADOR: {info.USUARIO_NOME}
+    TELEFONE DE CONTADO DO DOADOR: {info.USUARIO_TEL}
 </h1>
+<img src="{imgPath}{info.OBJ_IMG}" alt="" />
+<h1>Objeto: {info.OBJ_NOME}</h1>
+<h1>Descrição: {info.OBJ_DESCRICAO}</h1>
 {/each}
-<img src="{imgPath}{obj.OBJ_IMG}" alt="" />
-<h1>Objeto: {obj.OBJ_DESCRICAO}</h1>
 
-<h1>realize seu agendamento</h1>
-
-
+<h1>Realize seu agendamento</h1>
 <form on:submit|preventDefault={agendaCreate}>
     <div>
-        <label>
-            <input type="text" bind:value={CEP}> insira aqui seu CEP 
-        </label>
+        <label for="">Insira o CEP</label>
+        <input type="text" required minlength="8" maxlength="9" bind:value={CEP}>
     </div>
+    <br>
     <div>
-        <button>enviar CEP</button>
+        <button>Confirmar agendamento</button>
     </div>
 </form>
-{/each}
-

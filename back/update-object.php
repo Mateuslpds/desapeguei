@@ -18,7 +18,8 @@ else {
 $target_dir = "imagens/";
 $target_file = $target_dir . basename($_FILES["imagem"]["name"]);
 
-$q = $conn->prepare('UPDATE obj SET OBJ_DESCRICAO = :descricao, OBJ_IMG = :imagem WHERE OBJ_ID = :id;');
+$q = $conn->prepare('UPDATE obj SET OBJ_NOME = :nome, OBJ_DESCRICAO = :descricao, OBJ_IMG = :imagem WHERE OBJ_ID = :id;');
+$q->bindValue(':nome', $_POST['nome']);
 $q->bindValue(':descricao', $_POST['descricao']);
 $q->bindValue(':imagem', basename($_FILES["imagem"]["name"]));
 $q->bindValue(':id', $_POST['id']);
