@@ -23,7 +23,7 @@
             credentials: "include",
         });
         if (!res.ok) {
-            alert("deu merda");
+            alert("erro: não foi possível postar o objeto");
             return;
         }
 
@@ -36,7 +36,7 @@
             credentials: "include",
         });
         if (!res.ok) {
-            alert("deu merda, não tais logado");
+            alert("erro: não foi possível carregar os tipos");
             return;
         }
             types = await res.json();

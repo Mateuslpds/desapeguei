@@ -13,6 +13,7 @@
   import "swiper/css/navigation";
 
   let objs = [];
+  let ClosedOBJ = [];
 
   const imgPath = "http://localhost/desapeguei/back/imagens/";
 
@@ -26,6 +27,7 @@
 
   onMount(() => {
     loadObjs();
+    getAGD
   });
 
   const getOBJ = async (obj) => {
@@ -35,6 +37,14 @@
       credentials: "include",
     });
     console.log(loadRoute);
+  };
+
+  const getAGD = async () => {
+    const loadRoute = "http://localhost/desapeguei/back/get-agenda-objects.php";
+    const res = await fetch(loadRoute, {
+      credentials: "include",
+    });
+    ClosedOBJ = await res.json();
   };
 </script>
 
@@ -76,7 +86,8 @@
     navigation
     on:slideChange={() => console.log("slide change")}
     on:swiper={(e) => console.log(e.detail[0])}
-  >
+
+  >{#if ClosedOBJ.filter(ClosedOBJ => ClosedOBJ.AGD_STATUS != "fechado")}
     {#each objs.slice(0, 14).reverse() as obj}
       <SwiperSlide>
         <a
@@ -98,6 +109,7 @@
         </a>
       </SwiperSlide>
     {/each}
+    {/if}
   </Swiper>
   <h1>Tipo 1</h1>
   <Swiper

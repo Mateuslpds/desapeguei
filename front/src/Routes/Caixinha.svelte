@@ -8,13 +8,15 @@
     let objs = [];
     let doadorAgenda = [];
     let receptorAgenda = []; 
+    let types = [];
 
     let nome = "";
     let descricao = "";
     let imagem = "";
+    let tipo = "";
     let cep = "";
     let hora = "";
-    
+
     function openpop(){
         let popout = document.getElementById("popout");
         popout.classList.add("open-popout");
@@ -45,6 +47,7 @@
         loadObjs();
         loadDoadorAgenda();
         loadReceptorAgenda();
+        loadTypes();
     });
 
     const deleteOBJ = async (id, imagem) => {
@@ -116,6 +119,7 @@
         data.append("imgEdit", imgEdit);
         data.append("descricao", descricao);
         data.append("imagem", imagem[0]);
+        data.append("tipo", tipo);
         const res = await fetch(updateRoute, {
             method: "POST",
             body: data,
@@ -197,7 +201,18 @@
             return;
         }        
     };
-  
+    
+    const loadTypes = async () => {
+        const loadRoute = "http://localhost/desapeguei/back/get-types.php";
+        const res = await fetch(loadRoute, {
+            credentials: "include",
+        });
+        if (!res.ok) {
+            alert("erro: não foi possível carregar os tipos");
+            return;
+        }
+            types = await res.json();
+    };
     
 </script>
 
@@ -251,6 +266,11 @@
             <input type="text" id="nome" bind:value={nome}>
             <input type="text" id="descricao" bind:value={descricao}>
             <input type="file" id="imagem" bind:files={imagem}>
+            <select class="tipobutton" name="tipo" id="tipo" bind:value={tipo}>
+                {#each types as type}
+                    <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
+                {/each}
+            </select>
             <button class="EditarPopout" on:click={closepop}>Editar</button> 
         </form>
     </div>
