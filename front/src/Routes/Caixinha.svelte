@@ -171,35 +171,29 @@
 
    
     const ConfirmarEnvio = async (id) => {
-        var Prdt_enviado = document.getElementById("P_enviado")
-        if(Prdt_enviado.checked){
-            const  ConfirmarEnvioRoute = "http://localhost/desapeguei/back/get-doador-confirmation.php?id=" + id;
-            const res = await fetch(ConfirmarEnvioRoute, {
-                credentials: "include",
-            });
-            if(!res.ok){
-                alert("erro: não foi possível confirmar o envio")
-                return;
-            }
+        const  ConfirmarEnvioRoute = "http://localhost/desapeguei/back/get-doador-confirmation.php?id=" + id;
+        const res = await fetch(ConfirmarEnvioRoute, {
+            credentials: "include",
+        });
+        if(!res.ok){
+            alert("erro: não foi possível confirmar o envio")
+            return;
         }
     };
 
     const confirmarRecebimento = async (id) => {
-        var Prdt_recebido = document.getElementById("P_recebido")
-        if(Prdt_recebido.checked){
-            const  ConfirmarRecebimentoRoute = "http://localhost/desapeguei/back/get-receptor-confirmation.php?id=" + id;
-            const data = new FormData()
-            data.append("id",id)
-            const res = await fetch(ConfirmarRecebimentoRoute, {
-                method: "POST",
-                body: data,
-                credentials: "include"
-            });
-            if(!res.ok){
-                alert("erro: não foi possível confirmar o recebimento")
-                return;
-            }
-        }
+        const  ConfirmarRecebimentoRoute = "http://localhost/desapeguei/back/get-receptor-confirmation.php?id=" + id;
+        const data = new FormData()
+        data.append("id",id)
+        const res = await fetch(ConfirmarRecebimentoRoute, {
+            method: "POST",
+            body: data,
+            credentials: "include"
+        });
+        if(!res.ok){
+            alert("erro: não foi possível confirmar o recebimento")
+            return;
+        }        
     };
   
     
@@ -245,12 +239,7 @@
         <span style="cursor: pointer; color:red; font-size: 20px;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
     </div>
     <div>
-    <form>
-        <label>
-            <input type="checkbox" name = "confirmar" id="P_enviado"> produto enviado
-        </label>
-        <button name="submit" value="true" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}> confirmar</button>
-    </form>
+    <button name="submit" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}> confirmar</button>
     </div>
     {/each}
     <div class="popout" id="popout">
@@ -285,12 +274,7 @@
             <b>DATA E HORA EFETUADA:</b> {Ragenda.AGD_DATETIME}
             <span style="cursor: pointer; color:red; font-size: 20px;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
         </div>
-        <form>
-            <label>
-                <input type="checkbox" name = "confirmarRecebimento" id="P_recebido">produto recebido
-            </label>
-                <button name="submit2" value="true" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}> confirmar</button>  
-        </form>
+        <button name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}> confirmar</button>  
     {/each}
     {#if doadorAgenda.length > 0}
         {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "fechado") as DoadorFechado} 

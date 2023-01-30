@@ -8,11 +8,7 @@ if (!isset($_SESSION["user"])) {
 
 $AgdStatus = "fechado";
 
-if($stmt = $conn->query('SELECT AGD_STATUS FROM agenda') == "semi fechado"){
-    $AgdStatus;
-}
-
-$stmt = $conn->prepare('UPDATE agenda SET AGD_STATUS = :StatusAgenda WHERE AGD_ID = :id');
+$stmt = $conn->prepare('UPDATE agenda SET AGD_STATUS = :StatusAgenda WHERE AGD_ID = :id AND AGD_STATUS != "aberto"');
 $stmt->bindValue(':StatusAgenda', $AgdStatus);
 $stmt->bindValue(':id', $_GET['id']);
 $stmt->execute();

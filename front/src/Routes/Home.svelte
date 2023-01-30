@@ -45,27 +45,16 @@
 
 <body>
   <Menu />
-  {#if localStorage.getItem("isLogged") != undefined}
-    <div
-      class="col-12 col-lg-auto mb-0 mb-lg-3 me-lg-6 w-25  pl-lg-5"
-      id="Cbotao"
-    >
-      <a href="/doarTela" use:link>
-        <button type="button" class="btn btn-dark btn btn-outline-primary w-75">
-          Doar
-        </button>
-      </a>
-    </div>
-  {/if}
-
-
-
 <main class="conteudo">
   <section class="conteudo-principal">
     <div class="conteudo-principal-escrito">
       <h1 class="conteudo-principal-titulo">Desapeguei Doação</h1>
       <h2 class="conteudo-principal-subtitulo">Preserve o mundo com a sua doação de eletrônicos.</h2>
-      <button class="conteudo-principal-escrito-botao">Faça uma doação!</button>
+      {#if localStorage.getItem("isLogged") != undefined}
+      <a href="/doarTela" use:link>
+        <button class="conteudo-principal-escrito-botao">Faça uma doação!</button>
+      </a>
+      {/if}
     </div>
       <img class="conteudo-principal-imagem" src="imagens/robo.svg" alt="">
   </section>
