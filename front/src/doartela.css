@@ -29,9 +29,10 @@ label {
     font-size: 16px;
     background-color: #269ac5;
     border: none;
+    border-radius: 5px;
     color: white;
     padding: 15px 20px;
-    margin-left: 280px;
+    margin: 10px;
 }
 
 .botão:hover{

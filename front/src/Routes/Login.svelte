@@ -60,7 +60,7 @@
         />
       </div>
       <div class="col-md-6 bg-white p-5">
-        <h2 class="pb-3">Fique conectado</h2>
+        <h1 class="pb-3">Fique conectado</h1>
         <div class="form-style user">
           <form on:submit|preventDefault={submit}>
             <div class="form-group pb-3">

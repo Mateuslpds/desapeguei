@@ -97,7 +97,9 @@
         </select>
 
         <div>
-            <button class="botão">Fazer doação</button>
+            <center>
+                <button class="botão">Fazer doação</button>
+            </center>
         </div>
     </form>
 </body>

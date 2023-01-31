@@ -26,11 +26,11 @@ button {
 }
 
 .conteudo {
-  background: linear-gradient(-45deg, #23d5ab, #008eff, #23a6d5, #0070ff);
+  background: linear-gradient(-45deg, #266490, #8ad3ee, #2c75b8, #78c7e3);
 	background-size: 400% 400%;
 	-webkit-animation: gradient 15s ease infinite;
 	        animation: gradient 15s ease infinite;
-  border-top: 0.4px solid #fffee7;
+  border-top: 0.4px solid #ddf9ff;
 }
 
 .conteudo-principal {
@@ -49,20 +49,20 @@ button {
   font-family: 'Righteous', cursive;
   font-weight: 400;
   font-size: 64px;
-  color: #fffee7;
+  color: #ffffff;
 }
 
 .conteudo-principal-subtitulo{
   font-family: 'Sarala', sans-serif;
   font-weight: 400;
   font-size: 29px;
-  color: #fffee7;
+  color: #ffffff;
 
 }
 .conteudo-principal-escrito-botao{
-  background-color: #ecd6c4;
-  height: 60px;
-  width: 180px;
+  background-color: #f2e6db;
+  height: 80px;
+  width: 200px;
   border: none;
   box-shadow: 4px 5´x 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
@@ -74,7 +74,9 @@ button {
 }
 
 .conteudo-principal-imagem{
-  height: 450px;
+  height: 400px;
+  max-width: 100%;
+  min-width: 20%;
 }
 
 .conteudo-secundario{
@@ -86,7 +88,7 @@ button {
 }
 
 .conteudo-secundario-titulo{
-  border-top: 0.4px solid #fff2e7;
+  border-top: 0.4px solid #ffffff;
   padding-top: 48px;
   font-family: 'Righteous', cursive;
   font-weight: 400;
@@ -97,9 +99,9 @@ button {
 
 .conteudo-secundario-paragrafo{
   font-family: 'Sarala', sans-serif;
-  font-weight: 400;
   font-size: 18px;
-color: #ecd6c4;
+  margin-bottom: 5px;
+  color: #ffffff;
 }
 
 .rodape{
@@ -135,12 +137,12 @@ color: #ecd6c4;
 
 .carrossel-2{
   display: flex;
- flex-direction: row;
- align-items: center;
- justify-content: space-around;
- gap: -20px;
- padding-left: 28px;
- padding-right: 28px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: -20px;
+  padding-left: 28px;
+  padding-right: 28px;
 }
 .carrossel img {
   width: 200px;

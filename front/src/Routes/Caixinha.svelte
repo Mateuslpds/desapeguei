@@ -323,7 +323,7 @@
         {/each}
     {/if}
     <div class="textodoar">
-        Gostaria de fazer uma doação?
+        <i>Gostaria de fazer uma doação?</i>
     </div>
     <center>
     <div>

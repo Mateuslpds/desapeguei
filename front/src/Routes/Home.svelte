@@ -75,10 +75,15 @@
 
   <section class="conteudo-secundario">
     <h3 class="conteudo-secundario-titulo">O que a doação de eletrônicos faz por você?</h3>
-      <p class="conteudo-secundario-paragrafo">1. Doar ou reciclar eletrônicos de consumo preserva nossos recursos naturais e evita a poluição do ar e da água, bem como a emissão de gases.</p>
-      <p class="conteudo-secundario-paragrafo">2. A reciclagem de um milhão de laptops economiza a energia equivalente à eletricidade usada por mais de 3.500 residências em um ano. </p>
-      <p class="conteudo-secundario-paragrafo">3. Para cada milhão de telefones celulares que reciclarmos, 15 mil kg de cobre, 350 kg de prata, 34 kg de ouro e 15 kg de paládio podem ser recuperadas.</p>
+    <ol>  
+      <li class="conteudo-secundario-paragrafo">Doar ou reciclar eletrônicos de consumo preserva nossos recursos naturais e evita a poluição do ar e da água, bem como a emissão de gases.</li>
+      <br>
+      <li class="conteudo-secundario-paragrafo">A reciclagem de um milhão de laptops economiza a energia equivalente à eletricidade usada por mais de 3.500 residências em um ano. </li>
+      <br>
+      <li class="conteudo-secundario-paragrafo">Para cada milhão de telefones celulares que reciclarmos, 15 mil kg de cobre, 350 kg de prata, 34 kg de ouro e 15 kg de paládio podem ser recuperadas.</li>
+    </ol>
   </section>
+  <br>
 </main>
 
   <h1 class="titulo-carrosel">Recentes</h1>
