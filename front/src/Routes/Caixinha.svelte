@@ -2,13 +2,15 @@
     import Menu from "./Menu.svelte";
     import { link } from "svelte-spa-router";
     import { onMount } from "svelte";
-    import { dataset_dev, element, prevent_default } from "svelte/internal";
     import Agenda from "./Agenda.svelte";
 
     let objs = [];
     let doadorAgenda = [];
     let receptorAgenda = []; 
     let types = [];
+
+    let search = null;
+    let typefilter = null;
 
     let nome = "";
     let descricao = "";
@@ -30,17 +32,26 @@
 
     const imgPath = "http://localhost/desapeguei/back/imagens/";
 
+    $: visibleObjs = search
+        ? objs.filter((obj) => {
+              return (
+                (obj.OBJ_NOME.match(`${search}.*`) || obj.OBJ_DESCRICAO.match(`${search}.*`)) &&
+                (obj.OBJ_TIPO_ID == typefilter || typefilter == null)
+              );
+          })
+        : objs;
+
     const loadObjs = async () => {
         const loadRoute = "http://localhost/desapeguei/back/get-user-objects.php";
         const res = await fetch(loadRoute, {
-            credentials : "include",
+            credentials: "include",
         });
-        if (!res.ok) {
-            alert("erro: você não está logado");
-            return;
-        }
         objs = await res.json();
-        console.log(objs.length)
+    };
+
+    const cleanFilter = () => {
+        search = null;
+        typefilter = null;
     };
 
     onMount(() => {
@@ -82,7 +93,6 @@
         }
         loadDoadorAgenda();
         loadReceptorAgenda();
-
     }
 
     const deleteReceptorAGD = async (id) => {
@@ -100,7 +110,6 @@
         }
         loadDoadorAgenda();
         loadReceptorAgenda();
-
     }
 
     let idEdit = "";
@@ -174,7 +183,6 @@
         }
         receptorAgenda = await res.json();
     };
-
    
     const ConfirmarEnvio = async (id) => {
         const  ConfirmarEnvioRoute = "http://localhost/desapeguei/back/get-doador-confirmation.php?id=" + id;
@@ -213,7 +221,6 @@
         }
             types = await res.json();
     };
-    
 </script>
 
 <svelte:head>
@@ -230,13 +237,17 @@
 </main>
 <body class ="box">
     <div class="pesquisar">
-        <form>
-            <label class="caixinha" for="caixa">CAIXINHA</label>
-            <input class="InPesquisar" type="search" placeholder="Pesquisar por suas doações.">
-        </form>
+        <label class="caixinha" for="caixa">CAIXINHA</label>
+        <input class="InPesquisar" type="search" placeholder="Pesquisar por suas doações." bind:value={search}>
+        <select class="form-select" name="tipo" id="tipo" bind:value={typefilter}>
+            {#each types as type}
+                <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
+            {/each}
+        </select>
+        <button class="btn btn-outline-danger btn-sm" on:click={cleanFilter}>Limpar filtro</button>
     <div class="Caixinhasgeral">
     {#if objs.length > 0}
-    {#each objs as obj}
+    {#each visibleObjs as obj}
         <div class="Descrição">
             {obj.OBJ_NOME}
             {obj.OBJ_DESCRICAO}
