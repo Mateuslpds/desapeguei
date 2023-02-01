@@ -41,42 +41,17 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
 />
 <Menu></Menu>
-{#each infos as info}
-<h1>
-    NOME DO DOADOR: {info.USUARIO_NOME}
-    TELEFONE DE CONTADO DO DOADOR: {info.USUARIO_TEL}
-</h1>
-<img src="{imgPath}{info.OBJ_IMG}" alt="" />
-<h1>Objeto: {info.OBJ_NOME}</h1>
-<h1>Descrição: {info.OBJ_DESCRICAO}</h1>
-{/each}
-
-<h1>Realize seu agendamento</h1>
-<form on:submit|preventDefault={agendaCreate}>
-    <div>
-        <label for="">Insira o CEP</label>
-        <input type="text" required minlength="8" maxlength="9" bind:value={CEP}>
-    </div>
-    <br>
-    <div>
-        <button>Confirmar agendamento</button>
-    </div>
-</form>
-
 <head>
     <title>ViaCEP Webservice</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
     <!-- Adicionando Javascript -->
     <script>
-    
     function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
             document.getElementById('rua').value=("");
             document.getElementById('bairro').value=("");
             document.getElementById('cidade').value=("");
             document.getElementById('uf').value=("");
-            document.getElementById('ibge').value=("");
     }
 
     function meu_callback(conteudo) {
@@ -86,7 +61,6 @@
             document.getElementById('bairro').value=(conteudo.bairro);
             document.getElementById('cidade').value=(conteudo.localidade);
             document.getElementById('uf').value=(conteudo.uf);
-            document.getElementById('ibge').value=(conteudo.ibge);
         } //end if.
         else {
             //CEP não Encontrado.
@@ -114,8 +88,6 @@
                 document.getElementById('bairro').value="...";
                 document.getElementById('cidade').value="...";
                 document.getElementById('uf').value="...";
-                document.getElementById('ibge').value="...";
-
                 //Cria um elemento javascript.
                 var script = document.createElement('script');
 
@@ -142,12 +114,25 @@
     </head>
 
     <body>
-    <!-- Inicio do formulario -->
-      <form method="get" action=".">
-        <label>Cep:
-        <input name="cep" type="text" id="cep" value="" size="10" maxlength="9"
-               onblur="pesquisacep(this.value);" /></label><br />
-        <label>Rua:
+
+      {#each infos as info}
+
+<h1>
+    NOME DO DOADOR: {info.USUARIO_NOME}
+    TELEFONE DE CONTADO DO DOADOR: {info.USUARIO_TEL}
+</h1>
+<img src="{imgPath}{info.OBJ_IMG}" alt="" />
+<h1>Objeto: {info.OBJ_NOME}</h1>
+<h1>Descrição: {info.OBJ_DESCRICAO}</h1>
+{/each}
+
+<h1>Realize seu agendamento</h1>
+
+<form on:submit|preventDefault={agendaCreate}>
+    <div>
+        <label for="">Insira o CEP</label>
+        <input type="text" required minlength="8" maxlength="9"  bind:value={CEP} onchange="pesquisacep(this.value);" > <br/>
+         <label>Rua:
         <input name="rua" type="text" id="rua" size="60" /></label><br />
         <label>Bairro:
         <input name="bairro" type="text" id="bairro" size="40" /></label><br />
@@ -155,7 +140,10 @@
         <input name="cidade" type="text" id="cidade" size="40" /></label><br />
         <label>Estado:
         <input name="uf" type="text" id="uf" size="2" /></label><br />
-        <label>IBGE:
-        <input name="ibge" type="text" id="ibge" size="8" /></label><br />
-      </form>
+    </div>
+    <br>
+    <div>
+        <button>Confirmar agendamento</button>
+    </div>
+</form>
     </body>
