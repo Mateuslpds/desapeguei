@@ -270,19 +270,20 @@
                 {obj.OBJ_DESCRICAO}
             </div>
         </div>
+        {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado" && agenda.AGD_OBJ_ID == obj.OBJ_ID) as Dagenda}
+        <div class="receptor">
+            <br><b>DO RECEPTOR:</b> {Dagenda.USUARIO_NOME}
+            <br><b>TELEFONE DO RECEPTOR:</b> {Dagenda.USUARIO_TEL}
+            <br><b>CEP:</b> {Dagenda.AGD_CEP}
+            <br><b>DATA E HORA EFETUADA:</b> {Dagenda.AGD_DATETIME}
+                <br>
+            <button class="btnreagendar" on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)} on:click={openpopRea}>Reagendar</button>
+            <button class="btnconfirmar" name="submit" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}>Confirmar</button>
+            <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
+        </div>
+        {/each}
     {/each}
-    {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado") as Dagenda}
-    <div class="receptor">
-        <br><b>DO RECEPTOR:</b> {Dagenda.USUARIO_NOME}
-        <br><b>TELEFONE DO RECEPTOR:</b> {Dagenda.USUARIO_TEL}
-        <br><b>CEP:</b> {Dagenda.AGD_CEP}
-        <br><b>DATA E HORA EFETUADA:</b> {Dagenda.AGD_DATETIME}
-            <br>
-        <button class="btnreagendar" on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)} on:click={openpopRea}>Reagendar</button>
-        <button class="btnconfirmar" name="submit" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}>Confirmar</button>
-        <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
-    </div>
-    {/each}
+    
     <div class="popout" id="popout">
         <h2>Edição de objeto</h2>
         <form on:submit|preventDefault={() => editOBJ()}>
