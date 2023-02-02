@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
 }
 
@@ -6,7 +6,7 @@ body {
     font-family: sans-serif;
 }
 
-input { 
+input {
     width: 40%;
     padding: 8px 10px;
     margin: 5px 0;
@@ -28,11 +28,12 @@ input {
     background-color: white;
     margin: auto;
     margin-top: 50px;
-    padding: 0 40px 30px 40px;
+    margin-bottom: 50px;
+    padding: 0 40px 20px 40px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.btnEspecial{
+.btnEspecial {
     width: 100px;
     height: 50px;
     text-align: center;
@@ -78,7 +79,8 @@ input {
     margin-left: 5px;
 }
 
-.deletebotão,.Editar {
+.deletebotão,
+.btnreceptor {
     width: 85px;
     height: 35px;
     font-size: 15px;
@@ -92,11 +94,31 @@ input {
     float: right;
 }
 
+.btnreagendar {
+    width: 90px;
+    height: 40px;
+    font-size: 15px;
+    text-align: center;
+    background-color: #23a4d2;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 10px;
+}
+
 .IMGplaceholder {
     width: 20%;
     margin: 15px;
     padding-right: 10px;
     float: left;
+}
+
+.receptor,.receptor{
+    width: 90%;
+    padding: 10px;
+    background-color: rgb(240, 251, 255);
+    text-align: center;
 }
 
 .pesquisar {
@@ -119,6 +141,28 @@ input {
 .Descrição {
     font-size: 20px;
     margin: 20px;
+    margin-bottom: 8rem;
+}
+
+.btnconfirmar {
+    width: 90px;
+    height: 40px;
+    font-size: 15px;
+    text-align: center;
+    background-color: #18c40c;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.receptor {
+    margin: 30px;
+}
+
+.btnreceptor {
+    float: right;
 }
 
 .popout {
@@ -127,25 +171,46 @@ input {
     position: absolute;
     top: 0;
     left: 50%;
-    padding: 20px;
+    padding: 10px;
     visibility: hidden;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transform: translate 0.4s, top 0.4s;
-    transform: translate(-50%,-50%) scale(0.1);
+    transform: translate(-50%, -50%) scale(0.1);
+    grid: 5px;
 }
 
-.open-popout{
+.open-popout {
     visibility: visible;
     top: 50%;
-    transform: translate(-50%,-50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
 }
 
-.EditarPopout{
-    width: 100px;
-    height: 45px;
-    font-size: 22px;
+.reagendar-popout {
+    width: 500px;
+    background-color: rgb(249, 253, 255);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    padding: 10px;
+    visibility: hidden;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: translate 0.4s, top 0.4s;
+    transform: translate(-50%, -50%) scale(0.1);
+    grid: 5px;
+}
+
+.reagendar-open-popout {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.btnpopout {
+    width: 85px;
+    height: 35px;
+    font-size: 15px;
     text-align: center;
-    background-color: #228be6;
+    background-color: #23a4d2;
     color: white;
     border: none;
     border-radius: 3px;
@@ -153,15 +218,15 @@ input {
     margin: 10px;
 }
 
-/* parte do popout do reagendamento
-
-.reapopout {
-    width: 500px;
-    background-color: rgb(249, 253, 255);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    padding: 20px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.fechar {
+    width: 85px;
+    height: 35px;
+    font-size: 15px;
+    text-align: center;
+    background-color: #b34c3c;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 10px;
 }
-*/

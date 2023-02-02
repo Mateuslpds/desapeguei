@@ -30,6 +30,15 @@
         console.log(popout)
     } 
 
+    function openpopRea(){
+        let popout = document.getElementById("reagendar-popout");
+        popout.classList.add("reagendar-open-popout");
+    }
+    function closepopRea(){
+        let popout = document.getElementById("reagendar-popout");
+        popout.classList.remove("reagendar-open-popout");
+    }
+
     const imgPath = "http://localhost/desapeguei/back/imagens/";
 
     $: visibleObjs = search
@@ -239,57 +248,82 @@
     <div class="pesquisar">
         <label class="caixinha" for="caixa">CAIXINHA</label>
         <input class="InPesquisar" type="search" placeholder="Pesquisar por suas doações." bind:value={search}>
-        <select class="form-select" name="tipo" id="tipo" bind:value={typefilter}>
+        <select class="form-select" style="height: 30px;" name="tipo" id="tipo" bind:value={typefilter}>
             {#each types as type}
                 <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
             {/each}
         </select>
-        <button class="btn btn-outline-danger btn-sm" on:click={cleanFilter}>Limpar filtro</button>
+        <button class="btn btn-outline-danger btn-sm" style="height: 32px;" on:click={cleanFilter}>Limpar filtro</button>
     <div class="Caixinhasgeral">
     {#if objs.length > 0}
     {#each visibleObjs as obj}
+        <hr style="width:70%">
         <div class="Descrição">
-            {obj.OBJ_NOME}
-            {obj.OBJ_DESCRICAO}
             <img class="IMGplaceholder" src="{imgPath}{obj.OBJ_IMG}" alt="">
             <div class="xdelete">
                 <span on:click={() => deleteOBJ(obj.OBJ_ID, obj.OBJ_IMG)}>&times;</span>
             </div>
             <button class="deletebotão" on:click={() => selectID(obj.OBJ_ID, obj.OBJ_IMG)} on:click={openpop}>Editar</button> 
+            {obj.OBJ_NOME}
+            <br>
+            <div style="overflow: auto;">
+                {obj.OBJ_DESCRICAO}
+            </div>
         </div>
     {/each}
     {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado") as Dagenda}
-        <div>
-            <b>DO RECEPTOR:</b> {Dagenda.USUARIO_NOME}
-            <b>TELEFONE DO RECEPTOR:</b> {Dagenda.USUARIO_TEL}
-            <b>CEP:</b> {Dagenda.AGD_CEP}
-            <b>DATA E HORA EFETUADA:</b> {Dagenda.AGD_DATETIME}
-        <button on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)}>Reagendar</button>
-        <span style="cursor: pointer; color:red; font-size: 20px;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
-    </div>
-    <div>
-    <button name="submit" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}> confirmar</button>
+    <div class="receptor">
+        <br><b>DO RECEPTOR:</b> {Dagenda.USUARIO_NOME}
+        <br><b>TELEFONE DO RECEPTOR:</b> {Dagenda.USUARIO_TEL}
+        <br><b>CEP:</b> {Dagenda.AGD_CEP}
+        <br><b>DATA E HORA EFETUADA:</b> {Dagenda.AGD_DATETIME}
+            <br>
+        <button class="btnreagendar" on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)} on:click={openpopRea}>Reagendar</button>
+        <button class="btnconfirmar" name="submit" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}>Confirmar</button>
+        <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
     </div>
     {/each}
     <div class="popout" id="popout">
         <h2>Edição de objeto</h2>
         <form on:submit|preventDefault={() => editOBJ()}>
+            <label for="nome">Nome</label>
+            <br>
             <input type="text" id="nome" bind:value={nome}>
+            <br>
+            <label for="descricao">Descrição</label>
+            <br>
             <input type="text" id="descricao" bind:value={descricao}>
+            <br>
+            <label for="imagem">Insira uma nova imagem</label>
+            <br>
             <input type="file" id="imagem" bind:files={imagem}>
+            <br>
+            <label for="tipo">Tipo</label>
+            <br>
             <select class="tipobutton" name="tipo" id="tipo" bind:value={tipo}>
                 {#each types as type}
                     <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
                 {/each}
             </select>
-            <button class="EditarPopout" on:click={closepop}>Editar</button> 
+            <center>
+                <button class="btnpopout">Editar</button>
+                <button class="fechar" on:click={closepop}>&times; Fechar</button>
+            </center>
         </form>
     </div>
+    <div class="reagendar-popout" id="reagendar-popout">
         <form on:submit|preventDefault={() => editAGD()}>
-            <input type="text" id="cep" bind:value={cep}>
+            <h2>Edite o local</h2>
+            <label for="cep">CEP</label>
+            <input type="text" placeholder="Insira o local" id="cep" bind:value={cep}>
+            <label for="hora">Hora e Data</label>
             <input type="datetime-local" id="hora" bind:value={hora}>
-            <button class="Editar">Reagendar</button>
+            <center>
+                <button class="btnpopout">Reagendar</button>
+                <button class="fechar" on:click={closepopRea}>&times; Fechar</button>
+            </center>
         </form>
+    </div>
     {:else}
     <div class="imagem">
         <img src="imagens\sad.jpg" alt="gato na caixa"/>
@@ -302,34 +336,35 @@
     </div>
     {/if}
     {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado") as Ragenda}
-        <div>
-            <b>DO DOADOR:</b> {Ragenda.USUARIO_NOME}
-            <b>TELEFONE DO DOADOR:</b> {Ragenda.USUARIO_TEL}  
-            <b>CEP:</b> {Ragenda.AGD_CEP}
-            <b>DATA E HORA EFETUADA:</b> {Ragenda.AGD_DATETIME}
-            <span style="cursor: pointer; color:red; font-size: 20px;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
-        </div>
-        <button name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}> confirmar</button>  
+        <div class="receptor">
+            <br><b>DO DOADOR:</b> {Ragenda.USUARIO_NOME}
+            <br><b>TELEFONE DO DOADOR:</b> {Ragenda.USUARIO_TEL}  
+            <br><b>CEP:</b> {Ragenda.AGD_CEP}
+            <br><b>DATA E HORA EFETUADA:</b> {Ragenda.AGD_DATETIME}
+                <br>
+            <button class="btnconfirmar" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar</button> 
+            <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
+        </div> 
     {/each}
     {#if doadorAgenda.length > 0}
         {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "fechado") as DoadorFechado} 
-          <div class="Doador">
-              DOAÇÃO REALIZADA 
-            <b>CEP DO ENCONTRO:</b> {DoadorFechado.AGD_CEP}
-            <b>DATA E HORA EFETUADA:</b> {DoadorFechado.AGD_DATETIME}
-            <b>NOME DO RECEPTOR:</b> {DoadorFechado.USUARIO_NOME}
-            <b>TELEFONE DO RECEPTOR:</b> {DoadorFechado.USUARIO_TEL}
+          <div>
+            DOAÇÃO REALIZADA 
+            <br><b>CEP DO ENCONTRO:</b> {DoadorFechado.AGD_CEP}
+            <br><b>DATA E HORA EFETUADA:</b> {DoadorFechado.AGD_DATETIME}
+            <br><b>NOME DO RECEPTOR:</b> {DoadorFechado.USUARIO_NOME}
+            <br><b>TELEFONE DO RECEPTOR:</b> {DoadorFechado.USUARIO_TEL}
           </div>
         {/each}
     {/if} 
     {#if receptorAgenda.length > 0 }   
         {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS == "fechado") as ReceptorFechado} 
-          <div class="Receptor">
-              DOAÇÃO REALIZADA 
-            <b>CEP DO ENCONTRO:</b> {ReceptorFechado.AGD_CEP}
-            <b>DATA E HORA EFETUADA:</b> {ReceptorFechado.AGD_DATETIME}
-            <b>NOME DO DOADOR:</b> {ReceptorFechado.USUARIO_NOME}
-            <b>TELEFONE DO DOADOR:</b> {ReceptorFechado.USUARIO_TEL}
+          <div>
+            DOAÇÃO REALIZADA 
+            <br><b>CEP DO ENCONTRO:</b> {ReceptorFechado.AGD_CEP}
+            <br><b>DATA E HORA EFETUADA:</b> {ReceptorFechado.AGD_DATETIME}
+            <br><b>NOME DO DOADOR:</b> {ReceptorFechado.USUARIO_NOME}
+            <br><b>TELEFONE DO DOADOR:</b> {ReceptorFechado.USUARIO_TEL}
           </div>
         {/each}
     {/if}
