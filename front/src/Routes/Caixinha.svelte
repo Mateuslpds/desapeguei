@@ -336,19 +336,25 @@
         <p>doação.</p>
     </div>
     {/if}
-    {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado") as Ragenda}
+    {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS != "entregue") as Ragenda}
         <div class="receptor">
             <br><b>DO DOADOR:</b> {Ragenda.USUARIO_NOME}
             <br><b>TELEFONE DO DOADOR:</b> {Ragenda.USUARIO_TEL}  
             <br><b>CEP:</b> {Ragenda.AGD_CEP}
             <br><b>DATA E HORA EFETUADA:</b> {Ragenda.AGD_DATETIME}
                 <br>
-            <button class="btnconfirmar" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar</button> 
+                {#if Ragenda.AGD_STATUS == 'confirmado'}
+                    <button class="btnconfirmar" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar entrega</button> 
+                {:else if Ragenda.AGD_STATUS == 'entregue'}
+                    <h3>Seu pedido foi entregue</h3>
+                {:else}
+                <button class="btnconfirmar" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar</button> 
+                {/if}
             <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
         </div> 
     {/each}
     {#if doadorAgenda.length > 0}
-        {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "fechado") as DoadorFechado} 
+        {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as DoadorFechado} 
           <div>
             DOAÇÃO REALIZADA 
             <br><b>CEP DO ENCONTRO:</b> {DoadorFechado.AGD_CEP}
@@ -359,7 +365,7 @@
         {/each}
     {/if} 
     {#if receptorAgenda.length > 0 }   
-        {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS == "fechado") as ReceptorFechado} 
+        {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as ReceptorFechado} 
           <div>
             DOAÇÃO REALIZADA 
             <br><b>CEP DO ENCONTRO:</b> {ReceptorFechado.AGD_CEP}
