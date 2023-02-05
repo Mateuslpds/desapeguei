@@ -8,6 +8,7 @@
     let nome = "";
     let descricao = "";
     let imagem = "";
+    let cep = "";
     let tipo = "";
 
     const postOBJ = async () => {
@@ -16,6 +17,7 @@
         dado.append("nome", nome);
         dado.append("descricao", descricao);
         dado.append("imagem", imagem[0]);
+        dado.append("cep", cep)
         dado.append("tipo", tipo);
         let res = await fetch(postRoute, {
             method: "POST",
@@ -87,6 +89,15 @@
                 placeholder="Insira aqui a descrição do objeto."
                 bind:value={descricao}
             />
+        <div class="inpcep">
+            <label for="cep">CEP</label>
+                <textarea 
+                    name="CEP"
+                    id="cep"
+                    class="form-control border border-secondary p-1"
+                    placeholder="Insira aqui o seu CEP"
+                    bind:value={cep}
+                />
 
         </div>
         <label class="tipo" for="tipo">Tipo</label>

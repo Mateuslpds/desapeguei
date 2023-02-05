@@ -1,5 +1,45 @@
 <script>
   import Menu from "./Menu.svelte";
+
+  let email = "";
+  let secreto = "";
+  let Novasenha = "";
+  let confirmarSenha = "";
+
+  const submitSecret = async () => {
+    const auth = "http://localhost/desapeguei/back/auth-secret.php";
+    const data = new FormData();
+    data.append("secreto", secreto);
+    data.append("email", email);
+
+    const res = await fetch(auth, {
+      method: "POST",
+      body: data,
+      credentials : "include",
+    });
+    if(!res.ok){
+      alert('ih rapaz');
+    }
+  }
+
+  const submitNovasenha = async () => {
+    if(Novasenha === confirmarSenha){
+    const updateSenha = "http://localhost/desapeguei/back/update-password-user.php";
+    const data = new FormData();
+    data.append("Novasenha", Novasenha);
+
+    const res = await fetch(updateSenha, {
+      method: "POST",
+      body: data,
+      credentials : "include",
+      
+    })}else{
+      alert('preencha corretamente sua senha');
+      return;
+    };
+    
+  }
+  
 </script>
 
 <link
@@ -21,11 +61,23 @@
           />
         </div>
         <div class="col-md-6 p-5 form-style">
-          <form action="$">
+          <form on:submit|preventDefault={submitSecret} on:submit|preventDefault={submitNovasenha}>
             <h1>Esqueceu a senha?</h1>
             <br />
 
             <div class="desapega">
+                <div class="input-box pb-3 form-group">
+                  <label for="password">insira seu email</label>
+                  <input
+                    id="text"
+                    type="email"
+                    name="text"
+                    placeholder="Insira seu email"
+                    required
+                    class="form-control"
+                    maxlength= "45"
+                    bind:value={email}
+                  />
               <div class="input-box pb-3 form-group">
                 <label for="password">Senha Secreta</label>
                 <input
@@ -35,7 +87,8 @@
                   placeholder="Resposta da perguntinha secreta"
                   required
                   class="form-control"
-                  minlength="8"
+                  maxlength= "45"
+                  bind:value={secreto}
                 />
               </div>
               <br />
@@ -49,7 +102,8 @@
                   placeholder="Digite a senha aqui"
                   required
                   class="form-control"
-                  minlength="8"
+                  maxlength="20"
+                  bind:value={Novasenha}
                 />
               </div>
               <br />
@@ -63,7 +117,8 @@
                   placeholder="Digite a senha aqui"
                   required
                   class="form-control"
-                  minlength="8"
+                  maxlength="20"
+                  bind:value={confirmarSenha}
                 />
               </div>
               <center

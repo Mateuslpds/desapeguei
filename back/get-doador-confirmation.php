@@ -14,7 +14,6 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 $status = print_r($result[0]['AGD_STATUS'], true);
 
 if($status == 'aberto'){
-    echo "teste";
     $AgdStatus = 'semi-confirm-doador';
     $stmt = $conn->prepare('UPDATE agenda SET AGD_STATUS = :StatusAgenda WHERE AGD_ID = :id');
     $stmt->bindValue(':StatusAgenda', $AgdStatus);
@@ -22,7 +21,6 @@ if($status == 'aberto'){
     $stmt->execute();
 }
 if($status == 'semi-confirm-recp'){
-    echo "teste";
     $AgdStatus = 'confirmado';
     $stmt = $conn->prepare('UPDATE agenda SET AGD_STATUS = :StatusAgenda WHERE AGD_ID = :id');
     $stmt->bindValue(':StatusAgenda', $AgdStatus);

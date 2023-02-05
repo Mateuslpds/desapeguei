@@ -4,7 +4,7 @@
     import { onMount } from "svelte";
 
     let infos = [];
-    let CEP = "";
+    let datahora = "";
 
     const imgPath = "http://localhost/desapeguei/back/imagens/";
 
@@ -23,7 +23,7 @@
     const agendaCreate = async () => {
         const agendaRoute = "http://localhost/desapeguei/back/agenda-create.php";
         const agenDado = new FormData();
-        agenDado.append("CEP", CEP);
+        agenDado.append("datahora", datahora);
         let res = await fetch(agendaRoute, {
             method: "POST",
             body: agenDado,
@@ -41,10 +41,10 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
 />
 
-<head>
+<!--<head>
     <title>ViaCEP Webservice</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- Adicionando Javascript -->
+     Adicionando Javascript 
     <script>
     function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
@@ -110,7 +110,7 @@
         }
     };
     </script>
-</head>
+</head-->
 
 <body>
     <Menu></Menu>
@@ -133,9 +133,9 @@
         <div class="agd-box">
             <h1 class="agd-title">Realize seu agendamento</h1>
             <form class="agd-form" on:submit|preventDefault={agendaCreate}>
-                <label for="">Insira o CEP</label>
-                <input type="text" required minlength="8" maxlength="9"  bind:value={CEP} onchange="pesquisacep(this.value);" >
-                <div class="cep-results">
+                <label for="">Insira a data e a hora em que você deseja agendar</label>
+                <input type="datetime-local" id="hora" bind:value={datahora}>
+             <!--   <div class="cep-results">
                     <label style="float: left; width: 30%">Rua:
                     <input name="rua" type="text" id="rua" size="60" /></label>
                     <label style="float: left; width: 30%">Bairro:
@@ -144,7 +144,9 @@
                     <input name="cidade" type="text" id="cidade" size="40" /></label>
                     <label style="float: left; width: 10%">Estado:
                     <input name="uf" type="text" id="uf" size="2" /></label>
-                </div>
+
+                    onchange="pesquisacep(this.value);" isso foi usado dentro do input 
+                </div>-->
                 <button class="btn btn-primary">Confirmar agendamento</button>
             </form>
         </div>

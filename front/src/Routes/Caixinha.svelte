@@ -137,6 +137,7 @@
         data.append("imgEdit", imgEdit);
         data.append("descricao", descricao);
         data.append("imagem", imagem[0]);
+        data.append("cep",cep);
         data.append("tipo", tipo);
         const res = await fetch(updateRoute, {
             method: "POST",
@@ -154,7 +155,6 @@
         const updateRoute = "http://localhost/desapeguei/back/agenda-reagenda.php";
         const data = new FormData()
         data.append("id", idEdit);
-        data.append("cep", cep);
         data.append("hora",hora);
         const res = await fetch(updateRoute, {
             method: "POST",
@@ -274,7 +274,7 @@
         <div class="receptor">
             <br><b>DO RECEPTOR:</b> {Dagenda.USUARIO_NOME}
             <br><b>TELEFONE DO RECEPTOR:</b> {Dagenda.USUARIO_TEL}
-            <br><b>CEP:</b> {Dagenda.AGD_CEP}
+            <br><b>CEP:</b> 
             <br><b>DATA E HORA EFETUADA:</b> {Dagenda.AGD_DATETIME}
                 <br>
             <button class="btnreagendar" on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)} on:click={openpopRea}>Reagendar</button>
@@ -298,6 +298,10 @@
             <label for="imagem">Insira uma nova imagem</label>
             <br>
             <input type="file" id="imagem" bind:files={imagem}>
+            <br>
+            <label for="cep">Insira um novo cep</label>
+            <br>
+            <input type="text" id="cep" bind:value={cep}>
             <br>
             <label for="tipo">Tipo</label>
             <br>
