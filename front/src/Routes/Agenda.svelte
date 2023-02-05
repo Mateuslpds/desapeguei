@@ -2,6 +2,7 @@
     import Menu from "./Menu.svelte";
     import { link } from "svelte-spa-router";
     import { onMount } from "svelte";
+    import { loop_guard } from "svelte/internal";
 
     let infos = [];
     let datahora = "";
@@ -41,31 +42,19 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
 />
 
-<!--<head>
+<head>
     <title>ViaCEP Webservice</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
      Adicionando Javascript 
     <script>
-    function limpa_formulário_cep() {
-            //Limpa valores do formulário de cep.
-            document.getElementById('rua').value=("");
-            document.getElementById('bairro').value=("");
-            document.getElementById('cidade').value=("");
-            document.getElementById('uf').value=("");
-    }
 
     function meu_callback(conteudo) {
         if (!("erro" in conteudo)) {
             //Atualiza os campos com os valores.
-            document.getElementById('rua').value=(conteudo.logradouro);
-            document.getElementById('bairro').value=(conteudo.bairro);
-            document.getElementById('cidade').value=(conteudo.localidade);
-            document.getElementById('uf').value=(conteudo.uf);
-        } //end if.
-        else {
-            //CEP não Encontrado.
-            limpa_formulário_cep();
-            alert("CEP não encontrado.");
+            document.getElementById('rua').innerHTML=(conteudo.logradouro);
+            document.getElementById('bairro').innerHTML=(conteudo.bairro);
+            document.getElementById('cidade').innerHTML=(conteudo.localidade);
+            document.getElementById('uf').innerHTML=(conteudo.uf);
         }
     }
         
@@ -84,10 +73,10 @@
             if(validacep.test(cep)) {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('rua').value="...";
-                document.getElementById('bairro').value="...";
-                document.getElementById('cidade').value="...";
-                document.getElementById('uf').value="...";
+                document.getElementById('rua').innerHTML="...";
+                document.getElementById('bairro').innerHTML="...";
+                document.getElementById('cidade').innerHTML="...";
+                document.getElementById('uf').innerHTML="...";
                 //Cria um elemento javascript.
                 var script = document.createElement('script');
 
@@ -97,20 +86,11 @@
                 //Insere script no documento e carrega o conteúdo.
                 document.body.appendChild(script);
 
-            } //end if.
-            else {
-                //cep é inválido.
-                limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
             }
-        } //end if.
-        else {
-            //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
         }
     };
     </script>
-</head-->
+</head>
 
 <body>
     <Menu></Menu>
@@ -127,6 +107,14 @@
                     <h6>E-mail: {info.USUARIO_EMAIL}</h6>
                     <h6>Telefone: {info.USUARIO_TEL}</h6>
                 </div>
+                <div>
+                    <h5 onLoad={pesquisacep(info.OBJ_CEP.toString())}><strong>Local de encontro:</strong></h5>
+                    <h6>CEP: <span>{info.OBJ_CEP}</span></h6>
+                    <h6>Rua: <span id="rua"></span></h6>
+                    <h6>Bairro: <span id="bairro"></span></h6>
+                    <h6>Cidade: <span id="cidade"></span></h6>
+                    <h6>Estado: <span id="uf"></span></h6>
+                </div>
             </div>
         {/each}
         </div>
@@ -135,7 +123,7 @@
             <form class="agd-form" on:submit|preventDefault={agendaCreate}>
                 <label for="">Insira a data e a hora em que você deseja agendar</label>
                 <input type="datetime-local" id="hora" bind:value={datahora}>
-             <!--   <div class="cep-results">
+                <div class="cep-results">
                     <label style="float: left; width: 30%">Rua:
                     <input name="rua" type="text" id="rua" size="60" /></label>
                     <label style="float: left; width: 30%">Bairro:
@@ -144,9 +132,7 @@
                     <input name="cidade" type="text" id="cidade" size="40" /></label>
                     <label style="float: left; width: 10%">Estado:
                     <input name="uf" type="text" id="uf" size="2" /></label>
-
-                    onchange="pesquisacep(this.value);" isso foi usado dentro do input 
-                </div>-->
+                </div>
                 <button class="btn btn-primary">Confirmar agendamento</button>
             </form>
         </div>
@@ -210,9 +196,7 @@
     }
 
     .cep-results{
-        padding-right: 3rem;
-        margin-bottom: 2rem;
-        width: 100%;
+        display: none;
     }
 
     .btn{
