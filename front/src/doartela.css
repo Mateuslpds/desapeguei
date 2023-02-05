@@ -12,6 +12,10 @@ label {
     line-height: 10px;
 }
 
+.inpcep {
+    margin-bottom: 10px;
+}
+
 .box {
     width: 40%;
     background-color: white;

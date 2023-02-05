@@ -254,6 +254,7 @@
             {/each}
         </select>
         <button class="btn btn-outline-danger btn-sm" style="height: 32px;" on:click={cleanFilter}>Limpar filtro</button>
+    </div>
     <div class="Caixinhasgeral">
     {#if objs.length > 0}
     {#each visibleObjs as obj}
@@ -266,7 +267,7 @@
             <button class="deletebotão" on:click={() => selectID(obj.OBJ_ID, obj.OBJ_IMG)} on:click={openpop}>Editar</button> 
             {obj.OBJ_NOME}
             <br>
-            <div style="overflow: auto;">
+            <div class="overflow-description">
                 {obj.OBJ_DESCRICAO}
             </div>
         </div>
@@ -280,54 +281,64 @@
             <button class="btnreagendar" on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)} on:click={openpopRea}>Reagendar</button>
             <button class="btnconfirmar" name="submit" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}>Confirmar</button>
             <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
+
         </div>
         {/each}
     {/each}
     
     <div class="popout" id="popout">
         <h2>Edição de objeto</h2>
-        <form on:submit|preventDefault={() => editOBJ()}>
-            <label for="nome">Nome</label>
-            <br>
-            <input type="text" id="nome" bind:value={nome}>
-            <br>
-            <label for="descricao">Descrição</label>
-            <br>
-            <input type="text" id="descricao" bind:value={descricao}>
-            <br>
-            <label for="imagem">Insira uma nova imagem</label>
-            <br>
-            <input type="file" id="imagem" bind:files={imagem}>
-            <br>
-            <label for="cep">Insira um novo cep</label>
-            <br>
-            <input type="text" id="cep" bind:value={cep}>
-            <br>
-            <label for="tipo">Tipo</label>
-            <br>
-            <select class="tipobutton" name="tipo" id="tipo" bind:value={tipo}>
-                {#each types as type}
-                    <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
-                {/each}
-            </select>
-            <center>
-                <button class="btnpopout">Editar</button>
-                <button class="fechar" on:click={closepop}>&times; Fechar</button>
-            </center>
-        </form>
+        <center>
+            <form on:submit|preventDefault={() => editOBJ()}>
+                <label for="nome">Nome</label>
+                <br>
+                <input style="width: 50%" type="text" id="nome" placeholder="Insira o novo nome" bind:value={nome}>
+                <br>
+                <label for="descricao">Descrição</label>
+                <br>
+                <textarea style="width: 50%" type="text" id="descricao" placeholder="Insira uma nova descrição" bind:value={descricao}/>
+                <br>
+                <label for="imagem">Insira uma nova imagem</label>
+                <br>
+                <input style="width: 50%" type="file" id="imagem" bind:files={imagem}>
+                <br>
+                <label for="cep">Insira um novo cep</label>
+                <br>
+                <input style="width: 50%" type="text" id="cep" placeholder="Insira um novo CEP" bind:value={cep}>
+                <br>
+                <label for="tipo">Tipo</label>
+                <br>
+                <select class="tipobutton" name="tipo" id="tipo" bind:value={tipo}>
+                    {#each types as type}
+                        <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
+                    {/each}
+                </select>
+                <hr style="width:70%">
+                <center>
+                    <button class="btnpopout">Editar</button>
+                    <button class="fechar" on:click={closepop}>&times; Fechar</button>
+                </center>
+            </form>
+        </center>
     </div>
     <div class="reagendar-popout" id="reagendar-popout">
+        <center>
         <form on:submit|preventDefault={() => editAGD()}>
-            <h2>Edite o local</h2>
+            <h2>Local e Hora</h2>
             <label for="cep">CEP</label>
-            <input type="text" placeholder="Insira o local" id="cep" bind:value={cep}>
+            <br>
+            <input style="width: 50%" type="text" placeholder="Insira o novo local" id="cep" bind:value={cep}>
+            <br>
             <label for="hora">Hora e Data</label>
-            <input type="datetime-local" id="hora" bind:value={hora}>
+            <br>
+            <input style="width: 50%" type="datetime-local" id="hora" bind:value={hora}>
+            <hr style="width:70%">
             <center>
                 <button class="btnpopout">Reagendar</button>
                 <button class="fechar" on:click={closepopRea}>&times; Fechar</button>
             </center>
         </form>
+        </center>
     </div>
     {:else}
     <div class="imagem">
@@ -341,21 +352,21 @@
     </div>
     {/if}
     {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS != "entregue") as Ragenda}
-        <div class="receptor">
-            <br><b>DO DOADOR:</b> {Ragenda.USUARIO_NOME}
-            <br><b>TELEFONE DO DOADOR:</b> {Ragenda.USUARIO_TEL}  
-            <br><b>CEP:</b> {Ragenda.AGD_CEP}
-            <br><b>DATA E HORA EFETUADA:</b> {Ragenda.AGD_DATETIME}
-                <br>
-                {#if Ragenda.AGD_STATUS == 'confirmado'}
-                    <button class="btnconfirmar" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar entrega</button> 
-                {:else if Ragenda.AGD_STATUS == 'entregue'}
-                    <h3>Seu pedido foi entregue</h3>
-                {:else}
-                <button class="btnconfirmar" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar</button> 
-                {/if}
-            <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
-        </div> 
+    <div class="receptor">
+        <br><b>DO DOADOR:</b> {Ragenda.USUARIO_NOME}
+        <br><b>TELEFONE DO DOADOR:</b> {Ragenda.USUARIO_TEL}  
+        <br><b>CEP:</b> {Ragenda.AGD_CEP}
+        <br><b>DATA E HORA EFETUADA:</b> {Ragenda.AGD_DATETIME}
+            <br>
+            {#if Ragenda.AGD_STATUS == 'confirmado'}
+                <button class="btnconfirmar" style="width: 150px" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar entrega</button> 
+            {:else if Ragenda.AGD_STATUS == 'entregue'}
+                <h3>Seu pedido foi entregue</h3>
+            {:else}
+            <button class="btnconfirmar" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar</button> 
+            {/if}
+        <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
+    </div> 
     {/each}
     {#if doadorAgenda.length > 0}
         {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as DoadorFechado} 

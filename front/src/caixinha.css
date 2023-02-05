@@ -6,12 +6,13 @@ body {
     font-family: sans-serif;
 }
 
-input {
+input, textarea {
     width: 40%;
     padding: 8px 10px;
     margin: 5px 0;
     outline: 0;
-    border-width: 0 0 1px;
+    border-width: 1px;
+    border-radius: 5px;
     border-color: #2595bed8;
     background-color: rgb(240, 249, 255);
 }
@@ -48,6 +49,12 @@ input {
 
 .btnEspecial:hover {
     background-color: rgb(8, 35, 90);
+}
+
+.overflow-description {
+    padding: 8px;
+    border: none;
+    overflow-x: auto;
 }
 
 #Ctexto1 {
@@ -155,6 +162,10 @@ input {
     border-radius: 3px;
     cursor: pointer;
     margin: 10px;
+}
+.Mensagem{
+    margin: 10px;
+    color: #18c40c;
 }
 
 .receptor {

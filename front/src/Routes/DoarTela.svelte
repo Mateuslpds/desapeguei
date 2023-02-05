@@ -91,11 +91,12 @@
             />
         <div class="inpcep">
             <label for="cep">CEP</label>
-                <textarea 
+                <input
+                    type="number" 
                     name="CEP"
                     id="cep"
                     class="form-control border border-secondary p-1"
-                    placeholder="Insira aqui o seu CEP"
+                    placeholder="Insira o seu CEP."
                     bind:value={cep}
                 />
 
