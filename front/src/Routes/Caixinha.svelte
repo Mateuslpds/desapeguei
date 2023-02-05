@@ -39,6 +39,15 @@
         popout.classList.remove("reagendar-open-popout");
     }
 
+    function openhistorico(){
+        let popout = document.getElementById("popout-historico");
+        popout.classList.add("popout-historico-open");
+    }
+    function closehistorico(){
+        let popout = document.getElementById("popout-historico");
+        popout.classList.remove("popout-historico-open");
+    }
+
     const imgPath = "http://localhost/desapeguei/back/imagens/";
 
     $: visibleObjs = search
@@ -281,11 +290,9 @@
             <button class="btnreagendar" on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)} on:click={openpopRea}>Reagendar</button>
             <button class="btnconfirmar" name="submit" on:click={() => ConfirmarEnvio(Dagenda.AGD_ID)}>Confirmar</button>
             <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteDoadorAGD(Dagenda.AGD_ID)}>&times;</span>
-
         </div>
         {/each}
     {/each}
-    
     <div class="popout" id="popout">
         <h2>Edição de objeto</h2>
         <center>
@@ -363,33 +370,41 @@
             {:else if Ragenda.AGD_STATUS == 'entregue'}
                 <h3>Seu pedido foi entregue</h3>
             {:else}
-            <button class="btnconfirmar" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar</button> 
+                <button class="btnconfirmar" name="submit2" on:click={() => confirmarRecebimento(Ragenda.AGD_ID)}>Confirmar</button> 
             {/if}
         <span style="cursor: pointer; color:red; font-size: 25px;" on:click={() => deleteReceptorAGD(Ragenda.AGD_ID)}>&times;</span>
     </div> 
     {/each}
-    {#if doadorAgenda.length > 0}
-        {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as DoadorFechado} 
-          <div>
-            DOAÇÃO REALIZADA 
-            <br><b>CEP DO ENCONTRO:</b> {DoadorFechado.AGD_CEP}
-            <br><b>DATA E HORA EFETUADA:</b> {DoadorFechado.AGD_DATETIME}
-            <br><b>NOME DO RECEPTOR:</b> {DoadorFechado.USUARIO_NOME}
-            <br><b>TELEFONE DO RECEPTOR:</b> {DoadorFechado.USUARIO_TEL}
-          </div>
-        {/each}
-    {/if} 
-    {#if receptorAgenda.length > 0 }   
-        {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as ReceptorFechado} 
-          <div>
-            DOAÇÃO REALIZADA 
-            <br><b>CEP DO ENCONTRO:</b> {ReceptorFechado.AGD_CEP}
-            <br><b>DATA E HORA EFETUADA:</b> {ReceptorFechado.AGD_DATETIME}
-            <br><b>NOME DO DOADOR:</b> {ReceptorFechado.USUARIO_NOME}
-            <br><b>TELEFONE DO DOADOR:</b> {ReceptorFechado.USUARIO_TEL}
-          </div>
-        {/each}
-    {/if}
+    <div class="popout-historico" id="popout-historico"> 
+        <h3 class="frase-historico">Historico de doações</h3>
+        {#if doadorAgenda.length > 0}
+            {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as DoadorFechado} 
+            <div class="historico1">
+                <h3>Doação realizada</h3>
+                <b>CEP DO ENCONTRO:</b> {DoadorFechado.AGD_CEP}
+                <br><b>DATA E HORA EFETUADA:</b> {DoadorFechado.AGD_DATETIME}
+                <br><b>NOME DO RECEPTOR:</b> {DoadorFechado.USUARIO_NOME}
+                <br><b>TELEFONE DO RECEPTOR:</b> {DoadorFechado.USUARIO_TEL}
+            </div>
+            <hr style="width:70%">
+            {/each}
+        {/if} 
+        {#if receptorAgenda.length > 0 }   
+            {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as ReceptorFechado} 
+            <div class="historico2">
+                <h3>Doação realizada</h3>
+                <b>CEP DO ENCONTRO:</b> {ReceptorFechado.AGD_CEP}
+                <br><b>DATA E HORA EFETUADA:</b> {ReceptorFechado.AGD_DATETIME}
+                <br><b>NOME DO DOADOR:</b> {ReceptorFechado.USUARIO_NOME}
+                <br><b>TELEFONE DO DOADOR:</b> {ReceptorFechado.USUARIO_TEL}
+            </div>
+            <hr style="width:70%">
+            {/each}
+            <center>
+                <button class="fechar" on:click={closehistorico}>&times; Fechar</button>
+            </center>
+        {/if}
+    </div>
     <div class="textodoar">
         <i>Gostaria de fazer uma doação?</i>
     </div>
@@ -402,4 +417,5 @@
         </a>
     </div>
     </center>
+    <button class="btnhistorico" on:click={openhistorico}>Historico de doações</button>
 </body>

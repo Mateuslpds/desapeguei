@@ -241,3 +241,45 @@ input, textarea {
     cursor: pointer;
     margin: 10px;
 }
+.historico1,
+.historico2 {
+    width: 90%;
+    text-align: left;
+    padding: 20px;    
+}
+.popout-historico{
+    width: 600px;
+    height: auto;
+    position: absolute;
+    background-color: white;
+    top: 0;
+    left: 50%;
+    padding-left: 10px;
+    visibility: hidden;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: translate 0.4s, top 0.4s;
+    transform: translate(-50%, -50%) scale(0.1);
+    grid: 5px;
+}
+.popout-historico-open{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+.btnhistorico{
+    height: 45px;
+    width: 180px;
+    border: none;
+    margin-left: 30px;
+}
+.btnhistorico:hover{
+    background-color: rgb(228, 228, 228);
+}
+.frase-historico{
+    font-size: 40px;
+    height: 50px;
+    color: white;
+    padding-left: 20px;
+    margin-left: 10px;
+    background-image: linear-gradient(to right, #269ac5, transparent);
+}
