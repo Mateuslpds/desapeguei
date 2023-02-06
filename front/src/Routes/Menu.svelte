@@ -26,7 +26,7 @@
       <a
         href="/"
         class="d-flex align-items-center mb-3 mb-lg-0 text-dark text-decoration-none" style="font-size: 1.5rem;"
-        ><img src="imagens/logo.png" alt=""></a
+        ><img src="imagens/new_logo.png" alt=""></a
       >
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 w-50">
         <input
