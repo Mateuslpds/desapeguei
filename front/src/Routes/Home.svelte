@@ -58,7 +58,7 @@
 <main class="conteudo">
   <section class="conteudo-principal">
     <div class="conteudo-principal-escrito">
-      <h1 class="conteudo-principal-titulo">Desapeguei Doação</h1>
+      <h3 class="conteudo-principal-titulo">Desapeguei Doação</h3>
       <h3 class="conteudo-principal-subtitulo">Preserve o mundo com a sua doação de eletrônicos.</h3>
       {#if localStorage.getItem("isLogged") != undefined}
       <a href="/doarTela" use:link>
@@ -85,7 +85,7 @@
   </section>
   <br>
 </main>
-
+<div class="O-carrosel">
   <h1 class="titulo-carrosel">Recentes</h1>
   <Swiper
     modules={[Navigation]}
@@ -211,6 +211,7 @@
       </SwiperSlide>
     {/each}
   </Swiper>
+</div>
 </body>
 <footer>
   <div class="container-footer">
@@ -267,15 +268,28 @@
   * {
     box-sizing: border-box;
   }
-
   body {
-    background-color: #ebebeb;
+    background: rgba(216,253,255,255);
+    color: rgb(12, 69, 80);
   }
-
+  h1 {
+    font-family: fantasy;
+    width: 100%;
+    text-align: left;
+    color: rgba(23,32,55,255);
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    padding: 15px 15px 15px 40px;
+    background-image: linear-gradient(to right, white, transparent);
+  }
+  .O-carrosel {
+    padding: 50px 70px 50px 70px;  
+    background: rgb(112,191,222);
+    background: linear-gradient(90deg, rgba(112,191,222,1) 29%, rgba(64,139,196,1) 79%);
+  }
   .titulo-carrosel {
     margin-left: 4rem;
   }
-
   .card {
     color: #333;
     width: 17.5rem;
@@ -287,43 +301,13 @@
     border-radius: 5px;
     text-decoration: none;
   }
-
   .objImage {
     padding: 20px;
     height: 17rem;
   }
-
-
   .descricao {
     height: 3.5rem;
     overflow-wrap: break-word;
     overflow: hidden;
-  }
-
-  .row {
-    margin: auto;
-    width: 70%;
-    border: 2px solid #2595bea1;
-    border-radius: 10px;
-    padding-left: 10%;
-    padding-top: 1%;
-    padding-bottom: 1%;
-  }
-
-  .column {
-    float: left;
-    width: 25%;
-    padding: 5px;
-  }
-
-  .row::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-  .titulo {
-    text-align: center;
-    font-size: 40px;
   }
 </style>

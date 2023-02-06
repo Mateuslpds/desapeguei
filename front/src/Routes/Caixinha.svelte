@@ -390,6 +390,9 @@
             </div>
             <hr style="width:70%">
             {/each}
+            <center>
+                <button class="fechar" on:click={closehistorico}>&times; Fechar</button>
+            </center>
         {/if} 
         {#if receptorAgenda.length > 0 }   
             {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as ReceptorFechado} 

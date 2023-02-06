@@ -7,7 +7,7 @@
 }
 
 body {
-  background: #c9ccd1;
+  background: #d8e2f3;
 }
 .form-style input {
   border: 0;
@@ -26,10 +26,8 @@ button {
 }
 
 .conteudo {
-  background: linear-gradient(-45deg, #266490, #8ad3ee, #2c75b8, #78c7e3);
-	background-size: 400% 400%;
-	-webkit-animation: gradient 15s ease infinite;
-	        animation: gradient 15s ease infinite;
+  background: rgb(112,191,222);
+  background: linear-gradient(90deg, rgba(112,191,222,1) 29%, rgba(64,139,196,1) 79%);
   border-top: 0.4px solid #ddf9ff;
 }
 
@@ -90,7 +88,6 @@ button {
 .conteudo-secundario-titulo{
   border-top: 0.4px solid #ffffff;
   padding-top: 48px;
-  font-family: 'Righteous', cursive;
   font-weight: 400;
   font-size: 64px;
   color: #fff2ef;
@@ -99,7 +96,7 @@ button {
 
 .conteudo-secundario-paragrafo{
   font-family: 'Sarala', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 5px;
   color: #ffffff;
 }
