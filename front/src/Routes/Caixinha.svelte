@@ -383,7 +383,7 @@
             {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as DoadorFechado} 
             <div class="historico1">
                 <h3>Doação realizada</h3>
-                <b>CEP DO ENCONTRO:</b> {DoadorFechado.AGD_CEP}
+                <b>CEP DO ENCONTRO:</b> {DoadorFechado.OBJ_CEP}
                 <br><b>DATA E HORA EFETUADA:</b> {DoadorFechado.AGD_DATETIME}
                 <br><b>NOME DO RECEPTOR:</b> {DoadorFechado.USUARIO_NOME}
                 <br><b>TELEFONE DO RECEPTOR:</b> {DoadorFechado.USUARIO_TEL}
@@ -398,7 +398,7 @@
             {#each receptorAgenda.filter(agenda => agenda.AGD_STATUS == "entregue") as ReceptorFechado} 
             <div class="historico2">
                 <h3>Doação realizada</h3>
-                <b>CEP DO ENCONTRO:</b> {ReceptorFechado.AGD_CEP}
+                <b>CEP DO ENCONTRO:</b> {ReceptorFechado.OBJ_CEP}
                 <br><b>DATA E HORA EFETUADA:</b> {ReceptorFechado.AGD_DATETIME}
                 <br><b>NOME DO DOADOR:</b> {ReceptorFechado.USUARIO_NOME}
                 <br><b>TELEFONE DO DOADOR:</b> {ReceptorFechado.USUARIO_TEL}
