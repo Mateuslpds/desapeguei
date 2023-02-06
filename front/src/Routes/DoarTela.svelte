@@ -28,8 +28,7 @@
             alert("erro: não foi possível postar o objeto");
             return;
         }
-
-        console.log(imagem[0]);
+        window.location.href = "/#/caixinha";
     };
 
     const loadTypes = async () => {
@@ -67,6 +66,7 @@
                 id="nome"
                 class="form-control border border-secondary p-1"
                 placeholder="Insira o nome do objeto"
+                required
                 bind:value={nome}
             />
         <div class="inpimage">
@@ -77,6 +77,7 @@
                 id="imagem"
                 class="form-control border border-secondary p-1"
                 placeholder="Insira uma imagem."
+                required
                 bind:files={imagem}
             />
         </div>
@@ -87,6 +88,7 @@
                 id="DOARdescri"
                 class="form-control border border-secondary p-1"
                 placeholder="Insira aqui a descrição do objeto."
+                required
                 bind:value={descricao}
             />
         <div class="inpcep">
@@ -97,12 +99,13 @@
                     id="cep"
                     class="form-control border border-secondary p-1"
                     placeholder="Insira o seu CEP."
+                    required
                     bind:value={cep}
                 />
 
         </div>
         <label class="tipo" for="tipo">Tipo</label>
-        <select class="tipobutton" name="tipo" id="tipo" bind:value={tipo}>
+        <select class="tipobutton" name="tipo" id="tipo" required bind:value={tipo}>
             {#each types as type}
                 <option value={type.TIPO_ID}>{type.TIPO_DESCRICAO}</option>
             {/each}

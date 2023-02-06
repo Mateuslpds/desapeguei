@@ -20,7 +20,7 @@ if($status == 'aberto'){
     $stmt->bindValue(':id', $_GET['id']);
     $stmt->execute();
 }
-if($status == 'semi-confirm-recp'){
+if($status == 'semi-confirm-recep'){
     $AgdStatus = 'confirmado';
     $stmt = $conn->prepare('UPDATE agenda SET AGD_STATUS = :StatusAgenda WHERE AGD_ID = :id');
     $stmt->bindValue(':StatusAgenda', $AgdStatus);

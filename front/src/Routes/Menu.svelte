@@ -12,7 +12,7 @@
       credentials: "include",
     });
     localStorage.removeItem("isLogged");
-    location.reload();
+    window.location.href = "/";
   };
 </script>
 

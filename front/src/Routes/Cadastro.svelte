@@ -7,7 +7,7 @@
     let nome = "";
     let senha = "";
     let senha2 = "";
-    let secret = "";
+    //let secret = "";
     let email = "";
     let cpf = "";
     let telefone = "";
@@ -19,7 +19,7 @@
         const data = new FormData();
         data.append("nome", nome);
         data.append("senha", senha);
-        data.append("secreto", secret);
+        //data.append("secreto", secret);
         data.append("email", email);
         data.append("cpf", cpf);
         data.append("telefone", telefone);
@@ -27,6 +27,7 @@
             method: "POST",
             body: data,
         });
+        window.location.href = "/#/login";
     };
 
     function Senha() {
@@ -148,8 +149,8 @@
                 {/if}
                 <label class="passwordhide" for="showpass"><b>Mostrar senha</b></label>
                     <input class="boxpasswordhide" type="checkbox" on:click={Confirmar}>
-                <br/>    
-                <label for="email">Senha secreta</label>
+                <br/>
+                <!--<label for="email">Senha secreta</label>
                 <input
                     type="text"
                     name="secret"
@@ -159,7 +160,7 @@
                     maxlength= "45"
                     bind:value={secret}
                     required
-                />
+                />-->
                 <button type="submit" class="signIn">Cadastre-se</button>
             </form>
         </div>

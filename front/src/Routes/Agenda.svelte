@@ -34,6 +34,7 @@
             alert("deu merda");
             return;
         }
+        window.location.href = "/#/caixinha";
     };
 </script>
 
@@ -133,7 +134,7 @@
                     <label style="float: left; width: 10%">Estado:
                     <input name="uf" type="text" id="uf" size="2" /></label>
                 </div>
-                <button class="btn btn-primary">Confirmar agendamento</button>
+                <button style="margin-left: 1rem" class="btn btn-primary">Confirmar agendamento</button>
             </form>
         </div>
     </div>

@@ -211,6 +211,7 @@
             alert("erro: não foi possível confirmar o envio")
             return;
         }
+        loadDoadorAgenda();
     };
 
     const confirmarRecebimento = async (id) => {
@@ -225,7 +226,8 @@
         if(!res.ok){
             alert("erro: não foi possível confirmar o recebimento")
             return;
-        }        
+        }
+        loadReceptorAgenda();
     };
     
     const loadTypes = async () => {
@@ -280,11 +282,11 @@
                 {obj.OBJ_DESCRICAO}
             </div>
         </div>
-        {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS != "fechado" && agenda.AGD_OBJ_ID == obj.OBJ_ID) as Dagenda}
+        {#each doadorAgenda.filter(agenda => agenda.AGD_STATUS != "entregue" && agenda.AGD_OBJ_ID == obj.OBJ_ID) as Dagenda}
         <div class="receptor">
             <br><b>DO RECEPTOR:</b> {Dagenda.USUARIO_NOME}
             <br><b>TELEFONE DO RECEPTOR:</b> {Dagenda.USUARIO_TEL}
-            <br><b>CEP:</b> 
+            <br><b>CEP:</b> {Dagenda.OBJ_CEP}
             <br><b>DATA E HORA EFETUADA:</b> {Dagenda.AGD_DATETIME}
                 <br>
             <button class="btnreagendar" on:click={() => selectID(Dagenda.AGD_ID, Dagenda.AGD_DATETIME)} on:click={openpopRea}>Reagendar</button>
@@ -362,7 +364,7 @@
     <div class="receptor">
         <br><b>DO DOADOR:</b> {Ragenda.USUARIO_NOME}
         <br><b>TELEFONE DO DOADOR:</b> {Ragenda.USUARIO_TEL}  
-        <br><b>CEP:</b> {Ragenda.AGD_CEP}
+        <br><b>CEP:</b> {Ragenda.OBJ_CEP}
         <br><b>DATA E HORA EFETUADA:</b> {Ragenda.AGD_DATETIME}
             <br>
             {#if Ragenda.AGD_STATUS == 'confirmado'}
