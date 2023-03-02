@@ -6,8 +6,6 @@ Sistema feito com o intuito de fazer doações de eletrônicos entre os usuário
 * Cadastro
 * Publicar/solicitar doações
 * Busca e filtragem de eletrônicos
-* Avaliação de usuários
-* Chat para interação entre doador e recebedor
 
 ## Tecnologias 
 
@@ -16,7 +14,7 @@ Sistema feito com o intuito de fazer doações de eletrônicos entre os usuário
 * PHP
 * JavaScript
 * Svelte
-* Tailwind
+* Bootstrap
 
 ## Desenvolvedores
 
